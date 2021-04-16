@@ -8,6 +8,8 @@ import { Provider } from "react-redux";
 import { useStore } from "../src/store";
 import EmptyLayout from "../layouts/EmptyLayouts";
 import axiosInstance from "../lib/axiosInstance";
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -35,13 +37,15 @@ export default function MyApp(props) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <MuiPickersUtilsProvider utils={MomentUtils}>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </MuiPickersUtilsProvider>
     </Provider>
   );
 }
