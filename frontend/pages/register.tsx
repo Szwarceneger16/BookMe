@@ -1,12 +1,11 @@
 import React from "react";
 import RegisterLayout from "../layouts/RegisterLayout";
-import StaticDataPicker from "../components/DatePicker";
+import RegisterStepper from "../components/RegisterStepper";
 
 export default function customer() {
   return (
       <>
-    <div>Register</div>
-    <StaticDataPicker />
+      <RegisterStepper></RegisterStepper>
     </>
     );
 }
