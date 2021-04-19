@@ -21,9 +21,9 @@ import {
 //   InboxIcon ,
 //   DraftsIcon 
 // } from '@material-ui/icons'
-import moment from "moment";
 import theme from "../src/theme";
 import classes from "*.module.css";
+import * as DateFns from "date-fns";
 
 const exampleData = {
   dateFrom: "2021-04-18",
@@ -89,13 +89,13 @@ const disableDaysOfWeek = [0,6];
 const disableDateOfMonth = [27]
 const disableDate = (date) => {
   //debugger;
-  return disableDaysOfWeek.includes(date.day()) || 
-    disableDateOfMonth.includes(date.date())
+  return DateFns.isWeekend(date) || 
+    disableDateOfMonth.includes(DateFns.getDate(date) )
 }
 
 const renderDate = (day, selectedDate, isInCurrentMonth, dayComponent) => {
   // You canalso use our internal <Day /> component
-  const futureDateCount =  day.date() - moment().date();
+  const futureDateCount =  DateFns.getDate(day) - new Date().getDate();
   //debugger;
   return (<Badge 
     color="secondary"
@@ -105,7 +105,7 @@ const renderDate = (day, selectedDate, isInCurrentMonth, dayComponent) => {
 
 const ApoitmentDataTime = () => {
   const classes = useStyles();
-  const [date, changeDate] = useState(moment(new Date()));
+  const [date, changeDate] = useState(new Date());
 
   // prettier-ignore
   return (

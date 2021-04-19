@@ -9,11 +9,10 @@ import { useStore } from "../src/store";
 import EmptyLayout from "../layouts/EmptyLayouts";
 import axiosInstance from "../lib/axiosInstance";
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
-import "moment/locale/pl";
-import moment from "moment";
+import DateFnsUtils from '@date-io/date-fns';
+import { pl } from 'date-fns/locale';
+import format from "date-fns/format";
 
-moment.locale("pl");
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -41,7 +40,7 @@ export default function MyApp(props) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <MuiPickersUtilsProvider utils={MomentUtils} locale={"pl"}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
