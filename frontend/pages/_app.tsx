@@ -8,11 +8,10 @@ import { Provider } from "react-redux";
 import { useStore } from "../src/store";
 import EmptyLayout from "../layouts/EmptyLayouts";
 import axiosInstance from "../lib/axiosInstance";
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import { pl } from 'date-fns/locale';
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import { pl } from "date-fns/locale";
 import format from "date-fns/format";
-
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
