@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Field, Form, Formik, FormikProps } from 'formik';
 import { 
   DatePicker ,
   TimePicker ,
-  DateTimePicker
+  DateTimePicker,
+  KeyboardDateTimePicker
 } from "@material-ui/pickers";
 import {
   Typography,
@@ -105,24 +107,28 @@ const renderDate = (day, selectedDate, isInCurrentMonth, dayComponent) => {
 
 const ApoitmentDataTime = () => {
   const classes = useStyles();
-  const [date, changeDate] = useState(new Date());
+  //const [date, changeDate] = useState(new Date());
 
   // prettier-ignore
   return (
       <Grid container alignItems="center" justify='center'>
         <Grid item >
-          <DateTimePicker key="abc"
-            value={date}
+        <Field name="lastName">
+        {( { field, form, ...other}) => (
+          <KeyboardDateTimePicker
+            name={field.name}
+            value={field.value}
             allowKeyboardControl
-            onChange={changeDate}
             shouldDisableDate={disableDate}
             openTo="date"
             disablePast
             minutesStep={15}
-            variant="static"
+            // variant="static"
             renderDay={renderDate}
+            onChange={date => form.setFieldValue(field.name, date, false)}
+            {...other}
           />
-
+        )}</Field>
         </Grid >
         <Grid item className={classes.mainGrid}>
           {/* example list */}

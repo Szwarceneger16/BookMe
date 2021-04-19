@@ -4,6 +4,7 @@ import {
   TimePicker ,
   DateTimePicker
 } from "@material-ui/pickers";
+import { Field, Form, Formik, FormikProps } from 'formik';
 import {
   Typography,
   makeStyles,
@@ -93,9 +94,23 @@ export default function HorizontalLabelPositionBelowStepper() {
           </div>
         ) : (
           <div>
-              <Container maxWidth="lg" className={classes.mainContainer} >
-                {getStepContent(activeStep)}
-              </Container>
+                 <Formik
+                    initialValues={{ name: 'jared' }}
+                    onSubmit={(values, actions) => {
+                      setTimeout(() => {
+                        alert(JSON.stringify(values, null, 2));
+                        actions.setSubmitting(false);
+                      }, 1000);
+                    }}
+
+                  >{
+                    (props) => (
+                      <Container maxWidth="lg" className={classes.mainContainer} >
+                        {getStepContent(activeStep)}
+                      </Container>
+                    )
+                  }</Formik>
+              
             
             <Grid container 
                 // alignContent="flex-end" 

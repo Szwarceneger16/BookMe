@@ -32,6 +32,7 @@ export default function MyApp(props) {
   }, []);
 
   return (
+    <React.StrictMode>
     <Provider store={store}>
       <Head>
         <title>My page</title>
@@ -50,6 +51,7 @@ export default function MyApp(props) {
         </ThemeProvider>
       </MuiPickersUtilsProvider>
     </Provider>
+    </React.StrictMode>
   );
 }
 
