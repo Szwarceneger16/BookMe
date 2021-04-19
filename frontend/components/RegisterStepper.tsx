@@ -1,18 +1,13 @@
 import React, { useState } from "react";
-import { DatePicker, TimePicker, DateTimePicker } from "@material-ui/pickers";
+import { Field, Form, Formik, FormikProps } from "formik";
 import {
   Typography,
   Stepper,
   Step,
-  StepLabel,
-  StepConnector,
   Button,
   Container,
   Grid,
-  withStyles,
-  makeStyles,
   StepIconProps,
-  Theme,
   Box,
 } from "@material-ui/core";
 import ApoitmentDataTime from "./ApoitmentDataTime";
@@ -120,7 +115,21 @@ export default function HorizontalLabelPositionBelowStepper() {
           </div>
         ) : (
           <>
-            <Container maxWidth="lg">{getStepContent(activeStep)}</Container>
+            <Formik
+              initialValues={{ name: "jared" }}
+              onSubmit={(values, actions) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2));
+                  actions.setSubmitting(false);
+                }, 1000);
+              }}
+            >
+              {(props) => (
+                <Container maxWidth="lg">
+                  {getStepContent(activeStep)}
+                </Container>
+              )}
+            </Formik>
 
             <Grid
               container
