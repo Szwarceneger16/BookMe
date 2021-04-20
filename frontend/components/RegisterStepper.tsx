@@ -24,6 +24,7 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import PaymentIcon from "@material-ui/icons/Payment";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import SelectService from "./register/SelectService";
 
 function CustomStepIcon(props: StepIconProps) {
   const classes = CustomStepIconStyles();
@@ -57,10 +58,10 @@ function getSteps() {
   ];
 }
 
-function getStepContent(step: number) {
+function getStepContent(step: number, props) {
   switch (step) {
     case 0:
-      return "Select campaign settings...";
+      return <SelectService {...props} />;
     case 1:
       return <ApoitmentDataTime></ApoitmentDataTime>;
     case 2:
@@ -116,7 +117,7 @@ export default function HorizontalLabelPositionBelowStepper() {
         ) : (
           <>
             <Formik
-              initialValues={{ name: "jared" }}
+              initialValues={{ name: "jared", selectedService: "" }}
               onSubmit={(values, actions) => {
                 setTimeout(() => {
                   alert(JSON.stringify(values, null, 2));
@@ -125,18 +126,19 @@ export default function HorizontalLabelPositionBelowStepper() {
               }}
             >
               {(props) => (
-                <Container maxWidth={false} className={classes.mainContainer}>
-                  {getStepContent(activeStep)}
+                <Container maxWidth={false}>
+                  {getStepContent(activeStep, props)}
                 </Container>
               )}
             </Formik>
-            
-            <Grid container 
-                // alignContent="flex-end" 
-                // alignItems="flex-end" 
-                justify="flex-end"
-                direction="row" 
-                className={classes.stepperButtons}
+
+            <Grid
+              container
+              // alignContent="flex-end"
+              // alignItems="flex-end"
+              justify="flex-end"
+              direction="row"
+              className={classes.stepperButtons}
             >
               <Grid item>
                 <Button

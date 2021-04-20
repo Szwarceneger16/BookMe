@@ -18,6 +18,24 @@ const theme = createMuiTheme({
     },
     white: {
       main: "#FFF",
+      darker: "#DDD",
+    },
+  },
+  overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        "*::-webkit-scrollbar": {
+          width: "0.6em",
+        },
+        "*::-webkit-scrollbar-track": {
+          "-webkit-box-shadow": "inset 0 0 6px rgba(0,0,0,0.1)",
+          borderRadius: 5,
+        },
+        "*::-webkit-scrollbar-thumb": {
+          backgroundColor: "rgba(0,0,0,.1)",
+          borderRadius: 5,
+        },
+      },
     },
   },
 });
