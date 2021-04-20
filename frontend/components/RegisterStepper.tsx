@@ -105,7 +105,7 @@ export default function HorizontalLabelPositionBelowStepper() {
 
                   >{
                     (props) => (
-                      <Container maxWidth="lg" className={classes.mainContainer} >
+                      <Container maxWidth={false} className={classes.mainContainer} >
                         {getStepContent(activeStep)}
                       </Container>
                     )

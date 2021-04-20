@@ -16,6 +16,7 @@ import {
   ListItemIcon,
   ListItemText,
   Badge,
+  Box,
   Divider
 
 } from "@material-ui/core";
@@ -58,6 +59,7 @@ const exampleData = {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    padding: "2px",
   },
   paper: {
     padding: theme.spacing(2),
@@ -68,22 +70,42 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     wrap: "nowrap",
-    padding: 0,
-    "& li": {
-      textOverflow: "clip",
-      width: "fit-conent",
+    minHeight: "48px",
+    "& div": {
+      // border: "1px solid grey", 
+      padding: "4px",
     }
   },
   listHours: {
     width: "100px",
     justifyContent: "center",
-    backgroundColor: theme.palette.secondary.light,
     alignSelf: "stretch",
     borderBottom: "1px solid black"
   },
   mainGrid: {
-    maxHeight: "60vh", 
-    overflow: "auto"
+    maxHeight: "70vh", 
+    overflow: "auto",
+    minWidth: "400px",
+    maxWidth: "1000px",
+    margin: "10px",
+    scrollbarWidth: "none",
+  },
+  list: {
+    backgroundColor: theme.palette.primary.main,
+    width: "fit-content",
+    //overflow: "clip",
+  },
+  listButton: {
+    backgroundColor: theme.palette.primary.light,
+    borderRadius: "6px",
+    margin: "0px 4px"
+  },
+  hourBox: {
+    borderRadius: "10px",
+    margin: "auto",
+    padding: "5px",
+    borderStyle: "1px solid",
+    backgroundColor: theme.palette.primary.contrastText,
   }
 }));
 
@@ -97,21 +119,28 @@ const disableDate = (date) => {
 
 const renderDate = (day, selectedDate, isInCurrentMonth, dayComponent) => {
   // You canalso use our internal <Day /> component
-  const futureDateCount =  DateFns.getDate(day) - new Date().getDate();
+  const freeApoitmentsCount =  DateFns.getDate(day) - new Date().getDate();
   //debugger;
+  let color ="secondary";
+  if (freeApoitmentsCount > 5) {
+    color = "primary";
+  } else if ( freeApoitmentsCount < 3) {
+    color="error";
+  }
   return (<Badge 
-    color="secondary"
-    badgeContent={ futureDateCount > 0 && !dayComponent.props.disabled ? futureDateCount : undefined}
+    color={color}
+    badgeContent={ freeApoitmentsCount > 0 && !dayComponent.props.disabled ? freeApoitmentsCount : undefined}
     >{dayComponent}</Badge>);
 }
 
+const apotimentTimeStepp = 15;
 const ApoitmentDataTime = () => {
   const classes = useStyles();
   //const [date, changeDate] = useState(new Date());
 
   // prettier-ignore
   return (
-      <Grid container alignItems="center" justify='center'>
+      <Grid container alignItems="center" justify='center' spacing={2}>
         <Grid item >
         <Field name="lastName">
         {( { field, form, ...other}) => (
@@ -123,29 +152,32 @@ const ApoitmentDataTime = () => {
             openTo="date"
             disablePast
             minutesStep={15}
-            // variant="static"
+            variant="static"
             renderDay={renderDate}
             onChange={date => form.setFieldValue(field.name, date, false)}
             {...other}
           />
         )}</Field>
         </Grid >
-        <Grid item className={classes.mainGrid}>
+        <Grid item className={classes.mainGrid}  >
           {/* example list */}
-          <List disablePadding component="ul" >
+          <List disablePadding component="ul" className={classes.list} >
             {Array(25).fill("").map( (element,index) => (
               <ListItem style={{margin: "0px",padding: "0px"}} disableGutters key={index}>
                 <ListItemIcon className={classes.listHours}>
-                  <Typography color="primary">
+                  <Box color="primary" className={classes.hourBox}>
                     {`${9+Math.floor(index/4)}:${15*(index%4)}${index%4?"":"0"} - ${9+Math.floor((index+1)/4)}:${15*((index+1)%4)}${(index+1)%4?"":"0"}`} 
-                  </Typography>         
+                  </Box>         
                 </ListItemIcon>
-                <Divider flexItem color="dark" orientation="vertical"></Divider>
+                {/* <Divider flexItem color="dark" orientation="vertical"></Divider> */}
                 <List className={classes.horizontalList} >
-                  <ListItem disableGutters><Typography>{`dr. Jan Kowalski ${index}`}</Typography></ListItem>
-                  <ListItem disableGutters><Typography>{`dr. Jan Kowalski ${index}`}</Typography></ListItem>
-                  <ListItem disableGutters><Typography>{`dr. Jan Kowalski ${index}`}</Typography></ListItem>
-                  <ListItem disableGutters><Typography>{`dr. Jan Kowalski ${index}`}</Typography></ListItem>
+                  {Array( Math.floor(Math.random()*8) % 8).fill("").map( (el,ind) => (
+                    <ListItem disableGutters button className={classes.listButton} key={index+"_"+ind}  ><Typography>{`dr. Jan Kowalski`}</Typography></ListItem>
+                  ))}
+                    
+                  {/* <ListItem button  ><Typography>{`dr. Jan Kowalski ${index}`}</Typography></ListItem>
+                  <ListItem button ><Typography>{`dr. Jan Kowalski ${index}`}</Typography></ListItem>
+                  <ListItem button  ><Typography>{`dr. Jan Kowalski ${index}`}</Typography></ListItem> */}
                 </List>
                 
                 {/* <ListItemText primary={`dr. Jan Kowalski ${index}`} /> */}
