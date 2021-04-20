@@ -31,6 +31,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     stepper: {
       backgroundColor: "transparent",
+      borderBottom: `1px solid rgba(255,255,255,0.2)`,
     },
     stepperButtons: {
       padding: theme.spacing(2),

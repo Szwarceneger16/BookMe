@@ -17,6 +17,7 @@ import {
   CustomStepLabelStyle,
   CustomStepConnector,
 } from "./register/styles/RegisterStyles";
+import * as yup from "yup";
 import clsx from "clsx";
 import PeopleIcon from "@material-ui/icons/People";
 import EventIcon from "@material-ui/icons/Event";
@@ -25,6 +26,7 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import SelectService from "./register/SelectService";
+import LoginOrRegister from "./register/LoginOrRegister";
 
 function CustomStepIcon(props: StepIconProps) {
   const classes = CustomStepIconStyles();
@@ -51,7 +53,7 @@ function CustomStepIcon(props: StepIconProps) {
 
 function getSteps() {
   return [
-    "Wybierz rodzaj usługi i specjalistę",
+    "Wybierz rodzaj usługi",
     "Wybierz datę wizyty",
     "Zaloguj się lub wprowadź swoje dane",
     "Opłać kaucję",
@@ -65,7 +67,7 @@ function getStepContent(step: number, props) {
     case 1:
       return <ApoitmentDataTime></ApoitmentDataTime>;
     case 2:
-      return "This is the bit I really care about!";
+      return <LoginOrRegister {...props} />;
     case 3:
       return "This is the bit I really care about!";
     default:
@@ -89,6 +91,22 @@ export default function HorizontalLabelPositionBelowStepper() {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const validationSchema = yup.object({
+    email: yup
+      .string("Wprowadź email")
+      .email("Musisz wprowadzić prawidłowy email")
+      .required("Email jest wymagany"),
+    password: yup
+      .string("Wprowadź hasło")
+      .min(8, "Hasło musi zawierać minimum 8 znaków")
+      .required("Hasło jest wymagane"),
+    phone: yup.string("Wprowadź telefon").required("Telefon jest wymagany"),
+    firstName: yup.string("Wprowadź imię").required("Imię jest wymagane"),
+    lastName: yup
+      .string("Wprowadź nazwisko")
+      .required("Nazwisko jest wymagane"),
+  });
 
   return (
     <div className={classes.root}>
@@ -117,13 +135,23 @@ export default function HorizontalLabelPositionBelowStepper() {
         ) : (
           <>
             <Formik
-              initialValues={{ name: "jared", selectedService: "" }}
+              initialValues={{
+                name: "jared",
+                selectedService: "",
+                email: "",
+                password: "",
+                phone: "",
+                firstName: "",
+                lastName: "",
+              }}
               onSubmit={(values, actions) => {
+                console.log(values);
                 setTimeout(() => {
                   alert(JSON.stringify(values, null, 2));
                   actions.setSubmitting(false);
                 }, 1000);
               }}
+              validationSchema={validationSchema}
             >
               {(props) => (
                 <Container maxWidth={false}>
