@@ -1,64 +1,76 @@
 import React, { useState } from "react";
-import { 
-  DatePicker ,
-  TimePicker ,
-  DateTimePicker
-} from "@material-ui/pickers";
-import { Field, Form, Formik, FormikProps } from 'formik';
+import { Field, Form, Formik, FormikProps } from "formik";
 import {
   Typography,
-  makeStyles,
-  Stepper ,
-  Step ,
-  StepLabel ,
-  Theme,
+  Stepper,
+  Step,
   Button,
   Container,
-  createStyles,
-  Grid
+  Grid,
+  StepIconProps,
+  Box,
 } from "@material-ui/core";
-import ApoitmentDataTime from "../components/ApoitmentDataTime";
+import ApoitmentDataTime from "./ApoitmentDataTime";
+import {
+  useStyles,
+  CustomStepIconStyles,
+  CustomStepLabelStyle,
+  CustomStepConnector,
+} from "./register/styles/RegisterStyles";
+import clsx from "clsx";
+import PeopleIcon from "@material-ui/icons/People";
+import EventIcon from "@material-ui/icons/Event";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import PaymentIcon from "@material-ui/icons/Payment";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
+function CustomStepIcon(props: StepIconProps) {
+  const classes = CustomStepIconStyles();
+  const { active, completed } = props;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-    },
-    backButton: {
-      marginRight: theme.spacing(1),
-    },
-    instructions: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-    },
-    mainContainer: {
-        minHeight: "80vh"
-    },
-    stepperButtons: {
-        paddingBottom: theme.spacing(2) ,
-        paddingRight: theme.spacing(2) ,
-        // backgroundColor: theme.palette.grey[600]
-    }
-  }),
-);
+  const icons: { [index: string]: React.ReactElement } = {
+    1: <PeopleIcon />,
+    2: <EventIcon />,
+    3: <LockOpenIcon />,
+    4: <PaymentIcon />,
+  };
+
+  return (
+    <div
+      className={clsx(classes.root, {
+        [classes.active]: active,
+        [classes.completed]: completed,
+      })}
+    >
+      {icons[String(props.icon)]}
+    </div>
+  );
+}
 
 function getSteps() {
-    return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
-  }
-  
+  return [
+    "Wybierz rodzaj usługi i specjalistę",
+    "Wybierz datę wizyty",
+    "Zaloguj się lub wprowadź swoje dane",
+    "Opłać kaucję",
+  ];
+}
+
 function getStepContent(step: number) {
-    switch (step) {
-      case 0:
-        return 'Select campaign settings...';
-      case 1:
-        return (<ApoitmentDataTime></ApoitmentDataTime>);
-      case 2:
-        return 'This is the bit I really care about!';
-      default:
-        return 'Unknown step';
-    }
+  switch (step) {
+    case 0:
+      return "Select campaign settings...";
+    case 1:
+      return <ApoitmentDataTime></ApoitmentDataTime>;
+    case 2:
+      return "This is the bit I really care about!";
+    case 3:
+      return "This is the bit I really care about!";
+    default:
+      return "Unknown step";
   }
+}
 
 export default function HorizontalLabelPositionBelowStepper() {
   const classes = useStyles();
@@ -79,38 +91,45 @@ export default function HorizontalLabelPositionBelowStepper() {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper
+        activeStep={activeStep}
+        alternativeLabel
+        className={classes.stepper}
+        connector={<CustomStepConnector />}
+      >
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <CustomStepLabelStyle StepIconComponent={CustomStepIcon}>
+              {label}
+            </CustomStepLabelStyle>
           </Step>
         ))}
       </Stepper>
-      <div>
+      <Box className={classes.contentBox}>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>All steps completed</Typography>
+            <Typography className={classes.instructions}>
+              All steps completed
+            </Typography>
             <Button onClick={handleReset}>Reset</Button>
           </div>
         ) : (
-          <div>
-                 <Formik
-                    initialValues={{ name: 'jared' }}
-                    onSubmit={(values, actions) => {
-                      setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        actions.setSubmitting(false);
-                      }, 1000);
-                    }}
-
-                  >{
-                    (props) => (
-                      <Container maxWidth={false} className={classes.mainContainer} >
-                        {getStepContent(activeStep)}
-                      </Container>
-                    )
-                  }</Formik>
-              
+          <>
+            <Formik
+              initialValues={{ name: "jared" }}
+              onSubmit={(values, actions) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2));
+                  actions.setSubmitting(false);
+                }, 1000);
+              }}
+            >
+              {(props) => (
+                <Container maxWidth={false} className={classes.mainContainer}>
+                  {getStepContent(activeStep)}
+                </Container>
+              )}
+            </Formik>
             
             <Grid container 
                 // alignContent="flex-end" 
@@ -119,24 +138,31 @@ export default function HorizontalLabelPositionBelowStepper() {
                 direction="row" 
                 className={classes.stepperButtons}
             >
-                <Grid item>
-                    <Button
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        className={classes.backButton}
-                    >
-                        Back
-                    </Button>
-                </Grid>
-                <Grid item>
-                    <Button variant="contained" color="primary" onClick={handleNext}>
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                    </Button>
-                </Grid>
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.backButton}
+                  startIcon={<NavigateBeforeIcon />}
+                >
+                  Wróć
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  endIcon={<NavigateNextIcon />}
+                >
+                  {activeStep === steps.length - 1 ? "Zakończ" : "Dalej"}
+                </Button>
+              </Grid>
             </Grid>
-          </div>
+          </>
         )}
-      </div>
+      </Box>
     </div>
   );
 }
