@@ -83,12 +83,12 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "1px solid black"
   },
   mainGrid: {
-    maxHeight: "70vh", 
+    maxHeight: "60vh", 
     overflow: "auto",
     minWidth: "400px",
     maxWidth: "1000px",
     margin: "10px",
-    scrollbarWidth: "none",
+    // scrollbarWidth: "none",
   },
   list: {
     backgroundColor: theme.palette.primary.main,
