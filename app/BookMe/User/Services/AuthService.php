@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\MyApp\User\Services;
+namespace App\BookMe\User\Services;
 
 use App\Models\User;
 use App\BookMe\User\Repositories\UserRepository;
@@ -15,14 +15,10 @@ use League\Fractal\Manager;
 class AuthService
 {
     protected $userRepository;
-    protected $fractal;
-    protected $tranformsUtil;
 
-    public function __construct(UserRepository $userRepository, Manager $fractal, TranformsUtil $tranformsUtil)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->fractal = $fractal;
-        $this->tranformsUtil = $tranformsUtil;
     }
 
     /**
