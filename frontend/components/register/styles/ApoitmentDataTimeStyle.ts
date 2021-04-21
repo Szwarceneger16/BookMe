@@ -3,7 +3,8 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core";
 export default makeStyles((theme: Theme) => ({
     root: {
       flexGrow: 1,
-      padding: "2px",
+      padding: "10px",
+      margin: "10px"
     },
     paper: {
       padding: theme.spacing(2),
@@ -22,7 +23,6 @@ export default makeStyles((theme: Theme) => ({
     },
     listHours: {
       width: "100px",
-  
       justifyContent: "center",
       alignSelf: "stretch",
       borderBottom: "1px solid black"
@@ -37,11 +37,13 @@ export default makeStyles((theme: Theme) => ({
       padding: "0px !important",
       backgroundColor: theme.palette.primary.main,
       alignItems: "center",
-      display: "flex"
+      display: "flex",
       // scrollbarWidth: "none",
     },
     list: {
       width: "fit-content",
+      height: "100%",
+      padding: "10px 0px"
       //overflow: "clip",
     },
     listButton: {

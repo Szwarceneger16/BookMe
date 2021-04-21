@@ -37,7 +37,14 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiAppBar: {
+      colorDefault: {
+        color: "white",
+        backgroundColor:"rgba(0, 0, 0, 0.5)"
+      }
+    }
   },
+
 });
 
 declare module "@material-ui/core/styles/createPalette" {

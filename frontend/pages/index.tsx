@@ -1,20 +1,15 @@
-import Typography from "@material-ui/core/Typography";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import red from "@material-ui/core/colors/red";
+import React from "react";
+import IndexLayout from "../layouts/IndexLayout";
+import { 
+  Typography
+} from '@material-ui/core'
 
-const useStyles = makeStyles((theme: Theme) => 
-  createStyles({
-    color: {
-      color: red[500]
-    }
-  })
-)
-
-export default function Home() {
-  const classes = useStyles();
+export default function index() {
   return (
-    <>
-      <Typography variant="h2" component="h1" className={classes.color}>Strona główna</Typography>
+      <>
+        <Typography variant="h2" component="h1">Strona główna</Typography>
     </>
-  )
+    );
 }
+
+index.Layout = IndexLayout;

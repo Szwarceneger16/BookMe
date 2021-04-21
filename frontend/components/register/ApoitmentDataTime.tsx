@@ -113,8 +113,14 @@ const ApoitmentDataTime = (props) => {
         <ListItem style={{margin: "0px",padding: "0px"}} disableGutters key={index}>
           <ListItemIcon className={classes.listHours}>
             <Box color="primary" className={classes.hourBox}>
-              {`${DateFns.getHours(element)}:${DateFns.getMinutes(element)} - ${DateFns.getHours(elements[index+1])}:${DateFns.getMinutes(elements[index+1])}`} 
-              {/* {`${9+Math.floor(index/4)}:${15*(index%4)}${index%4?"":"0"} - ${9+Math.floor((index+1)/4)}:${15*((index+1)%4)}${(index+1)%4?"":"0"}`}  */}
+              {`${DateFns.getHours(element)}:
+              ${DateFns.getMinutes(element) === 0 ? '00' : DateFns.getMinutes(element)}
+              -
+              ${DateFns.getHours(elements[index+1])}:
+              ${DateFns.getMinutes(elements[index+1])  === 0 ? 
+              '00' : 
+              DateFns.getMinutes(elements[index+1])
+              }`}
             </Box>         
           </ListItemIcon>
         {/* <Divider flexItem color="dark" orientation="vertical"></Divider> */}
