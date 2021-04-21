@@ -10,7 +10,7 @@ import {
   StepIconProps,
   Box,
 } from "@material-ui/core";
-import ApoitmentDataTime from "./ApoitmentDataTime";
+import ApoitmentDataTime from "./register/ApoitmentDataTime";
 import {
   useStyles,
   CustomStepIconStyles,
@@ -65,7 +65,7 @@ function getStepContent(step: number, props) {
     case 0:
       return <SelectService {...props} />;
     case 1:
-      return <ApoitmentDataTime></ApoitmentDataTime>;
+      return <ApoitmentDataTime {...props}/>;
     case 2:
       return <LoginOrRegister {...props} />;
     case 3:
@@ -143,6 +143,8 @@ export default function HorizontalLabelPositionBelowStepper() {
                 phone: "",
                 firstName: "",
                 lastName: "",
+                selectedExpertId: "",
+                apoitmentDate: "",
               }}
               onSubmit={(values, actions) => {
                 console.log(values);
