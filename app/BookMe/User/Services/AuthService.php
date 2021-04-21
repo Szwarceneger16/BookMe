@@ -5,21 +5,13 @@ declare(strict_types=1);
 namespace App\BookMe\User\Services;
 
 use App\Models\User;
-use App\BookMe\User\Repositories\UserRepository;
 use App\BookMe\Utility\Response;
-use App\BookMe\Utility\TranformsUtil;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
-use League\Fractal\Manager;
+
 
 class AuthService
 {
-    protected $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
 
     /**
      * Login User
@@ -49,10 +41,8 @@ class AuthService
                 $data,
                 ['password' => bcrypt($data['password'])]
             ));
-            return Response::build([
-                'message' => 'User successfully registered',
-                'user' => $user
-            ], 201, 'msg/success.create');
+            return Response::build($user
+            , 201, 'msg/success.create');
         } catch (\Exception $e) {
             Log::error("There was problem with AuthService.registerAction(): ", ['error' => $e]);
             return Response::build([], 500, 'msg/error.create');

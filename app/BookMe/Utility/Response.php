@@ -1,6 +1,6 @@
 <?php
 
-namespace App\MyApp\Utility;
+namespace App\BookMe\Utility;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Translation\Translator;
