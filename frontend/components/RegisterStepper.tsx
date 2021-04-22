@@ -27,6 +27,7 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import SelectService from "./register/SelectService";
 import LoginOrRegister from "./register/LoginOrRegister";
+import axios from "axios";
 
 function CustomStepIcon(props: StepIconProps) {
   const classes = CustomStepIconStyles();
@@ -60,14 +61,14 @@ function getSteps() {
   ];
 }
 
-function getStepContent(step: number, props) {
+function getStepContent(step: number, props, isSubmitLoading) {
   switch (step) {
     case 0:
       return <SelectService {...props} />;
     case 1:
-      return <ApoitmentDataTime {...props}/>;
+      return <ApoitmentDataTime {...props} />;
     case 2:
-      return <LoginOrRegister {...props} />;
+      return <LoginOrRegister {...props} isSubmitLoading={isSubmitLoading} />;
     case 3:
       return "This is the bit I really care about!";
     default:
@@ -77,7 +78,10 @@ function getStepContent(step: number, props) {
 
 export default function HorizontalLabelPositionBelowStepper() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [needRegister, setNeedRegister] = useState<boolean>(true);
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -136,7 +140,6 @@ export default function HorizontalLabelPositionBelowStepper() {
           <>
             <Formik
               initialValues={{
-                name: "jared",
                 selectedService: "",
                 email: "",
                 password: "",
@@ -145,19 +148,40 @@ export default function HorizontalLabelPositionBelowStepper() {
                 lastName: "",
                 selectedExpertId: "",
                 apoitmentDate: "",
+                isLoading: false,
               }}
-              onSubmit={(values, actions) => {
-                console.log(values);
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  actions.setSubmitting(false);
-                }, 1000);
+              onSubmit={async (values, actions): Promise<void> => {
+                setIsSubmitLoading(true);
+                if (needRegister) {
+                  await axios
+                    .post(process.env.BACKEND_HOST + "/auth/register", {
+                      email: values.email,
+                      password: values.password,
+                      first_name: values.firstName,
+                      last_name: values.lastName,
+                      phone: values.phone,
+                    })
+                    .then((res) => {
+                      console.log(res);
+                      setIsAuthorized(true);
+                      actions.resetForm();
+                    })
+                    .catch((err) => {
+                      if (err.response.status === 422) {
+                        actions.setFieldError(
+                          "email",
+                          "Ten email jest już używany"
+                        );
+                      }
+                    });
+                  setIsSubmitLoading(false);
+                }
               }}
               validationSchema={validationSchema}
             >
               {(props) => (
                 <Container maxWidth={false}>
-                  {getStepContent(activeStep, props)}
+                  {getStepContent(activeStep, props, isSubmitLoading)}
                 </Container>
               )}
             </Formik>
@@ -187,6 +211,7 @@ export default function HorizontalLabelPositionBelowStepper() {
                   color="primary"
                   onClick={handleNext}
                   endIcon={<NavigateNextIcon />}
+                  disabled={!isAuthorized && activeStep === 2}
                 >
                   {activeStep === steps.length - 1 ? "Zakończ" : "Dalej"}
                 </Button>

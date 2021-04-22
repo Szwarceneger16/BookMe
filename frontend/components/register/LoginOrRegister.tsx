@@ -15,6 +15,7 @@ import useStyles, { WhiteTextField } from "./styles/LoginOrRegisterStyles";
 import MaskedInput from "react-text-mask";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import LoadingButton from "../buttons/LoadingButton";
 
 interface TextMaskCustomProps {
   inputRef: (ref: HTMLInputElement | null) => void;
@@ -35,7 +36,7 @@ function TextMaskCustom(props: TextMaskCustomProps) {
   );
 }
 
-export default function LoginOrRegister(props) {
+export default function LoginOrRegister({ isSubmitLoading, ...props }) {
   const classes = useStyles();
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [hasAccount, setHasAccount] = React.useState<boolean>(true);
@@ -147,9 +148,14 @@ export default function LoginOrRegister(props) {
             >
               {hasAccount ? "Nie mam konta" : "Mam konto"}
             </Button>
-            <Button color="primary" variant="contained" type="submit">
+            <LoadingButton
+              loading={isSubmitLoading}
+              color="primary"
+              variant="contained"
+              type="submit"
+            >
               {hasAccount ? "Zaloguj" : "Zarejestruj"}
-            </Button>
+            </LoadingButton>
           </Box>
         </form>
       </Grid>
