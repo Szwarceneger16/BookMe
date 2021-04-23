@@ -26,4 +26,12 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
 });
 
+Route::group([
+    'middleware' => 'api',
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'user',
+], function($router){
+    Route::get('me', 'UserController@authUser');
+});
+
 Route::get('services', [JobsServicesController::class, 'index']);
