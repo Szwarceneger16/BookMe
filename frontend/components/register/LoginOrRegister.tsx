@@ -10,6 +10,7 @@ import {
   Box,
   Button,
 } from "@material-ui/core";
+import { useSelector } from 'react-redux'
 import Image from "next/image";
 import useStyles, { WhiteTextField } from "./styles/LoginOrRegisterStyles";
 import MaskedInput from "react-text-mask";
@@ -40,6 +41,7 @@ export default function LoginOrRegister({ isSubmitLoading, ...props }) {
   const classes = useStyles();
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [hasAccount, setHasAccount] = React.useState<boolean>(true);
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   return (
     <Grid container alignItems="center" justifycontent="center">
@@ -55,6 +57,7 @@ export default function LoginOrRegister({ isSubmitLoading, ...props }) {
       </Hidden>
       <Grid item xs={12} md={6} className={classes.formGrid}>
         <form onSubmit={props.handleSubmit}>
+          { !isLoggedIn ? (
           <WhiteTextField
             fullWidth
             id="email"
@@ -67,7 +70,7 @@ export default function LoginOrRegister({ isSubmitLoading, ...props }) {
             onChange={props.handleChange}
             error={props.touched.email && Boolean(props.errors.email)}
             helperText={props.touched.email && props.errors.email}
-          />
+          />) : null}
           {!hasAccount ? (
             <>
               <WhiteTextField
@@ -142,19 +145,21 @@ export default function LoginOrRegister({ isSubmitLoading, ...props }) {
             }}
           />
           <Box display="flex" justifyContent="space-between">
+            { !isLoggedIn ? (
             <Button
               className={classes.icon}
               onClick={() => setHasAccount(!hasAccount)}
             >
               {hasAccount ? "Nie mam konta" : "Mam konto"}
-            </Button>
+            </Button> 
+            ) : null}
             <LoadingButton
               loading={isSubmitLoading}
               color="primary"
               variant="contained"
               type="submit"
             >
-              {hasAccount ? "Zaloguj" : "Zarejestruj"}
+              { !isLoggedIn ? (hasAccount ? "Zaloguj" : "Zarejestruj") : "Potwierdz"}
             </LoadingButton>
           </Box>
         </form>
