@@ -31,6 +31,7 @@ Route::group([
     'namespace' => 'App\Http\Controllers',
     'prefix' => 'user',
 ], function($router){
+    Route::post('check-password', 'UserController@checkPassword');
     Route::get('me', 'UserController@authUser');
 });
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\BookMe\User\Request\CheckPasswordRequest;
 use App\BookMe\User\Services\AuthUserService;
+use App\BookMe\User\Services\CheckPasswordService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -14,10 +16,13 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     protected $authUserService;
+    protected $checkPasswordService;
 
-    public function __construct(AuthUserService $authUserService)
+    public function __construct(AuthUserService $authUserService,
+                                CheckPasswordService $checkPasswordService)
     {
         $this->authUserService = $authUserService;
+        $this->checkPasswordService = $checkPasswordService;
     }
 
     /**
@@ -35,8 +40,26 @@ class UserController extends Controller
      *    "status": 200
      *    }
      */
-    public function authUser(): JsonResponse{
+    public function authUser(): JsonResponse
+    {
         return $this->authUserService->execute();
     }
 
+    /**
+     * Check password
+     *
+     * Returns data about current authenticated user
+     * @bodyParam password string required Password to check. Example: 1235678
+     * @authenticated
+     * @response {
+     *    "data": "true",
+     *    "message": "Record was returned",
+     *    "status": 200
+     *    }
+     */
+    public function checkPassword(CheckPasswordRequest $request): JsonResponse
+    {
+        error_log("???");
+        return $this->checkPasswordService->execute($request->validated());
+    }
 }

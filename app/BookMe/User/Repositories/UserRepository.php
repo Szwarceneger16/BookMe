@@ -29,7 +29,7 @@ class UserRepository
                 'first_name',
                 'last_name',
                 'email',
-            ])[0];
+            ])->first();
             return $current_user_object;
         }
         else {
