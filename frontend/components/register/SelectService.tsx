@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import clsx from "clsx";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {
   FormControl,
@@ -11,23 +10,21 @@ import {
   Typography,
 } from "@material-ui/core";
 import useStyles, { selectStyles } from "./styles/SelectServiceStyles";
+import axios from "axios";
 
-const SERVICES = [
-  { id: 2, name: "Kardiolog" },
-  { id: 3, name: "Ginekolog" },
-  { id: 4, name: "Badanie wzroku" },
-  { id: 5, name: "Sesja u fizjoterapeuty" },
-];
+interface Service{
+  id: number;
+  title: string;
+}
 
 export default function SelectService(props) {
   const classes = useStyles();
   const select_styles = selectStyles();
-  const [services, setServices] = React.useState([]);
+  const [services, setServices] = React.useState<Service[]>([]);
 
-  React.useEffect(async () => {
-    //TODO
-    //Async save to state
-    setServices(SERVICES);
+  React.useEffect(async (): Promise<void> => {
+    await axios.get(process.env.BACKEND_HOST + "/services")
+        .then( res => setServices(res.data.data));
   }, []);
 
   return (
@@ -42,14 +39,15 @@ export default function SelectService(props) {
         <Typography className={classes.white}>
           Aby rozpocząć wybierz usługę, z której chcesz skorzystać.
         </Typography>
-        <FormControl variant="outlined" fullWidth className={classes.marginTop}>
-          <InputLabel
-            id="services-select-label"
-            className={select_styles.label}
-          >
-            Usługi
-          </InputLabel>
           {services.length > 0 ? (
+              <>
+              <FormControl variant="outlined" fullWidth className={classes.marginTop}>
+                  <InputLabel
+                      id="services-select-label"
+                      className={select_styles.label}
+                  >
+                      Usługi
+                  </InputLabel>
             <Select
               labelId="services-select-label"
               id="services-select"
@@ -61,14 +59,16 @@ export default function SelectService(props) {
             >
               {services.map((service) => (
                 <MenuItem key={service.id} value={service.id}>
-                  {service.name}
+                  {service.title}
                 </MenuItem>
               ))}
             </Select>
+              </FormControl>
+              </>
           ) : (
-            <Skeleton variant="rect" width={300} height={30} />
+            <Skeleton variant="rect" style={{width: "100%"}} height={60} />
           )}
-        </FormControl>
+
       </Grid>
     </Grid>
   );
