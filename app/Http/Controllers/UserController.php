@@ -59,7 +59,6 @@ class UserController extends Controller
      */
     public function checkPassword(CheckPasswordRequest $request): JsonResponse
     {
-        error_log("???");
         return $this->checkPasswordService->execute($request->validated());
     }
 }
