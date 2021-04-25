@@ -4,9 +4,7 @@ const ISSERVER = typeof window === "undefined";
 
 const user = !ISSERVER ? JSON.parse(localStorage.getItem("user")) : "";
 
-const inistalState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
+const inistalState = { isLoggedIn: false, user: null };
 
 function authReducer(state = inistalState, action) {
   const { type, payload } = action;

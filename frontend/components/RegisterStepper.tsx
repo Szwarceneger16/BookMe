@@ -27,8 +27,9 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import SelectService from "./register/SelectService";
 import LoginOrRegister from "./register/LoginOrRegister";
-import axios from "axios";
-import {authService} from "../lib/authService";
+import { authService } from "../lib/authService";
+import { useDispatch, useSelector } from "react-redux";
+import { login as loginAction } from "../src/actions/auth";
 
 function CustomStepIcon(props: StepIconProps) {
   const classes = CustomStepIconStyles();
@@ -62,14 +63,29 @@ function getSteps() {
   ];
 }
 
-function getStepContent(step: number, props, isSubmitLoading) {
+function getStepContent(
+  step: number,
+  props,
+  isSubmitLoading,
+  hasAccount,
+  setHasAccount,
+  isAuthorized
+) {
   switch (step) {
     case 0:
       return <SelectService {...props} />;
     case 1:
       return <ApoitmentDataTime {...props} />;
     case 2:
-      return <LoginOrRegister {...props} isSubmitLoading={isSubmitLoading} />;
+      return (
+        <LoginOrRegister
+          {...props}
+          isSubmitLoading={isSubmitLoading}
+          hasAccount={hasAccount}
+          setHasAccount={setHasAccount}
+          isAuthorized={isAuthorized}
+        />
+      );
     case 3:
       return "This is the bit I really care about!";
     default:
@@ -80,12 +96,13 @@ function getStepContent(step: number, props, isSubmitLoading) {
 export default function HorizontalLabelPositionBelowStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [needRegister, setNeedRegister] = useState<boolean>(true);
+  const [hasAccount, setHasAccount] = useState<boolean>(true);
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const steps = getSteps();
 
-  const { register } = authService();
+  const { register, checkPassword, login } = authService();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -102,17 +119,14 @@ export default function HorizontalLabelPositionBelowStepper() {
   const validationSchema = yup.object({
     email: yup
       .string("Wprowadź email")
-      .email("Musisz wprowadzić prawidłowy email")
-      .required("Email jest wymagany"),
+      .email("Musisz wprowadzić prawidłowy email"),
     password: yup
       .string("Wprowadź hasło")
       .min(8, "Hasło musi zawierać minimum 8 znaków")
       .required("Hasło jest wymagane"),
-    phone: yup.string("Wprowadź telefon").required("Telefon jest wymagany"),
-    firstName: yup.string("Wprowadź imię").required("Imię jest wymagane"),
-    lastName: yup
-      .string("Wprowadź nazwisko")
-      .required("Nazwisko jest wymagane"),
+    phone: yup.string("Wprowadź telefon"),
+    firstName: yup.string("Wprowadź imię"),
+    lastName: yup.string("Wprowadź nazwisko"),
   });
 
   return (
@@ -154,37 +168,90 @@ export default function HorizontalLabelPositionBelowStepper() {
               }}
               onSubmit={async (values, actions): Promise<void> => {
                 setIsSubmitLoading(true);
-                if (needRegister) {
-                    await register({
-                      email: values.email,
-                      password: values.password,
-                      first_name: values.firstName,
-                      last_name: values.lastName,
-                      phone: values.phone
-                    })
-                    .then((res) => {
-                      console.log(res);
-                      setIsAuthorized(true);
-                      actions.resetForm();
-                    })
-                    .catch((err) => {
-                      if (typeof err.response !== undefined){
-                        if (err.response.status === 422) {
-                          actions.setFieldError(
-                              "email",
-                              "Ten email jest już używany"
-                          );
-                        }
-                      }
-                    });
-                  setIsSubmitLoading(false);
+                if (isLoggedIn) {
+                  // When user is logged in
+                  await checkPassword(values.password)
+                    .then((res) => setIsAuthorized(true))
+                    .catch((err) =>
+                      actions.setFieldError(
+                        "password",
+                        "Hasła się nie zgadzają."
+                      )
+                    );
+                } else if (!isLoggedIn && !hasAccount) {
+                  // When user wanna register
+                  //Can be better option but doesnt block handle submit
+                  if (!values.email) {
+                    actions.setFieldError("email", "Email jest wymagany");
+                    setIsSubmitLoading(false);
+                    return;
+                  }
+                  if (!values.phone) {
+                    actions.setFieldError("phone", "Telefon jest wymagany");
+                    setIsSubmitLoading(false);
+                    return;
+                  }
+                  if (!values.firstName) {
+                    actions.setFieldError("firstName", "Imię jest wymagane");
+                    setIsSubmitLoading(false);
+                    return;
+                  }
+                  if (!values.lastName) {
+                    actions.setFieldError("lastName", "Nazwisko jest wymagane");
+                    setIsSubmitLoading(false);
+                    return;
+                  }
+                  const response = await register({
+                    email: values.email,
+                    password: values.password,
+                    first_name: values.firstName,
+                    last_name: values.lastName,
+                    phone: values.phone,
+                  });
+                  if (response) {
+                    setIsAuthorized(true);
+                    actions.resetForm();
+                  } else {
+                    actions.setFieldError(
+                      "email",
+                      "Ten email jest już używany"
+                    );
+                  }
+                } else if (!isLoggedIn && hasAccount) {
+                  // When user wanna login
+                  if (!values.email) {
+                    actions.setFieldError("email", "Email jest wymagany");
+                    setIsSubmitLoading(false);
+                    return;
+                  }
+                  const response = await login({
+                    email: values.email,
+                    password: values.password,
+                  });
+                  if (response) {
+                    setIsAuthorized(true);
+                    actions.resetForm();
+                  } else {
+                    actions.setFieldError(
+                      "email",
+                      "Niepoprawny email lub hasło"
+                    );
+                  }
                 }
+                setIsSubmitLoading(false);
               }}
               validationSchema={validationSchema}
             >
               {(props) => (
                 <Container maxWidth={false}>
-                  {getStepContent(activeStep, props, isSubmitLoading)}
+                  {getStepContent(
+                    activeStep,
+                    props,
+                    isSubmitLoading,
+                    hasAccount,
+                    setHasAccount,
+                    isAuthorized
+                  )}
                 </Container>
               )}
             </Formik>

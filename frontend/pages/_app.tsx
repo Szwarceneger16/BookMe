@@ -31,7 +31,10 @@ export default function MyApp(props) {
           .get(process.env.BACKEND_HOST + "/user/me", {
             headers: header(),
           })
-          .then((res) => dispatch(login(res.data.data)))
+          .then((res) => {
+            console.log(res);
+            dispatch(login(res.data.data))
+          })
           .catch((err) => console.log(err));
       })();
     }, []);
