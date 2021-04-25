@@ -28,6 +28,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import SelectService from "./register/SelectService";
 import LoginOrRegister from "./register/LoginOrRegister";
 import axios from "axios";
+import {authService} from "../lib/authService";
 
 function CustomStepIcon(props: StepIconProps) {
   const classes = CustomStepIconStyles();
@@ -83,6 +84,8 @@ export default function HorizontalLabelPositionBelowStepper() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
   const steps = getSteps();
+
+  const { register } = authService();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -148,18 +151,16 @@ export default function HorizontalLabelPositionBelowStepper() {
                 lastName: "",
                 selectedExpertId: "",
                 apoitmentDate: "",
-                isLoading: false,
               }}
               onSubmit={async (values, actions): Promise<void> => {
                 setIsSubmitLoading(true);
                 if (needRegister) {
-                  await axios
-                    .post(process.env.BACKEND_HOST + "/auth/register", {
+                    await register({
                       email: values.email,
                       password: values.password,
                       first_name: values.firstName,
                       last_name: values.lastName,
-                      phone: values.phone,
+                      phone: values.phone
                     })
                     .then((res) => {
                       console.log(res);
@@ -167,11 +168,13 @@ export default function HorizontalLabelPositionBelowStepper() {
                       actions.resetForm();
                     })
                     .catch((err) => {
-                      if (err.response.status === 422) {
-                        actions.setFieldError(
-                          "email",
-                          "Ten email jest już używany"
-                        );
+                      if (typeof err.response !== undefined){
+                        if (err.response.status === 422) {
+                          actions.setFieldError(
+                              "email",
+                              "Ten email jest już używany"
+                          );
+                        }
                       }
                     });
                   setIsSubmitLoading(false);
