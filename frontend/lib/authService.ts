@@ -37,9 +37,6 @@ export function authService(): object {
         phone,
       })
       .then((res) => {
-        const data = res.data.data;
-        dispatch(loginAction(data));
-        localStorage.setItem("user", JSON.stringify(data));
         return true;
       })
       .catch((err) => {
