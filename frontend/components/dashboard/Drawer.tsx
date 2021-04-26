@@ -12,47 +12,21 @@ import {
   createStyles,
 } from "@material-ui/core/styles";
 import DrawerItems from "./DrawerItems";
-import { Box } from "@material-ui/core";
-
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-    },
-    drawer: {
-      [theme.breakpoints.up("sm")]: {
-        width: drawerWidth,
-        flexShrink: 0,
-      },
-    },
-    appBar: {
-      backgroundColor: "transparent",
-      boxShadow: "none",
-      [theme.breakpoints.up("sm")]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-      },
-    },
-    menuButton: {
-      marginLeft: theme.spacing(2),
-      color: theme.palette.primary.main,
-      [theme.breakpoints.up("sm")]: {
-        display: "none",
-      },
-    },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-    },
-  })
-);
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Divider,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@material-ui/core";
+import { Notifications } from "@material-ui/icons";
+import { grey } from "@material-ui/core/colors";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import useStyles from "./styles/DrawerStyles";
 
 export default function AppDrawer({ children, items, ...props }) {
   const classes = useStyles();
@@ -63,11 +37,83 @@ export default function AppDrawer({ children, items, ...props }) {
     setMobileOpen(!mobileOpen);
   };
 
+  //
+  // Notifications
+  //
+  const [anchorNotificationsEl, setAnchorNotificationsEl] = React.useState(
+    null
+  );
+  const areNotificationsOpen = Boolean(anchorNotificationsEl);
+
+  const handleNotificationsOpen = (event) => {
+    setAnchorNotificationsEl(event.currentTarget);
+  };
+
+  const handleNotificationsClose = () => {
+    setAnchorNotificationsEl(null);
+  };
+
+  const notificationsId = "notifications";
+  const renderNotifications = (
+    <Menu
+      anchorEl={anchorNotificationsEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={notificationsId}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={areNotificationsOpen}
+      onClose={handleNotificationsClose}
+      className={classes.messagesContainer}
+    >
+      <Typography variant="h5" className={classes.messagesTitle}>
+        Powiadomienia
+      </Typography>
+      <Divider />
+      {[0, 1, 2].map((item) => (
+        <MenuItem
+          onClick={handleNotificationsClose}
+          key={item}
+          className={classes.messageItem}
+        >
+          <Avatar className={classes.notificationIcon}>
+            <AssignmentIcon />
+          </Avatar>
+          <div className={classes.messageTexts}>
+            <Typography className={classes.messageName}>
+              Nadchodzące wydarzenie
+            </Typography>
+            <Typography className={classes.messageShort}>
+              Za <b>2 dni</b> odbędzie się Twoja wizyta
+            </Typography>
+          </div>
+        </MenuItem>
+      ))}
+      <div className={classes.messagesExpandMore}>
+        <Button
+          endIcon={
+            <ExpandMoreIcon color="inherit" aria-label="show more messages" />
+          }
+        >
+          Pokaż wszystko
+        </Button>
+      </div>
+    </Menu>
+  );
+  //End notifictions
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Box flexGrow={1}></Box>
+          {/*TODO: Add functionality when notification api will be working*/}
+          <IconButton
+            aria-label="show 17 new notifications"
+            onClick={handleNotificationsOpen}
+          >
+            <Badge badgeContent={4} color="primary">
+              <Notifications className={classes.appBarIcon} />
+            </Badge>
+          </IconButton>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -109,6 +155,7 @@ export default function AppDrawer({ children, items, ...props }) {
           </Drawer>
         </Hidden>
       </nav>
+      {renderNotifications}
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {children}

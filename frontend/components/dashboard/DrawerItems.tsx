@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -13,45 +12,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import FolderSharedIcon from "@material-ui/icons/FolderShared";
-
-const useStyles = makeStyles((theme) => ({
-  logo: {
-    padding: theme.spacing(2),
-  },
-  itemButton: {
-    color: theme.palette.white.main,
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-  selected: {
-    backgroundColor: theme.palette.primary.main,
-    "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
-    },
-  },
-  subitem: {
-    position: "relative",
-    "&::before": {
-      content: "''",
-      position: "absolute",
-      display: "block",
-      top: "50%",
-      left: theme.spacing(2),
-      width: 8,
-      height: 8,
-      borderRadius: "50%",
-      backgroundColor: theme.palette.white.main,
-      transform: "translateY(-50%)",
-    },
-  },
-  subitemActive: {
-    position: "relative",
-    "&::before": {
-      backgroundColor: theme.palette.primary.main,
-    },
-  },
-}));
+import useStyles from "./styles/DrawerItemStyles";
 
 const LinkedSimpleItem = ({ data }) => {
   const classes = useStyles();
@@ -60,9 +21,12 @@ const LinkedSimpleItem = ({ data }) => {
 
   return (
     <Link href={data.href}>
-      <ListItem button className={clsx({ [classes.selected]: isSelected })}>
+      <ListItem
+        button
+        className={clsx(classes.listItem, { [classes.selected]: isSelected })}
+      >
         <ListItemIcon className={classes.itemButton}>{data.icon}</ListItemIcon>
-        <ListItemText primary={data.name} />
+        <ListItemText className={classes.listItemText} primary={data.name} />
       </ListItem>
     </Link>
   );
@@ -89,12 +53,12 @@ const LinkedCollapseItem = ({ data }) => {
       <ListItem
         button
         onClick={handleClick}
-        className={clsx({ [classes.selected]: isSelected })}
+        className={clsx(classes.listItem, { [classes.selected]: isSelected })}
       >
         <ListItemIcon className={classes.itemButton}>
           <FolderSharedIcon />
         </ListItemIcon>
-        <ListItemText primary={data.name} />
+        <ListItemText className={classes.listItemText} primary={data.name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -108,8 +72,14 @@ const LinkedCollapseItem = ({ data }) => {
             })}
           >
             <Link href={itemData.href}>
-              <ListItem button className={classes.nested}>
-                <ListItemText primary={itemData.name} />
+              <ListItem
+                button
+                className={clsx(classes.listItem, classes.nested)}
+              >
+                <ListItemText
+                  className={classes.listItemText}
+                  primary={itemData.name}
+                />
               </ListItem>
             </Link>
           </List>
