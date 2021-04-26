@@ -22,25 +22,6 @@ export default function MyApp(props) {
 
   const Layout = Component.Layout || EmptyLayout;
 
-  const LayoutAuth = ({ children }) => {
-    const dispatch = useDispatch();
-
-    React.useEffect(() => {
-      (async (): Promise<void> => {
-        await axios
-          .get(process.env.BACKEND_HOST + "/user/me", {
-            headers: header(),
-          })
-          .then((res) => {
-            console.log(res);
-            dispatch(login(res.data.data))
-          })
-          .catch((err) => console.log(err));
-      })();
-    }, []);
-    return <Layout>{children}</Layout>;
-  };
-
   axiosInstance();
 
   React.useEffect(() => {
@@ -64,9 +45,9 @@ export default function MyApp(props) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <LayoutAuth>
+          <Layout>
             <Component {...pageProps} />
-          </LayoutAuth>
+          </Layout>
         </ThemeProvider>
       </MuiPickersUtilsProvider>
     </Provider>

@@ -1,4 +1,5 @@
 import {
+  login,
   login as loginAction,
   logout as logoutAction,
 } from "../src/actions/auth";
@@ -6,6 +7,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useRouter } from "next/router";
 import authHeader from "./authHeader";
+import header from "./authHeader";
 
 export function authService(): object {
   const dispatch = useDispatch();
@@ -64,12 +66,20 @@ export function authService(): object {
 }
 
 export function useAuth() {
+  const ISSERVER = typeof window === "undefined";
+  if (ISSERVER) {
+    return;
+  }
   const router = useRouter();
+  const dispatch = useDispatch();
   axios
-    .post(process.env.BACKEND_HOST + "/me")
+    .get(process.env.BACKEND_HOST + "/user/me", {
+      headers: header(),
+    })
     // Render compoment when
     .then((res) => {
       if (res.status === 200) {
+        dispatch(login(res.data.data));
         return false;
       }
       return true;
