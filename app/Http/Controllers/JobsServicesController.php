@@ -15,7 +15,7 @@ use Psy\Util\Json;
  */
 class JobsServicesController extends Controller
 {
-    public $showAllService;
+    public ShowAllService $showAllService;
 
     public function __construct(ShowAllService $showAllService)
     {

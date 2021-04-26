@@ -6,6 +6,7 @@ namespace App\BookMe\User\Repositories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserRepository
@@ -22,18 +23,22 @@ class UserRepository
         return $this->user->create($data);
     }
 
-    public function getAuthUserInfo(){
-        $current_user = Auth::user();
-        if (isset($current_user)){
-            $current_user_object = $this->user->where('id', $current_user->id)->get([
-                'first_name',
-                'last_name',
-                'email',
-            ])->first();
-            return $current_user_object;
-        }
-        else {
-            return null;
-        }
+    public function getAuthUser()
+    {
+        return $this->user->find(Auth::id());
     }
+
+    public function updatePassword(object $user, $request)
+    {
+        return $this->user->where('id',$user->id)->update(['password'=> Hash::make($request['password'])]);
+    }
+
+    public function updateData($user,$request)
+    {
+        return $this->user->where('id',$user->id)->update([
+            'email'=>$request['email'],
+            'phone'=>$request['phone']
+            ]);
+    }
+
 }

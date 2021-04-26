@@ -4,23 +4,23 @@
 namespace App\BookMe\JobsServices\Services;
 
 
-use App\BookMe\JobsServices\Repositories\JobsServicesRepository;
+use App\BookMe\JobsServices\Repositories\ServiceRepository;
 use App\BookMe\Utility\Response;
 use Illuminate\Http\JsonResponse;
 
 
 class ShowAllService
 {
-    protected $jobsServicesRepository;
+    protected ServiceRepository $serviceRepository;
 
-    public function __construct(JobsServicesRepository $jobsServicesRepository)
+    public function __construct(ServiceRepository $serviceRepository)
     {
-        $this->jobsServicesRepository = $jobsServicesRepository;
+        $this->serviceRepository = $serviceRepository;
     }
 
     public function execute(): JsonResponse
     {
-        $services = $this->jobsServicesRepository->listServices();
+        $services = $this->serviceRepository->listServices();
         return Response::build($services, 200, "msg/success.list");
     }
 

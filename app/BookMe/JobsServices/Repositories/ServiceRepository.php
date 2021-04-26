@@ -6,9 +6,9 @@ namespace App\BookMe\JobsServices\Repositories;
 
 use App\Models\Service;
 
-class JobsServicesRepository
+class ServiceRepository
 {
-    protected $service;
+    protected Service $service;
 
     public function __construct(Service $service)
     {
