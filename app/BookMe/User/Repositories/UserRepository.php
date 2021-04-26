@@ -30,7 +30,7 @@ class UserRepository
 
     public function updatePassword(object $user, $request)
     {
-        return $this->user->where('id',$user->id)->update(['password'=> Hash::make($request['password'])]);
+        return $this->user->where('id',$user->id)->update(['password'=> Hash::make($request['new_password'])]);
     }
 
     public function updateData($user,$request)

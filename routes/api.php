@@ -36,6 +36,7 @@ Route::group([
     Route::get('me', 'UserController@authUser');
     Route::post('change-password','UserController@changePassword');
     Route::post('update-data','UserController@update');
+    Route::post('update-data2','UserController@update2');
 });
 
 Route::get('services', [JobsServicesController::class, 'index']);

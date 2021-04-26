@@ -9,5 +9,6 @@ return [
     'login' => 'Login failed',
     'register' => 'Register failed',
     'refresh' => 'Refresh token failed',
-    'role' => 'Role invalid'
+    'role' => 'Role invalid',
+    'credentials' => 'Bad credentials',
 ];

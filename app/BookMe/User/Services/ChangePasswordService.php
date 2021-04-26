@@ -23,8 +23,12 @@ class ChangePasswordService
         $user=$this->userRepository->getAuthUser();
         if(isset($user))
         {
-            $this->userRepository->updatePassword($user, $request);
-            return Response::build([], 201, 'msg/success.update');
+            if (Hash::check($request['password'], $user->password)){
+                $this->userRepository->updatePassword($user, $request);
+                return Response::build([], 201, 'msg/success.update');
+            } else {
+                return Response::build([], 405, 'msg/error.credentials');
+            }
         }else{
             return Response::build([], 404, 'msg/error.update');
         }

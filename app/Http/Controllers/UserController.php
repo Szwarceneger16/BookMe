@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BookMe\User\Request\ChangePasswordRequest;
 use App\BookMe\User\Request\CheckPasswordRequest;
 use App\BookMe\User\Request\UpdateDataRequest;
 use App\BookMe\User\Services\AuthUserService;
@@ -65,6 +66,7 @@ class UserController extends Controller
      *    "message": "Record was returned",
      *    "status": 200
      *    }
+     *
      * @param UpdateDataRequest $request
      * @return JsonResponse
      */
@@ -77,17 +79,19 @@ class UserController extends Controller
      * Change password
      *
      * Change password current logged user
-     * @bodyParam password string required Password to change. Example: 1235678
+     * @bodyParam password string required User's current password. Example: 1235678
+     * @bodyParam new_password string required User's new password. Example: 1235678
      * @authenticated
      * @response {
      *    "data": "[]",
      *    "message": "Records was updated",
      *    "status": 201
      *    }
+     *
      * @param CheckPasswordRequest $request
      * @return JsonResponse
      */
-    public function changePassword(CheckPasswordRequest $request): JsonResponse
+    public function changePassword(ChangePasswordRequest $request): JsonResponse
     {
         return $this->changePasswordService->execute($request->validated());
     }
@@ -104,6 +108,7 @@ class UserController extends Controller
      *    "message": "Records was updated",
      *    "status": 201
      *    }
+     *
      * @param UpdateDataRequest $request
      * @return JsonResponse
      */
@@ -111,5 +116,6 @@ class UserController extends Controller
     {
         return $this->updateDataService->execute($request->validated());
     }
+
 
 }
