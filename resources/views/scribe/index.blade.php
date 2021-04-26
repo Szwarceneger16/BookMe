@@ -44,7 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: April 24 2021</li>
+            <li>Last updated: April 26 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">

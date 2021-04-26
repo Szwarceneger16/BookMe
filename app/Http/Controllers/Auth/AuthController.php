@@ -55,11 +55,14 @@ class AuthController extends Controller
      *  "message": "Login success",
      *  "status": 201
      * }
+     * @param LoginRequest $request
+     * @return JsonResponse
      */
     public function login(LoginRequest $request): JsonResponse
     {
         return $this->loginActionService->execute($request->validated());
     }
+
     /**
      * Register
      *
@@ -83,6 +86,8 @@ class AuthController extends Controller
      * "message": "Records was created",
      * "status": 201
      *}
+     * @param RegisterRequest $request
+     * @return JsonResponse
      */
     public function register(RegisterRequest $request): JsonResponse
     {
@@ -110,4 +115,6 @@ class AuthController extends Controller
     {
         return $this->refreshActionService->execute();
     }
+
+
 }

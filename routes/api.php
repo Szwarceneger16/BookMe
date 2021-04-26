@@ -24,6 +24,7 @@ Route::group([
     Route::post('register', 'AuthController@register');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
+
 });
 
 Route::group([
@@ -33,6 +34,8 @@ Route::group([
 ], function($router){
     Route::post('check-password', 'UserController@checkPassword');
     Route::get('me', 'UserController@authUser');
+    Route::post('change-password','UserController@changePassword');
+    Route::post('update-data','UserController@update');
 });
 
 Route::get('services', [JobsServicesController::class, 'index']);

@@ -8,6 +8,7 @@ use App\BookMe\User\Repositories\UserRepository;
 use App\BookMe\Utility\Response;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class RegisterActionService
@@ -24,7 +25,7 @@ class RegisterActionService
         try {
             $user = $this->userRepository->addUser(array_merge(
                 $data,
-                ['password' => bcrypt($data['password'])]
+                ['password' => Hash::make($data['password'])]
             ));
             return Response::build($user
                 , 201, 'msg/success.create');
