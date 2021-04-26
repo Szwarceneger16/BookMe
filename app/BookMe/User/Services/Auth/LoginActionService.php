@@ -23,7 +23,7 @@ class LoginActionService
     {
         if ($token = auth()->attempt($data)) {
             $newToken = $this->tokenHelper->createNewToken($token);
-            return Response::build($newToken, 401, 'msg/success.login');
+            return Response::build($newToken, 201, 'msg/success.login');
         } else {
             Log::error("There was problem with AuthService.loginAction(): ");
             return Response::build([], 500, 'msg/error.login');

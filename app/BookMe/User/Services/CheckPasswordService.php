@@ -16,7 +16,8 @@ class CheckPasswordService
 
     public function execute($data)
     {
-        if (Hash::check($data['password'], Auth::user()->password)){
+        $user = Auth::user();
+        if (isset($user) && Hash::check($data['password'], $user->password)){
             return Response::build(true, 200, 'msg/success.show');
         } else {
             return Response::build([], 406, 'msg/error.show');
