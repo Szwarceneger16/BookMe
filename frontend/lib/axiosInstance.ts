@@ -1,7 +1,8 @@
 import axios from "axios";
+import authHeader from "./authHeader";
 
 const options = {
-  baseURL: process.env.BACKEND_HOST,
+  baseURL: process.env.BACKEND_HOST + "/auth/refresh",
   headers: {
     "Content-Type": "application/json",
   },
@@ -34,10 +35,12 @@ function createAxiosResponseInterceptor() {
        */
       axios.interceptors.response.eject(interceptor);
 
+      const header = authHeader();
       options["method"] = "POST";
+      options["headers"] = { ...options["headers"], ...header };
       return axios(options)
         .then((response) => {
-          const user = JSON.parse(localStorage.getItem("user"));
+          let user = JSON.parse(localStorage.getItem("user"));
           user.access_token = response.data.token;
           localStorage.setItem("user", JSON.stringify(user));
           error.response.config.headers["Authorization"] =

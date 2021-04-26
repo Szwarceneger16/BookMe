@@ -1,32 +1,65 @@
 import React from "react";
 import Drawer from "../components/dashboard/Drawer";
 import HomeIcon from "@material-ui/icons/Home";
-import FolderSharedIcon from "@material-ui/icons/FolderShared";
+import EventNoteIcon from "@material-ui/icons/EventNote";
+import SettingsIcon from "@material-ui/icons/Settings";
 import { useAuth } from "../lib/authService";
+import { ExitToApp } from "@material-ui/icons";
+import { logout } from "../src/actions/auth";
+import { CircularProgress } from "@material-ui/core";
+
+//Same like folder in pages
+const SECTION_PREFIX = "/user";
 
 const ITEMS = [
   {
     name: "Strona główna",
     icon: <HomeIcon />,
-    href: "/user/dashboard",
+    href: SECTION_PREFIX + "/dashboard",
   },
   {
     name: "Twoje wizyty",
-    icon: <FolderSharedIcon />,
+    icon: <EventNoteIcon />,
     subitems: [
       {
         name: "Odwołaj",
-        href: "/user/remove",
+        href: SECTION_PREFIX + "/remove",
       },
       {
         name: "Pokaż wszystkie",
-        href: "/user/all",
+        href: SECTION_PREFIX + "/all",
       },
     ],
+  },
+  {
+    name: "Ustawienia",
+    icon: <SettingsIcon />,
+    href: SECTION_PREFIX + "/settings",
+  },
+  {
+    name: "Wyloguj",
+    icon: <ExitToApp />,
+    href: SECTION_PREFIX + "/logout",
   },
 ];
 
 export default function CustomerLayout({ children }) {
-  useAuth();
-  return <Drawer items={ITEMS}>{children}</Drawer>;
+  const [isAuth, setIsAuth] = React.useState(false);
+  useAuth().then((res) => setIsAuth(res));
+  if (isAuth !== true) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  } else {
+    return <Drawer items={ITEMS}>{children}</Drawer>;
+  }
 }

@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
 import useStyles from "../components/register/styles/BoxStyle";
+import { useLogin } from "../lib/authService";
 
 export default function EmptyLayout({ children }) {
   const classes = useStyles();
+  useLogin();
   return (
     <Box
       display="flex"

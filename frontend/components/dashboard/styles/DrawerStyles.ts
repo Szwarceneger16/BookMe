@@ -5,9 +5,7 @@ const drawerWidth = 240;
 
 export default makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: "flex",
-    },
+    root: {},
     drawer: {
       [theme.breakpoints.up("sm")]: {
         width: drawerWidth,
@@ -29,16 +27,19 @@ export default makeStyles((theme: Theme) =>
         display: "none",
       },
     },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
     drawerPaper: {
       width: drawerWidth,
       backgroundColor: theme.palette.background.dark,
       color: theme.palette.white.main,
     },
     content: {
-      flexGrow: 1,
+      marginLeft: drawerWidth,
+      maxWidth: `calc(100% - ${drawerWidth}px)`,
       padding: theme.spacing(3),
+      [theme.breakpoints.down("xs")]: {
+        marginLeft: 0,
+        maxWidth: "100%",
+      },
     },
     appBarIcon: {
       color: grey[500],

@@ -17,13 +17,13 @@ import {
   Badge,
   Box,
   Button,
+  Container,
   Divider,
   Menu,
   MenuItem,
   Typography,
 } from "@material-ui/core";
 import { Notifications } from "@material-ui/icons";
-import { grey } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import useStyles from "./styles/DrawerStyles";
@@ -102,7 +102,7 @@ export default function AppDrawer({ children, items, ...props }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Box flexGrow={1}></Box>
           {/*TODO: Add functionality when notification api will be working*/}
@@ -157,8 +157,7 @@ export default function AppDrawer({ children, items, ...props }) {
       </nav>
       {renderNotifications}
       <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {children}
+        <Container maxWidth="lg">{children}</Container>
       </main>
     </div>
   );

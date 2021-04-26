@@ -11,6 +11,7 @@ import header from "./authHeader";
 
 export function authService(): object {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const login = ({ email, password }) => {
     return axios
@@ -49,6 +50,7 @@ export function authService(): object {
   const logout = () => {
     dispatch(logoutAction());
     localStorage.removeItem("user");
+    router.push("/");
   };
   const checkPassword = (password) => {
     return axios.post(
@@ -65,7 +67,35 @@ export function authService(): object {
   };
 }
 
-export function useAuth() {
+export async function useAuth() {
+  const ISSERVER = typeof window === "undefined";
+  if (ISSERVER) {
+    return;
+  }
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const response = await axios
+    .get(process.env.BACKEND_HOST + "/user/me", {
+      headers: header(),
+    })
+    // Render compoment when
+    .then((res) => {
+      if (res.status === 200) {
+        dispatch(login(res.data.data));
+        return true;
+      }
+      return false;
+    })
+    .catch((err) => {
+      if (typeof window !== "undefined") {
+        router.push("/");
+        return false;
+      }
+    });
+  return response;
+}
+
+export function useLogin() {
   const ISSERVER = typeof window === "undefined";
   if (ISSERVER) {
     return;
@@ -80,13 +110,11 @@ export function useAuth() {
     .then((res) => {
       if (res.status === 200) {
         dispatch(login(res.data.data));
-        return false;
+        return true;
       }
-      return true;
+      return false;
     })
     .catch((err) => {
-      if (typeof window !== "undefined") {
-        router.push("/");
-      }
+      return false;
     });
 }

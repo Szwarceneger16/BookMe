@@ -35,7 +35,7 @@ export default makeStyles((theme) => ({
       position: "absolute",
       display: "block",
       top: "50%",
-      left: theme.spacing(6),
+      left: theme.spacing(5),
       width: 6,
       height: 6,
       borderRadius: "50%",

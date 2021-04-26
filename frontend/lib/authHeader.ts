@@ -1,4 +1,4 @@
-const authHeader = () => {
+const authHeader = (): object => {
   //Funckja dołaczająca nagłówek autoryzujący do żądania.
   const user = JSON.parse(localStorage.getItem("user"));
   if (user && user.access_token) {
