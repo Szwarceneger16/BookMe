@@ -1,5 +1,5 @@
 ---
-title: BookMe Documentation
+title: Laravel Documentation
 
 language_tabs:
 - bash
