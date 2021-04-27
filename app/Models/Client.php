@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Client extends Model
 {
+    protected $fillable = [
+        'user_id'
+    ];
+
     use HasFactory;
 
     public function user(): BelongsTo

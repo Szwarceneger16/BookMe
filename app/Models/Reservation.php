@@ -10,6 +10,15 @@ class Reservation extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'datetime_start',
+        'datetime_end',
+        'client_id',
+        'employee_id',
+        'place_id',
+        'service_id'
+    ];
+
     public function employees(): HasMany
     {
         return $this->hasMany(Employee::class);
