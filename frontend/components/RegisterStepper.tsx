@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Field, Form, Formik, FormikProps } from "formik";
+import { Field, Form, Formik, useFormik, FormikProps } from "formik";
 import {
   Typography,
   Stepper,
@@ -70,13 +70,21 @@ function getStepContent(
   isSubmitLoading,
   hasAccount,
   setHasAccount,
-  isAuthorized
+  isAuthorized,
+  isDateSelected,
+  setIsDateSelected
 ) {
   switch (step) {
     case 0:
       return <SelectService {...props} />;
     case 1:
-      return <ApoitmentDataTime {...props} />;
+      return (
+        <ApoitmentDataTime
+          {...props}
+          setIsDateSelected={setIsDateSelected}
+          isDateSelected={isDateSelected}
+        />
+      );
     case 2:
       return (
         <LoginOrRegister
@@ -99,6 +107,7 @@ export default function HorizontalLabelPositionBelowStepper() {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [hasAccount, setHasAccount] = useState<boolean>(true);
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [isDateSelected, setIsDateSelected] = useState<boolean>(false);
   const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const steps = getSteps();
@@ -108,6 +117,11 @@ export default function HorizontalLabelPositionBelowStepper() {
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleReservation = () => {
+    console.log(formik);
+    formik.handleSubmit();
   };
 
   const handleBack = () => {
@@ -124,11 +138,115 @@ export default function HorizontalLabelPositionBelowStepper() {
       .email("Musisz wprowadzić prawidłowy email"),
     password: yup
       .string("Wprowadź hasło")
-      .min(8, "Hasło musi zawierać minimum 8 znaków")
+      .min(5, "Hasło musi zawierać minimum 8 znaków")
       .required("Hasło jest wymagane"),
     phone: yup.string("Wprowadź telefon"),
     firstName: yup.string("Wprowadź imię"),
     lastName: yup.string("Wprowadź nazwisko"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      selectedService: "",
+      email: "",
+      password: "",
+      phone: "",
+      firstName: "",
+      lastName: "",
+      selectedExpertId: "",
+      apoitmentDate: "",
+    },
+    onSubmit: async (values, actions): Promise<void> => {
+      if (activeStep === steps.length - 1) {
+        console.log(values);
+      } else {
+        setIsSubmitLoading(true);
+        if (isLoggedIn) {
+          // When user is logged in
+          await checkPassword(values.password)
+            .then((res) => {
+              dispatch(setMessage("Pomyślnie się zautoryzowałeś", "success"));
+              setIsAuthorized(true);
+            })
+            .catch((err) => {
+              dispatch(
+                setMessage(
+                  "Wygląda na to, że podałeś złe hasło. Spróbuj jeszcze raz",
+                  "error"
+                )
+              );
+              actions.setFieldError("password", "Hasła się nie zgadzają.");
+            });
+        } else if (!isLoggedIn && !hasAccount) {
+          // When user wanna register
+          //Can be better option but doesnt block handle submit
+          if (!values.email) {
+            actions.setFieldError("email", "Email jest wymagany");
+            setIsSubmitLoading(false);
+            return;
+          }
+          if (!values.phone) {
+            actions.setFieldError("phone", "Telefon jest wymagany");
+            setIsSubmitLoading(false);
+            return;
+          }
+          if (!values.firstName) {
+            actions.setFieldError("firstName", "Imię jest wymagane");
+            setIsSubmitLoading(false);
+            return;
+          }
+          if (!values.lastName) {
+            actions.setFieldError("lastName", "Nazwisko jest wymagane");
+            setIsSubmitLoading(false);
+            return;
+          }
+          const response = await register({
+            email: values.email,
+            password: values.password,
+            first_name: values.firstName,
+            last_name: values.lastName,
+            phone: values.phone,
+          });
+          if (response) {
+            setIsAuthorized(true);
+            dispatch(
+              setMessage(
+                "Pomyślnie się zarejestrowałeś. Możesz przejść dalej",
+                "success"
+              )
+            );
+            //actions.resetForm();
+          } else {
+            actions.setFieldError("email", "Ten email jest już używany");
+          }
+        } else if (!isLoggedIn && hasAccount) {
+          // When user wanna login
+          if (!values.email) {
+            actions.setFieldError("email", "Email jest wymagany");
+            setIsSubmitLoading(false);
+            return;
+          }
+          const response = await login({
+            email: values.email,
+            password: values.password,
+          });
+          if (response) {
+            setIsAuthorized(true);
+            //actions.resetForm();
+            dispatch(
+              setMessage(
+                "Pomyślnie się zalogowałeś. Możesz przejść dalej",
+                "success"
+              )
+            );
+          } else {
+            actions.setFieldError("email", "Niepoprawny email lub hasło");
+          }
+        }
+        setIsSubmitLoading(false);
+      }
+    },
+    validationSchema: validationSchema,
   });
 
   return (
@@ -157,7 +275,7 @@ export default function HorizontalLabelPositionBelowStepper() {
           </div>
         ) : (
           <>
-            <Formik
+            {/* <Formik
               initialValues={{
                 selectedService: "",
                 email: "",
@@ -229,7 +347,7 @@ export default function HorizontalLabelPositionBelowStepper() {
                         "success"
                       )
                     );
-                    actions.resetForm();
+                    //actions.resetForm();
                   } else {
                     actions.setFieldError(
                       "email",
@@ -249,7 +367,7 @@ export default function HorizontalLabelPositionBelowStepper() {
                   });
                   if (response) {
                     setIsAuthorized(true);
-                    actions.resetForm();
+                    //actions.resetForm();
                     dispatch(
                       setMessage(
                         "Pomyślnie się zalogowałeś. Możesz przejść dalej",
@@ -266,20 +384,22 @@ export default function HorizontalLabelPositionBelowStepper() {
                 setIsSubmitLoading(false);
               }}
               validationSchema={validationSchema}
-            >
-              {(props) => (
-                <Container maxWidth={false}>
-                  {getStepContent(
-                    activeStep,
-                    props,
-                    isSubmitLoading,
-                    hasAccount,
-                    setHasAccount,
-                    isAuthorized
-                  )}
-                </Container>
+            > */}
+            {/* {(formik) => ( */}
+            <Container maxWidth={false}>
+              {getStepContent(
+                activeStep,
+                formik,
+                isSubmitLoading,
+                hasAccount,
+                setHasAccount,
+                isAuthorized,
+                isDateSelected,
+                setIsDateSelected
               )}
-            </Formik>
+            </Container>
+            {/* )} */}
+            {/* </Formik> */}
 
             <Grid
               container
@@ -304,9 +424,16 @@ export default function HorizontalLabelPositionBelowStepper() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={handleNext}
+                  onClick={() => {
+                    activeStep === steps.length - 1
+                      ? handleReservation()
+                      : handleNext();
+                  }}
                   endIcon={<NavigateNextIcon />}
-                  disabled={!isAuthorized && activeStep === 2}
+                  disabled={
+                    (!isAuthorized && activeStep === 2) ||
+                    (activeStep === 1 && !isDateSelected)
+                  }
                 >
                   {activeStep === steps.length - 1 ? "Zakończ" : "Dalej"}
                 </Button>

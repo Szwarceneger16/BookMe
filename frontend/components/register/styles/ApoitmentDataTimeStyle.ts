@@ -25,7 +25,7 @@ export default makeStyles((theme: Theme) => ({
       width: "100px",
       justifyContent: "center",
       alignSelf: "stretch",
-      borderBottom: "1px solid black"
+      borderBottom: "1px solid black",
     },
     apoitmentSelectListItem: {
       height: "min-content",
@@ -38,7 +38,7 @@ export default makeStyles((theme: Theme) => ({
       maxWidth: "1000px",
       margin: "0px !important",
       padding: "0px !important",
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.light,
       alignItems: "center",
       display: "flex",
       // scrollbarWidth: "none",
@@ -46,14 +46,19 @@ export default makeStyles((theme: Theme) => ({
     list: {
       width: "fit-content",
       height: "100%",
-      padding: "10px 0px"
+      padding: "10px 0px",
       //overflow: "clip",
+
     },
     listButton: {
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.common.white,
       borderRadius: "6px",
-      margin: "0px 4px"
+      margin: "0px 4px",
+      '&.Mui-selected': {
+        backgroundColor: theme.palette.info.light,
+      },
     },
+
     hourBox: {
       borderRadius: "10px",
       margin: "auto",
