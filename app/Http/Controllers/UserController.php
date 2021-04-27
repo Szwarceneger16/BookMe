@@ -9,6 +9,7 @@ use App\BookMe\User\Services\AuthUserService;
 use App\BookMe\User\Services\ChangePasswordService;
 use App\BookMe\User\Services\CheckPasswordService;
 use App\BookMe\User\Services\UpdateDataService;
+use App\BookMe\User\Services\UserDashboardInfoService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -23,16 +24,19 @@ class UserController extends Controller
     protected CheckPasswordService $checkPasswordService;
     private ChangePasswordService $changePasswordService;
     private UpdateDataService $updateDataService;
+    private UserDashboardInfoService $userDashboardInfoService;
 
     public function __construct(AuthUserService $authUserService,
                                 CheckPasswordService $checkPasswordService,
                                 UpdateDataService $updateDataService,
-                                ChangePasswordService $changePasswordService)
+                                ChangePasswordService $changePasswordService,
+                                UserDashboardInfoService $userDashboardInfoService)
     {
         $this->authUserService = $authUserService;
         $this->checkPasswordService = $checkPasswordService;
         $this->updateDataService = $updateDataService;
         $this->changePasswordService = $changePasswordService;
+        $this->userDashboardInfoService = $userDashboardInfoService;
     }
 
     /**
@@ -115,6 +119,28 @@ class UserController extends Controller
     public function update(UpdateDataRequest $request): JsonResponse
     {
         return $this->updateDataService->execute($request->validated());
+    }
+
+    /**
+     * User dashboard info
+     *
+     * Get info to dashboard
+     * @authenticated
+     * @response {
+     *    "data": {
+     *          "user_reservations_count": 0,
+     *          "all_reservations_count": 0
+     *      },
+     *    "message": "Records was showed",
+     *    "status": 201
+     *    }
+     *
+     * @param UpdateDataRequest $request
+     * @return JsonResponse
+     */
+    public function userDashboardInfo(): JsonResponse
+    {
+        return $this->userDashboardInfoService->execute();
     }
 
 
