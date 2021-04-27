@@ -26,7 +26,7 @@ class UpdateDataRequest extends FormRequest
     {
         return [
             'email' => 'email',
-            'phone' => 'int',
+            'phone' => 'string',
         ];
     }
 }

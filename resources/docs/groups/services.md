@@ -46,6 +46,10 @@ fetch(url, {
         {
             "id": 2,
             "title": "Masaż"
+        },
+        {
+            "id": 3,
+            "title": "Kinezjoterapia"
         }
     ],
     "message": "Data was returned",
