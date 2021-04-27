@@ -1,9 +1,5 @@
 import { LOGIN, LOGOUT, REGISTER, SET_USER_INFO } from "../actions/types";
 
-const ISSERVER = typeof window === "undefined";
-
-const user = !ISSERVER ? JSON.parse(localStorage.getItem("user")) : "";
-
 const inistalState = { isLoggedIn: false, user: null };
 
 function authReducer(state = inistalState, action) {

@@ -30,6 +30,7 @@ import LoginOrRegister from "./register/LoginOrRegister";
 import { authService } from "../lib/authService";
 import { useDispatch, useSelector } from "react-redux";
 import { login as loginAction } from "../src/actions/auth";
+import { setMessage } from "../src/actions/message";
 
 function CustomStepIcon(props: StepIconProps) {
   const classes = CustomStepIconStyles();
@@ -101,6 +102,7 @@ export default function HorizontalLabelPositionBelowStepper() {
   const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const steps = getSteps();
+  const dispatch = useDispatch();
 
   const { register, checkPassword, login } = authService();
 
@@ -171,13 +173,24 @@ export default function HorizontalLabelPositionBelowStepper() {
                 if (isLoggedIn) {
                   // When user is logged in
                   await checkPassword(values.password)
-                    .then((res) => setIsAuthorized(true))
-                    .catch((err) =>
+                    .then((res) => {
+                      dispatch(
+                        setMessage("Pomyślnie się zautoryzowałeś", "success")
+                      );
+                      setIsAuthorized(true);
+                    })
+                    .catch((err) => {
+                      dispatch(
+                        setMessage(
+                          "Wygląda na to, że podałeś złe hasło. Spróbuj jeszcze raz",
+                          "error"
+                        )
+                      );
                       actions.setFieldError(
                         "password",
                         "Hasła się nie zgadzają."
-                      )
-                    );
+                      );
+                    });
                 } else if (!isLoggedIn && !hasAccount) {
                   // When user wanna register
                   //Can be better option but doesnt block handle submit
@@ -210,6 +223,12 @@ export default function HorizontalLabelPositionBelowStepper() {
                   });
                   if (response) {
                     setIsAuthorized(true);
+                    dispatch(
+                      setMessage(
+                        "Pomyślnie się zarejestrowałeś. Możesz przejść dalej",
+                        "success"
+                      )
+                    );
                     actions.resetForm();
                   } else {
                     actions.setFieldError(
@@ -231,6 +250,12 @@ export default function HorizontalLabelPositionBelowStepper() {
                   if (response) {
                     setIsAuthorized(true);
                     actions.resetForm();
+                    dispatch(
+                      setMessage(
+                        "Pomyślnie się zalogowałeś. Możesz przejść dalej",
+                        "success"
+                      )
+                    );
                   } else {
                     actions.setFieldError(
                       "email",

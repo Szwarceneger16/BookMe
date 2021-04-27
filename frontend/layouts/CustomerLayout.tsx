@@ -7,6 +7,7 @@ import { useAuth } from "../lib/authService";
 import { ExitToApp } from "@material-ui/icons";
 import { logout } from "../src/actions/auth";
 import { CircularProgress } from "@material-ui/core";
+import { authService } from "../lib/authService";
 
 //Same like folder in pages
 const SECTION_PREFIX = "/user";
@@ -36,16 +37,15 @@ const ITEMS = [
     icon: <SettingsIcon />,
     href: SECTION_PREFIX + "/settings",
   },
-  {
-    name: "Wyloguj",
-    icon: <ExitToApp />,
-    href: SECTION_PREFIX + "/logout",
-  },
 ];
 
 export default function CustomerLayout({ children }) {
   const [isAuth, setIsAuth] = React.useState(false);
-  useAuth().then((res) => setIsAuth(res));
+  useAuth().then((res) => {
+    if (res !== isAuth) {
+      setIsAuth(res);
+    }
+  });
   if (isAuth !== true) {
     return (
       <div

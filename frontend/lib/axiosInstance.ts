@@ -21,9 +21,9 @@ function createAxiosResponseInterceptor() {
     (error) => {
       // Reject promise if usual error
       if (
+        error &&
         typeof error.response !== undefined &&
-        error.response.status !== 404 &&
-        error.response.data.status !== "Token is Expired. Go to refresh"
+        error.response.status !== 401
       ) {
         return Promise.reject(error);
       }

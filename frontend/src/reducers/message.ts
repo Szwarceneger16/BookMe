@@ -4,13 +4,12 @@ const initialState = {};
 
 function messageReducer(state = initialState, action) {
   const { type, payload } = action;
-
   switch (type) {
     case SET_MESSAGE:
-      return { message: payload };
+      return { message: payload.message, severity: payload.severity };
 
     case CLEAR_MESSAGE:
-      return { message: "" };
+      return {};
 
     default:
       return state;

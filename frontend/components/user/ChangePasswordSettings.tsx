@@ -17,22 +17,9 @@ import LoadingButton from "../elements/buttons/LoadingButton";
 import { Save } from "@material-ui/icons";
 import authHeader from "../../lib/authHeader";
 import axios from "axios";
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      padding: theme.spacing(2),
-    },
-    field: {
-      marginTop: theme.spacing(2),
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-    },
-    button: {},
-  })
-);
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../src/actions/message";
+import useStyles from "./style/SettingsFormStyles";
 
 const validationSchema = yup.object({
   password: yup
@@ -50,6 +37,7 @@ function ChangePasswordSettings(props) {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showNewPassword, setShowNewPassword] = React.useState(false);
   const [isSubmitLoading, setIsSubmitLoading] = React.useState(false);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       password: "",
@@ -70,11 +58,12 @@ function ChangePasswordSettings(props) {
           }
         )
         .then((res) => {
-          console.log(res);
+          dispatch(setMessage("Pomyślnie zmieniono hasło", "success"));
           actions.resetForm();
         })
         .catch((err) => {
-          if (err.response.status == 405) {
+          dispatch(setMessage("Wystąpił błąd podczas zmiany hasła", "error"));
+          if (err.response && err.response.status == 405) {
             actions.setFieldError("password", "Podane hasło nie zgadza się");
           }
         });
@@ -84,14 +73,15 @@ function ChangePasswordSettings(props) {
 
   return (
     <Paper className={classes.root}>
-      <Grid container>
+      <Grid container spacing={1}>
         <Grid item xs={12} md={4}>
           <Typography variant="h5" gutterBottom>
             Zmień hasło
           </Typography>
           <Typography variant="caption">
             Aby zmienić hasło do konta należy najpierw podać stare hasło, a
-            następnie nowe.
+            następnie nowe. Musisz pamiętać o tym, aby hasło miało minimum 8
+            znaków.
           </Typography>
         </Grid>
         <Grid item xs={12} md={8}>
@@ -104,7 +94,7 @@ function ChangePasswordSettings(props) {
               variant="outlined"
               name="password"
               className={classes.field}
-              value={formik.password}
+              value={formik.values.password}
               onChange={formik.handleChange}
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
@@ -126,7 +116,7 @@ function ChangePasswordSettings(props) {
               fullWidth
               id="new_password"
               label="Nowe hasło"
-              type={showPassword ? "text" : "password"}
+              type={showNewPassword ? "text" : "password"}
               variant="outlined"
               name="new_password"
               className={classes.field}

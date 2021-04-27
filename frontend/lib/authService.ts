@@ -48,9 +48,9 @@ export function authService(): object {
   };
 
   const logout = () => {
+    router.push("/");
     dispatch(logoutAction());
     localStorage.removeItem("user");
-    router.push("/");
   };
   const checkPassword = (password) => {
     return axios.post(
