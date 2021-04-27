@@ -70,13 +70,19 @@ function getStepContent(
   isSubmitLoading,
   hasAccount,
   setHasAccount,
-  isAuthorized
+  isAuthorized,
+  isDateSelected,
+  setIsDateSelected,
 ) {
   switch (step) {
     case 0:
       return <SelectService {...props} />;
     case 1:
-      return <ApoitmentDataTime {...props} />;
+      return <ApoitmentDataTime 
+      {...props} 
+      setIsDateSelected={setIsDateSelected}
+      isDateSelected={isDateSelected}
+      />;
     case 2:
       return (
         <LoginOrRegister
@@ -99,6 +105,7 @@ export default function HorizontalLabelPositionBelowStepper() {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [hasAccount, setHasAccount] = useState<boolean>(true);
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [isDateSelected, setIsDateSelected] = useState<boolean>(false);
   const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const steps = getSteps();
@@ -109,6 +116,10 @@ export default function HorizontalLabelPositionBelowStepper() {
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
+
+  const handleReservation = () => {
+
+  }
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -124,7 +135,7 @@ export default function HorizontalLabelPositionBelowStepper() {
       .email("Musisz wprowadzić prawidłowy email"),
     password: yup
       .string("Wprowadź hasło")
-      .min(8, "Hasło musi zawierać minimum 8 znaków")
+      .min(5, "Hasło musi zawierać minimum 8 znaków")
       .required("Hasło jest wymagane"),
     phone: yup.string("Wprowadź telefon"),
     firstName: yup.string("Wprowadź imię"),
@@ -275,7 +286,9 @@ export default function HorizontalLabelPositionBelowStepper() {
                     isSubmitLoading,
                     hasAccount,
                     setHasAccount,
-                    isAuthorized
+                    isAuthorized,
+                    isDateSelected,
+                    setIsDateSelected
                   )}
                 </Container>
               )}
@@ -304,9 +317,14 @@ export default function HorizontalLabelPositionBelowStepper() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={handleNext}
+                  onClick={ () => { 
+                      activeStep === steps.length - 1 ?
+                      handleReservation() : 
+                      handleNext()
+                    }}
                   endIcon={<NavigateNextIcon />}
-                  disabled={!isAuthorized && activeStep === 2}
+                  disabled={(!isAuthorized && activeStep === 2) ||
+                     (activeStep === 1 && !isDateSelected)}
                 >
                   {activeStep === steps.length - 1 ? "Zakończ" : "Dalej"}
                 </Button>

@@ -64,11 +64,14 @@ const disableDate = (date) => {
 
 const renderDate = (day, selectedDate, isInCurrentMonth, dayComponent) => {
   // You canalso use our internal <Day /> component
-  const freeApoitmentsCount =  DateFns.getDate(day) - new Date().getDate();
+  const freeApoitmentsCount =  DateFns.differenceInCalendarDays(day,new Date());
+  if (freeApoitmentsCount > 7 || !isInCurrentMonth) {
+    return (dayComponent);
+  }
   //debugger;
   let color ="secondary";
   if (freeApoitmentsCount > 5) {
-    color = "primary";
+    color ="primary";
   } else if ( freeApoitmentsCount < 3) {
     color="error";
   }
@@ -83,8 +86,9 @@ const config = {
   startTimeHour: 9,
   endTimeHour: 15,
 }
-const ApoitmentDataTime = (props) => {
+const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,...props}) => {
   const classes = useStyles();
+  const [selectedApotitment ,setSelectedApotitment] = useState('');
   const [ displayedDate , setdisplayedDate ] = useState(
     DateFns.toDate( DateFns.set(new Date(), {hours: config.startTimeHour, minutes: 0}))
   );
@@ -125,11 +129,15 @@ const ApoitmentDataTime = (props) => {
           </ListItemIcon>
         {/* <Divider flexItem color="dark" orientation="vertical"></Divider> */}
           <List className={classes.horizontalList} >
-            {Array( Math.floor(Math.random()*8) % 8).fill("").map( (el,ind) => (
+            {Array(3/*  Math.floor(Math.random()*8) % 8 */).fill("").map( (el,ind) => (
               <ListItem disableGutters button 
+                selected={ selectedApotitment === index+"_"+ind }
                 className={classes.listButton} 
                 key={index+"_"+ind}
-                onClick={ () => handleApoitmentSelect(index,1) }
+                onClick={ () => {
+                  handleApoitmentSelect(index,1)
+                  setSelectedApotitment(index+"_"+ind);
+                } }
               >
                 <Typography>{`dr. Jan Kowalski`}</Typography>
               </ListItem>
@@ -142,6 +150,7 @@ const ApoitmentDataTime = (props) => {
   });
 
   const handleApoitmentSelect = (dateindex,expertId) => {
+    setIsDateSelected(true);
     props.setFieldValue('selectedExpertId',expertId);
     props.setFieldValue('apoitmentDate',apoitmentTimeInterval[dateindex]);
   }
