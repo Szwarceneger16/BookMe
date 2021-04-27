@@ -109,11 +109,18 @@ fetch(url, {
 </form>
 
 
+<<<<<<< HEAD
+## api/reservations
+
+
+
+=======
 ## Store new reservation
 
 <small class="badge badge-darkred">requires authentication</small>
 
 Store new reservation
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 
 > Example request:
 
@@ -122,7 +129,11 @@ curl -X POST \
     "http://localhost/api/reservations" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+<<<<<<< HEAD
+    -d '{"datetime_start":"2021-04-27T15:50:39+0000","datetime_end":"2021-04-27T15:50:39+0000","client_id":7,"employee_id":3,"place_id":6,"service_id":13}'
+=======
     -d '{"datetime_start":"\"2019-09-18T19:00:52Z\"","datetime_end":"\"2019-09-18T19:30:52Z\"","client_id":1,"employee_id":1,"place_id":1,"service_id":1}'
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 
 ```
 
@@ -137,12 +148,21 @@ let headers = {
 };
 
 let body = {
+<<<<<<< HEAD
+    "datetime_start": "2021-04-27T15:50:39+0000",
+    "datetime_end": "2021-04-27T15:50:39+0000",
+    "client_id": 7,
+    "employee_id": 3,
+    "place_id": 6,
+    "service_id": 13
+=======
     "datetime_start": "\"2019-09-18T19:00:52Z\"",
     "datetime_end": "\"2019-09-18T19:30:52Z\"",
     "client_id": 1,
     "employee_id": 1,
     "place_id": 1,
     "service_id": 1
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 }
 
 fetch(url, {
@@ -153,6 +173,8 @@ fetch(url, {
 ```
 
 
+<<<<<<< HEAD
+=======
 > Example response (200):
 
 ```json
@@ -162,6 +184,7 @@ fetch(url, {
     "status": 201
 }
 ```
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 <div id="execution-results-POSTapi-reservations" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-reservations"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-POSTapi-reservations"></code></pre>
@@ -170,7 +193,11 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-reservations"></code></pre>
 </div>
+<<<<<<< HEAD
+<form id="form-POSTapi-reservations" data-method="POST" data-path="api/reservations" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-reservations', this);">
+=======
 <form id="form-POSTapi-reservations" data-method="POST" data-path="api/reservations" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-reservations', this);">
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-reservations" onclick="tryItOut('POSTapi-reservations');">Try it out ⚡</button>
@@ -181,6 +208,20 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/reservations</code></b>
 </p>
+<<<<<<< HEAD
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>datetime_start</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="datetime_start" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
+<br>
+The value must be a valid date.
+</p>
+<p>
+<b><code>datetime_end</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="datetime_end" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
+<br>
+The value must be a valid date.
+=======
 <p>
 <label id="auth-POSTapi-reservations" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-reservations" data-component="header"></label>
 </p>
@@ -196,30 +237,47 @@ Datetime start reservation.
 <input type="text" name="datetime_end" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
 <br>
 Datetime end password.
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 </p>
 <p>
 <b><code>client_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
 <input type="number" name="client_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
 <br>
+<<<<<<< HEAD
+
+=======
 Client id.
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 </p>
 <p>
 <b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
 <input type="number" name="employee_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
 <br>
+<<<<<<< HEAD
+
+=======
 Employee id.
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 </p>
 <p>
 <b><code>place_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
 <input type="number" name="place_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
 <br>
+<<<<<<< HEAD
+
+=======
 Place id.
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 </p>
 <p>
 <b><code>service_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
 <input type="number" name="service_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
 <br>
+<<<<<<< HEAD
+
+=======
 Service id.
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 </p>
 
 </form>
@@ -234,14 +292,22 @@ Service id.
 
 ```bash
 curl -X GET \
+<<<<<<< HEAD
+    -G "http://localhost/api/reservations/voluptate" \
+=======
     -G "http://localhost/api/reservations/labore" \
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< HEAD
+    "http://localhost/api/reservations/voluptate"
+=======
     "http://localhost/api/reservations/labore"
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 );
 
 let headers = {
@@ -295,14 +361,22 @@ fetch(url, {
 
 ```bash
 curl -X GET \
+<<<<<<< HEAD
+    -G "http://localhost/api/reservations/reiciendis/edit" \
+=======
     -G "http://localhost/api/reservations/tempore/edit" \
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< HEAD
+    "http://localhost/api/reservations/reiciendis/edit"
+=======
     "http://localhost/api/reservations/tempore/edit"
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 );
 
 let headers = {
@@ -356,14 +430,22 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
+<<<<<<< HEAD
+    "http://localhost/api/reservations/occaecati" \
+=======
     "http://localhost/api/reservations/sit" \
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< HEAD
+    "http://localhost/api/reservations/occaecati"
+=======
     "http://localhost/api/reservations/sit"
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 );
 
 let headers = {
@@ -421,14 +503,22 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
+<<<<<<< HEAD
+    "http://localhost/api/reservations/modi" \
+=======
     "http://localhost/api/reservations/repellendus" \
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
+<<<<<<< HEAD
+    "http://localhost/api/reservations/modi"
+=======
     "http://localhost/api/reservations/repellendus"
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
 );
 
 let headers = {

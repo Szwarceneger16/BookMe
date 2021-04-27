@@ -30,7 +30,7 @@ class AuthUserService
 
             ], 200, 'msg/success.update');
         }else{
-            return Response::build([], 404, 'msg/error.update');
+            return Response::build([], 401, 'msg/error.update');
         }
     }
 }

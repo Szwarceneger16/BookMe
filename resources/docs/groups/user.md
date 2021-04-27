@@ -15,7 +15,7 @@ curl -X POST \
     "http://localhost/api/user/check-password" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"katelyn50@example.net","phone":20,"password":"1235678"}'
+    -d '{"email":"witting.priscilla@example.com","phone":16,"password":"1235678"}'
 
 ```
 
@@ -30,8 +30,8 @@ let headers = {
 };
 
 let body = {
-    "email": "katelyn50@example.net",
-    "phone": 20,
+    "email": "witting.priscilla@example.com",
+    "phone": 16,
     "password": "1235678"
 }
 

@@ -41,7 +41,19 @@ fetch(url, {
     "data": [
         {
             "id": 1,
+<<<<<<< HEAD
+            "title": "Porada fizjoterapeutyczna"
+        },
+        {
+            "id": 2,
+            "title": "Masaż"
+        },
+        {
+            "id": 3,
+            "title": "Kinezjoterapia"
+=======
             "title": "Masaż stóp"
+>>>>>>> 07986962ac3c8447968da641cbe0431af3a0e476
         }
     ],
     "message": "Data was returned",
