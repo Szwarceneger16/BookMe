@@ -88,7 +88,7 @@ function getStepContent(
         />
       );
     case 3:
-      return "This is the bit I really care about!";
+      return "Ta funckjonalność zostanie dodana za jakiś czas";
     default:
       return "Unknown step";
   }

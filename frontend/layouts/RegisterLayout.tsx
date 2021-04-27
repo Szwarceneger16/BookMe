@@ -15,7 +15,7 @@ export default function EmptyLayout({ children }) {
       flexDirection="column"
       className={classes.root}
     >
-      <BookMeLogo />
+      <BookMeLogo color="white" />
       <Box className={classes.container}>{children}</Box>
     </Box>
   );
