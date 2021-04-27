@@ -2,12 +2,10 @@ import React from "react";
 import Drawer from "../components/dashboard/Drawer";
 import HomeIcon from "@material-ui/icons/Home";
 import EventNoteIcon from "@material-ui/icons/EventNote";
+import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { useAuth } from "../lib/authService";
-import { ExitToApp } from "@material-ui/icons";
-import { logout } from "../src/actions/auth";
 import { CircularProgress } from "@material-ui/core";
-import { authService } from "../lib/authService";
 
 //Same like folder in pages
 const SECTION_PREFIX = "/user";
@@ -31,6 +29,11 @@ const ITEMS = [
         href: SECTION_PREFIX + "/all",
       },
     ],
+  },
+  {
+    name: "Zapisz się na wizytę",
+    icon: <EventAvailableIcon />,
+    href: "/register",
   },
   {
     name: "Ustawienia",
