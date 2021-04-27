@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\BookMe\User\Request\LoginRequest;
+use App\BookMe\User\Request\RegisterRequest;
 use App\BookMe\User\Services\Auth\LoginActionService;
 use App\BookMe\User\Services\Auth\LogoutActionService;
 use App\BookMe\User\Services\Auth\RefreshActionService;
 use App\BookMe\User\Services\Auth\RegisterActionService;
 use App\Http\Controllers\Controller;
-use App\BookMe\User\Request\StoreRegistrationRequest;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -86,10 +86,10 @@ class AuthController extends Controller
      * "message": "Records was created",
      * "status": 201
      *}
-     * @param StoreRegistrationRequest $request
+     * @param RegisterRequest $request
      * @return JsonResponse
      */
-    public function register(StoreRegistrationRequest $request): JsonResponse
+    public function register(RegisterRequest $request): JsonResponse
     {
         return $this->registerActionService->execute($request->validated());
     }
@@ -115,6 +115,4 @@ class AuthController extends Controller
     {
         return $this->refreshActionService->execute();
     }
-
-
 }
