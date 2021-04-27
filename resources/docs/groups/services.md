@@ -41,11 +41,7 @@ fetch(url, {
     "data": [
         {
             "id": 1,
-            "title": "Porada fizjoterapeutyczna"
-        },
-        {
-            "id": 2,
-            "title": "Masaż"
+            "title": "Masaż stóp"
         }
     ],
     "message": "Data was returned",

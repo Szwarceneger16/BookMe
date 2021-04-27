@@ -12,9 +12,7 @@ use Illuminate\Http\JsonResponse;
 
 class StoreReservationService
 {
-
     private ReservationRepository $reservationRepository;
-
 
     public function __construct(ReservationRepository $reservationRepository)
     {
