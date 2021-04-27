@@ -22,4 +22,9 @@ class ReservationRepository
     {
         return $this->reservation->create($reservation->toArray());
     }
+
+    public function allReservationsCount()
+    {
+        return $this->reservation->all()->count();
+    }
 }
