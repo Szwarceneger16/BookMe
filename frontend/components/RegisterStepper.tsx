@@ -305,117 +305,6 @@ export default function HorizontalLabelPositionBelowStepper() {
           </div>
         ) : (
           <>
-            {/* <Formik
-              initialValues={{
-                selectedService: "",
-                email: "",
-                password: "",
-                phone: "",
-                firstName: "",
-                lastName: "",
-                selectedExpertId: "",
-                apoitmentDate: "",
-              }}
-              onSubmit={async (values, actions): Promise<void> => {
-                setIsSubmitLoading(true);
-                if (isLoggedIn) {
-                  // When user is logged in
-                  await checkPassword(values.password)
-                    .then((res) => {
-                      dispatch(
-                        setMessage("Pomyślnie się zautoryzowałeś", "success")
-                      );
-                      setIsAuthorized(true);
-                    })
-                    .catch((err) => {
-                      dispatch(
-                        setMessage(
-                          "Wygląda na to, że podałeś złe hasło. Spróbuj jeszcze raz",
-                          "error"
-                        )
-                      );
-                      actions.setFieldError(
-                        "password",
-                        "Hasła się nie zgadzają."
-                      );
-                    });
-                } else if (!isLoggedIn && !hasAccount) {
-                  // When user wanna register
-                  //Can be better option but doesnt block handle submit
-                  if (!values.email) {
-                    actions.setFieldError("email", "Email jest wymagany");
-                    setIsSubmitLoading(false);
-                    return;
-                  }
-                  if (!values.phone) {
-                    actions.setFieldError("phone", "Telefon jest wymagany");
-                    setIsSubmitLoading(false);
-                    return;
-                  }
-                  if (!values.firstName) {
-                    actions.setFieldError("firstName", "Imię jest wymagane");
-                    setIsSubmitLoading(false);
-                    return;
-                  }
-                  if (!values.lastName) {
-                    actions.setFieldError("lastName", "Nazwisko jest wymagane");
-                    setIsSubmitLoading(false);
-                    return;
-                  }
-                  const response = await register({
-                    email: values.email,
-                    password: values.password,
-                    first_name: values.firstName,
-                    last_name: values.lastName,
-                    phone: values.phone,
-                  });
-                  if (response) {
-                    setIsAuthorized(true);
-                    dispatch(
-                      setMessage(
-                        "Pomyślnie się zarejestrowałeś. Możesz przejść dalej",
-                        "success"
-                      )
-                    );
-                    //actions.resetForm();
-                  } else {
-                    actions.setFieldError(
-                      "email",
-                      "Ten email jest już używany"
-                    );
-                  }
-                } else if (!isLoggedIn && hasAccount) {
-                  // When user wanna login
-                  if (!values.email) {
-                    actions.setFieldError("email", "Email jest wymagany");
-                    setIsSubmitLoading(false);
-                    return;
-                  }
-                  const response = await login({
-                    email: values.email,
-                    password: values.password,
-                  });
-                  if (response) {
-                    setIsAuthorized(true);
-                    //actions.resetForm();
-                    dispatch(
-                      setMessage(
-                        "Pomyślnie się zalogowałeś. Możesz przejść dalej",
-                        "success"
-                      )
-                    );
-                  } else {
-                    actions.setFieldError(
-                      "email",
-                      "Niepoprawny email lub hasło"
-                    );
-                  }
-                }
-                setIsSubmitLoading(false);
-              }}
-              validationSchema={validationSchema}
-            > */}
-            {/* {(formik) => ( */}
             <Container maxWidth={false}>
               {getStepContent(
                 activeStep,
@@ -428,8 +317,6 @@ export default function HorizontalLabelPositionBelowStepper() {
                 setIsDateSelected
               )}
             </Container>
-            {/* )} */}
-            {/* </Formik> */}
 
             <Grid
               container
