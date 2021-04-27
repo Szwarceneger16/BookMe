@@ -71,10 +71,10 @@ class UserController extends Controller
      *    "status": 200
      *    }
      *
-     * @param UpdateDataRequest $request
+     * @param CheckPasswordRequest $request
      * @return JsonResponse
      */
-    public function checkPassword(UpdateDataRequest $request): JsonResponse
+    public function checkPassword(CheckPasswordRequest $request): JsonResponse
     {
         return $this->checkPasswordService->execute($request->validated());
     }
@@ -92,7 +92,7 @@ class UserController extends Controller
      *    "status": 201
      *    }
      *
-     * @param CheckPasswordRequest $request
+     * @param ChangePasswordRequest $request
      * @return JsonResponse
      */
     public function changePassword(ChangePasswordRequest $request): JsonResponse
