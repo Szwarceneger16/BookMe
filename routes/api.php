@@ -39,7 +39,6 @@ Route::group([
     Route::get('me',  [UserController::class,'authUser']);
     Route::post('change-password',[UserController::class,'changePassword']);
     Route::post('update-data',[UserController::class,'update']);
-    Route::get('dashboard-info',[UserController::class,'userDashboardInfo']);
 });
 
 Route::get('services', [JobsServicesController::class, 'index']);
