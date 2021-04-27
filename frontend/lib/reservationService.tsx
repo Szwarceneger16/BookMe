@@ -6,27 +6,39 @@ import {
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useRouter } from "next/router";
-import authHeader from "./authHeader";
+
 import header from "./authHeader";
 
 export function reservationService(): object {
-  const dispatch = useDispatch();
-  const router = useRouter();
 
-  const login = ({ email, password }) => {
+  const setNewReservation = ({ 
+    client_id, 
+    place_id,
+    service_id,
+    employee_id,
+    datetime_start,
+    datetime_end 
+  }) => {
     return axios
-      .post(process.env.BACKEND_HOST + "/auth/login", {
-        email,
-        password,
+      .post(process.env.BACKEND_HOST + "/reservations", {
+        client_id,
+        place_id,
+        service_id,
+        employee_id,
+        datetime_start,
+        datetime_end
+      }, {
+        headers: header() 
       })
       .then((res) => {
-        const data = res.data.data;
-        dispatch(loginAction(data));
-        localStorage.setItem("user", JSON.stringify(data));
         return true;
       })
       .catch((err) => {
         return false;
       });
+  };
+
+  return {
+    setNewReservation
   };
 }

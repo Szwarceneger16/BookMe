@@ -28,9 +28,12 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import SelectService from "./register/SelectService";
 import LoginOrRegister from "./register/LoginOrRegister";
 import { authService } from "../lib/authService";
+import { reservationService } from "../lib/reservationService";
 import { useDispatch, useSelector } from "react-redux";
 import { login as loginAction } from "../src/actions/auth";
 import { setMessage } from "../src/actions/message";
+import * as DateFns from "date-fns";
+import { useRouter } from "next/router";
 
 function CustomStepIcon(props: StepIconProps) {
   const classes = CustomStepIconStyles();
@@ -110,8 +113,10 @@ export default function HorizontalLabelPositionBelowStepper() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const steps = getSteps();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const { register, checkPassword, login } = authService();
+  const { setNewReservation } = reservationService();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -152,11 +157,36 @@ export default function HorizontalLabelPositionBelowStepper() {
       firstName: "",
       lastName: "",
       selectedExpertId: "",
-      apoitmentDate: "",
+      apoitmentDateStart: "",
+      apoitmentDateEnd: "",
     },
     onSubmit: async (values, actions): Promise<void> => {
       if (activeStep === steps.length - 1) {
         console.log(values);
+        const result = await setNewReservation({
+          client_id: 0,
+          place_id: 0,
+          service_id: values.selectedService,
+          employee_id: values.selectedExpertId,
+          datetime_start: DateFns.parseJSON(values.apoitmentDateStart),
+          datetime_end: DateFns.parseJSON(values.apoitmentDateEnd),
+        });
+        if (result) {
+          dispatch(
+            setMessage(
+              "Wizyta zarezerwowana",
+              "success"
+            )
+          );
+          router.push("/");
+        } else {
+          dispatch(
+            setMessage(
+              "Nie udało się zarezerwowac wizyty",
+              "error"
+            )
+          );
+        }
       } else {
         setIsSubmitLoading(true);
         if (isLoggedIn) {

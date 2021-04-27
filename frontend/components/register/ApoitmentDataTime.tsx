@@ -131,7 +131,7 @@ const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,...props}) => {
               
               return(
               <ListItem disableGutters button 
-                selected={ DateFns.isEqual(element,props.values['apoitmentDate']) &&
+                selected={ DateFns.isEqual(element,props.values['apoitmentDateStart']) &&
                 props.values['selectedExpertId'] == ind
                 }
                 className={classes.listButton} 
@@ -153,8 +153,10 @@ const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,...props}) => {
   const handleApoitmentSelect = (dateindex,expertId) => {
     setIsDateSelected(true);
     props.setFieldValue('selectedExpertId',expertId);
-    props.setFieldValue('apoitmentDate',
+    props.setFieldValue('apoitmentDateStart',
       DateFns.toDate(apoitmentTimeInterval[dateindex]));
+      props.setFieldValue('apoitmentDateEnd',
+      DateFns.toDate(apoitmentTimeInterval[dateindex+1]));
   }
 
   return (
