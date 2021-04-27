@@ -16,6 +16,8 @@ import { ExitToApp } from "@material-ui/icons";
 import { authService } from "../../lib/authService";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../src/actions/message";
+import BookMeLogo from "../elements/BookMeLogo";
+import { Box } from "@material-ui/core";
 
 const LinkedSimpleItem = ({ data }) => {
   const classes = useStyles();
@@ -110,9 +112,9 @@ export default function DrawerItems({ items }) {
   const dispatch = useDispatch();
   return (
     <div>
-      <Typography variant="h3" component="h2" className={classes.logo}>
-        BookMe
-      </Typography>
+      <Box px={2} my={3}>
+        <BookMeLogo color="white" />
+      </Box>
       <List>
         {items.map((dataItem) => (
           <LinkedItem data={dataItem} key={dataItem.name} />

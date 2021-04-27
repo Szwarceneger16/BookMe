@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Grid,
-  IconButton,
-  InputAdornment,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Box, Grid, Paper, TextField, Typography } from "@material-ui/core";
 import LoadingButton from "../elements/buttons/LoadingButton";
 import { Save } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +8,6 @@ import axios from "axios";
 import authHeader from "../../lib/authHeader";
 import { setMessage } from "../../src/actions/message";
 import MaskedInput from "react-text-mask";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
 import * as yup from "yup";
 import useStyles from "./style/SettingsFormStyles";
 
@@ -141,7 +132,7 @@ function ChangeContactSettings(props) {
                 startIcon={<Save />}
                 className={classes.field}
               >
-                Zmień
+                Edytuj
               </LoadingButton>
             </Box>
           </form>

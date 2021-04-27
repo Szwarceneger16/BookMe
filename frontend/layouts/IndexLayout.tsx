@@ -14,14 +14,6 @@ export default function EmptyLayout({ children }) {
       className={classes.root}
     >
       <AppBar />
-      <Typography
-        variant="h3"
-        component="h1"
-        gutterBottom
-        className={classes.logo}
-      >
-        INDEX
-      </Typography>
       <Box className={classes.container}>{children}</Box>
     </Box>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Field, Form, Formik,useFormik, FormikProps } from "formik";
+import { Field, Form, Formik, useFormik, FormikProps } from "formik";
 import {
   Typography,
   Stepper,
@@ -75,17 +75,19 @@ function getStepContent(
   setHasAccount,
   isAuthorized,
   isDateSelected,
-  setIsDateSelected,
+  setIsDateSelected
 ) {
   switch (step) {
     case 0:
       return <SelectService {...props} />;
     case 1:
-      return <ApoitmentDataTime 
-      {...props} 
-      setIsDateSelected={setIsDateSelected}
-      isDateSelected={isDateSelected}
-      />;
+      return (
+        <ApoitmentDataTime
+          {...props}
+          setIsDateSelected={setIsDateSelected}
+          isDateSelected={isDateSelected}
+        />
+      );
     case 2:
       return (
         <LoginOrRegister
@@ -97,7 +99,7 @@ function getStepContent(
         />
       );
     case 3:
-      return "platnosci";
+      return "Ta funckjonalność zostanie dodana za jakiś czas";
     default:
       return "Unknown step";
   }
@@ -125,7 +127,7 @@ export default function HorizontalLabelPositionBelowStepper() {
   const handleReservation = () => {
     console.log(formik);
     formik.handleSubmit();
-  }
+  };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -149,7 +151,7 @@ export default function HorizontalLabelPositionBelowStepper() {
   });
 
   const formik = useFormik({
-    initialValues:{
+    initialValues: {
       selectedService: "",
       email: "",
       password: "",
@@ -193,9 +195,7 @@ export default function HorizontalLabelPositionBelowStepper() {
           // When user is logged in
           await checkPassword(values.password)
             .then((res) => {
-              dispatch(
-                setMessage("Pomyślnie się zautoryzowałeś", "success")
-              );
+              dispatch(setMessage("Pomyślnie się zautoryzowałeś", "success"));
               setIsAuthorized(true);
             })
             .catch((err) => {
@@ -205,10 +205,7 @@ export default function HorizontalLabelPositionBelowStepper() {
                   "error"
                 )
               );
-              actions.setFieldError(
-                "password",
-                "Hasła się nie zgadzają."
-              );
+              actions.setFieldError("password", "Hasła się nie zgadzają.");
             });
         } else if (!isLoggedIn && !hasAccount) {
           // When user wanna register
@@ -250,10 +247,7 @@ export default function HorizontalLabelPositionBelowStepper() {
             );
             //actions.resetForm();
           } else {
-            actions.setFieldError(
-              "email",
-              "Ten email jest już używany"
-            );
+            actions.setFieldError("email", "Ten email jest już używany");
           }
         } else if (!isLoggedIn && hasAccount) {
           // When user wanna login
@@ -276,16 +270,13 @@ export default function HorizontalLabelPositionBelowStepper() {
               )
             );
           } else {
-            actions.setFieldError(
-              "email",
-              "Niepoprawny email lub hasło"
-            );
+            actions.setFieldError("email", "Niepoprawny email lub hasło");
           }
         }
         setIsSubmitLoading(false);
       }
     },
-    validationSchema: validationSchema
+    validationSchema: validationSchema,
   });
 
   return (
@@ -424,20 +415,20 @@ export default function HorizontalLabelPositionBelowStepper() {
               }}
               validationSchema={validationSchema}
             > */}
-              {/* {(formik) => ( */}
-                <Container maxWidth={false}>
-                  {getStepContent(
-                    activeStep,
-                    formik,
-                    isSubmitLoading,
-                    hasAccount,
-                    setHasAccount,
-                    isAuthorized,
-                    isDateSelected,
-                    setIsDateSelected
-                  )}
-                </Container>
-              {/* )} */}
+            {/* {(formik) => ( */}
+            <Container maxWidth={false}>
+              {getStepContent(
+                activeStep,
+                formik,
+                isSubmitLoading,
+                hasAccount,
+                setHasAccount,
+                isAuthorized,
+                isDateSelected,
+                setIsDateSelected
+              )}
+            </Container>
+            {/* )} */}
             {/* </Formik> */}
 
             <Grid
@@ -463,14 +454,16 @@ export default function HorizontalLabelPositionBelowStepper() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={ () => { 
-                      activeStep === steps.length - 1 ?
-                      handleReservation() : 
-                      handleNext()
-                    }}
+                  onClick={() => {
+                    activeStep === steps.length - 1
+                      ? handleReservation()
+                      : handleNext();
+                  }}
                   endIcon={<NavigateNextIcon />}
-                  disabled={(!isAuthorized && activeStep === 2) ||
-                     (activeStep === 1 && !isDateSelected)}
+                  disabled={
+                    (!isAuthorized && activeStep === 2) ||
+                    (activeStep === 1 && !isDateSelected)
+                  }
                 >
                   {activeStep === steps.length - 1 ? "Zakończ" : "Dalej"}
                 </Button>

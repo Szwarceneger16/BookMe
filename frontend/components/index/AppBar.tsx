@@ -1,6 +1,11 @@
-import React from 'react';
-import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { 
+import React from "react";
+import {
+  fade,
+  makeStyles,
+  Theme,
+  createStyles,
+} from "@material-ui/core/styles";
+import {
   Toolbar,
   AppBar,
   IconButton,
@@ -10,26 +15,33 @@ import {
   MenuItem,
   Menu,
   Icon,
-  Button
-} from '@material-ui/core';
+  Button,
+} from "@material-ui/core";
 import {
   Menu as MenuIcon,
-  Search as SearchIcon ,
+  Search as SearchIcon,
   AccountCircle,
   Mail as MailIcon,
   Notifications as NotificationsIcon,
   MoreVert as MoreIcon,
-  CalendarToday
-} from '@material-ui/icons';
-import Link from 'next/link'
+  CalendarToday,
+} from "@material-ui/icons";
+import Link from "next/link";
 
-import useStyles from './styles/AppBar';
-import BookMeLogo from '../elements/BookMeLogo';
+import useStyles from "./styles/AppBar";
+import BookMeLogo from "../elements/BookMeLogo";
+import { useLogin } from "../../lib/authService";
+import { useSelector } from "react-redux";
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [
+    mobileMoreAnchorEl,
+    setMobileMoreAnchorEl,
+  ] = React.useState<null | HTMLElement>(null);
+  useLogin();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -51,14 +63,14 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
@@ -67,34 +79,31 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
       color="default"
       className={classes.mobileMenu}
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem className={classes.mobileMenu}>
         <Link href="/register">
-          <Button
-            variant="contained"
-            color="primary"
-          >Zarejestruj się</Button>
+          <Button variant="contained" color="primary">
+            Zarejestruj się
+          </Button>
         </Link>
-        
       </MenuItem>
       <MenuItem>
-        <Link href="/login">
-          <Button
-            variant="contained"
-            color="primary"
-          >Zaloguj się</Button>
+        <Link href={!isLoggedIn ? "/login" : "/user/dashboard"}>
+          <Button variant="contained" color="primary">
+            {!isLoggedIn ? "Zaloguj się" : "Panel klienta"}
+          </Button>
         </Link>
       </MenuItem>
     </Menu>
@@ -122,16 +131,14 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Link href="/register">
-              <Button
-                variant="contained"
-                color="primary"
-              >Zarejestruj się</Button>
+              <Button variant="contained" color="secondary">
+                Zapisz się
+              </Button>
             </Link>
-            <Link href="/login">
-              <Button
-                variant="contained"
-                color="primary"
-              >Zaloguj się</Button>
+            <Link href={!isLoggedIn ? "/login" : "/user/dashboard"}>
+              <Button variant="contained" color="primary">
+                {!isLoggedIn ? "Zaloguj się" : "Panel klienta"}
+              </Button>
             </Link>
           </div>
           <div className={classes.sectionMobile}>
