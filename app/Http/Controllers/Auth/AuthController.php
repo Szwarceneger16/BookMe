@@ -10,7 +10,7 @@ use App\BookMe\User\Services\Auth\LogoutActionService;
 use App\BookMe\User\Services\Auth\RefreshActionService;
 use App\BookMe\User\Services\Auth\RegisterActionService;
 use App\Http\Controllers\Controller;
-use App\BookMe\User\Request\RegisterRequest;
+use App\BookMe\User\Request\StoreRegistrationRequest;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -86,10 +86,10 @@ class AuthController extends Controller
      * "message": "Records was created",
      * "status": 201
      *}
-     * @param RegisterRequest $request
+     * @param StoreRegistrationRequest $request
      * @return JsonResponse
      */
-    public function register(RegisterRequest $request): JsonResponse
+    public function register(StoreRegistrationRequest $request): JsonResponse
     {
         return $this->registerActionService->execute($request->validated());
     }
