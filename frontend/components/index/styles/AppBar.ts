@@ -9,10 +9,10 @@ createStyles({
     marginRight: theme.spacing(2),
   },
   title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+    display: 'block',
+    // [theme.breakpoints.up('')]: {
+    //   display: 'block',
+    // },
   },
   search: {
     position: 'relative',
@@ -39,7 +39,7 @@ createStyles({
     justifyContent: 'center',
   },
   inputRoot: {
-    color: 'inherit',
+    color: 'default',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -63,9 +63,16 @@ createStyles({
   },
   sectionMobile: {
     display: 'flex',
+    
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
+  mobileMenu: {
+    "& div": {
+      backgroundColor: theme.overrides.MuiAppBar.colorDefault.backgroundColor,
+    }
+    
+  }
 }),
 );

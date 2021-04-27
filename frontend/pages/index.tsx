@@ -9,7 +9,6 @@ export default function index() {
   return (
       <>
         {/* <Typography variant="h2" component="h1">Strona główna</Typography> */}
-        <VisitHistory />
       </>
     );
 }

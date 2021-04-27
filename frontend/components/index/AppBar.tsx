@@ -24,6 +24,7 @@ import {
 import Link from 'next/link'
 
 import useStyles from './styles/AppBar';
+import BookMeLogo from '../elements/BookMeLogo';
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
@@ -69,6 +70,8 @@ export default function PrimarySearchAppBar() {
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
+      color="default"
+      className={classes.mobileMenu}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={mobileMenuId}
@@ -77,34 +80,22 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-
+      <MenuItem className={classes.mobileMenu}>
+        <Link href="/register">
+          <Button
+            variant="contained"
+            color="primary"
+          >Zarejestruj się</Button>
+        </Link>
         
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
+        <Link href="/login">
+          <Button
+            variant="contained"
+            color="primary"
+          >Zaloguj się</Button>
+        </Link>
       </MenuItem>
     </Menu>
   );
@@ -113,25 +104,7 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar color="default" position="fixed">
         <Toolbar>
-          {/* ============== DRAWER SECTION */}
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton> */}
-          <Typography className={classes.title} variant="h4" noWrap> 
-            <Icon fontSize="inherit"><CalendarToday></CalendarToday></Icon>
-          </Typography>
-          
-          <Typography className={classes.title} variant="h4" noWrap> 
-            Book
-          </Typography>
-          <Typography className={classes.title} variant="h6" noWrap> 
-            Me
-          </Typography>
+          <BookMeLogo />
           {/* =========== SEARCH SECTION */}
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -156,30 +129,10 @@ export default function PrimarySearchAppBar() {
             </Link>
             <Link href="/login">
               <Button
-                variant="outlined"
+                variant="contained"
                 color="primary"
               >Zaloguj się</Button>
             </Link>
-            {/* <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton> */}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

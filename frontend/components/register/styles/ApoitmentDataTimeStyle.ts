@@ -28,7 +28,10 @@ export default makeStyles((theme: Theme) => ({
       borderBottom: "1px solid black"
     },
     apoitmentSelectListItem: {
-      height: "60vh", 
+      height: "min-content",
+      [theme.breakpoints.up(1538)]: {
+        height: "60vh",
+      },
       overflow: "auto",
       minWidth: "400px",
       width: "80vw",
@@ -54,7 +57,7 @@ export default makeStyles((theme: Theme) => ({
     hourBox: {
       borderRadius: "10px",
       margin: "auto",
-      padding: "5px",
+      padding: "3px",
       borderStyle: "1px solid",
       backgroundColor: theme.palette.primary.contrastText,
     }

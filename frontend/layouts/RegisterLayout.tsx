@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography } from "@material-ui/core";
 import useStyles from "../components/register/styles/BoxStyle";
 import { useLogin } from "../lib/authService";
+import BookMeLogo from "../components/elements/BookMeLogo";
 
 export default function EmptyLayout({ children }) {
   const classes = useStyles();
@@ -14,14 +15,7 @@ export default function EmptyLayout({ children }) {
       flexDirection="column"
       className={classes.root}
     >
-      <Typography
-        variant="h3"
-        component="h1"
-        gutterBottom
-        className={classes.logo}
-      >
-        BookMe
-      </Typography>
+      <BookMeLogo />
       <Box className={classes.container}>{children}</Box>
     </Box>
   );
