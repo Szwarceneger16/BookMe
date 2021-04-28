@@ -23,6 +23,7 @@ class AuthUserService
         $user = $this->userRepository->getAuthUser();
         if (isset($user)){
             return Response::build([
+                'id'=>$user->id,
                 'first_name'=>$user->first_name,
                 'last_name'=>$user->last_name,
                 'email'=>$user->email,
