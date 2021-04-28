@@ -113,6 +113,7 @@ export default function HorizontalLabelPositionBelowStepper() {
   const [isDateSelected, setIsDateSelected] = useState<boolean>(false);
   const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const authUser = useSelector((state) => state.auth.user);
   const steps = getSteps();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -122,11 +123,6 @@ export default function HorizontalLabelPositionBelowStepper() {
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleReservation = () => {
-    console.log(formik);
-    formik.handleSubmit();
   };
 
   const handleBack = () => {
@@ -165,14 +161,30 @@ export default function HorizontalLabelPositionBelowStepper() {
     onSubmit: async (values, actions): Promise<void> => {
       if (activeStep === steps.length - 1) {
         console.log(values);
+        // console.log(hasAccount,isAuthorized,isLoggedIn);
+        
+        // let result;
+        // if (hasAccount) {
+        //   result = await setNewReservation({
+        //     client_id: authUser.id,
+        //     place_id: 1,
+        //     service_id: values.selectedService,
+        //     employee_id: values.selectedExpertId,
+        //     datetime_start: DateFns.parseJSON(values.apoitmentDateStart),
+        //     datetime_end: DateFns.parseJSON(values.apoitmentDateEnd),
+        //   });
+        // } else {
+
+        // }
         const result = await setNewReservation({
-          client_id: 0,
-          place_id: 0,
+          client_id: 1 /* authUser.id */,
+          place_id: 1,
           service_id: values.selectedService,
           employee_id: values.selectedExpertId,
           datetime_start: DateFns.parseJSON(values.apoitmentDateStart),
           datetime_end: DateFns.parseJSON(values.apoitmentDateEnd),
         });
+
         if (result) {
           dispatch(
             setMessage(
@@ -343,7 +355,7 @@ export default function HorizontalLabelPositionBelowStepper() {
                   color="primary"
                   onClick={() => {
                     activeStep === steps.length - 1
-                      ? handleReservation()
+                      ? formik.handleSubmit()
                       : handleNext();
                   }}
                   endIcon={<NavigateNextIcon />}

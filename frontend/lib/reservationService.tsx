@@ -31,6 +31,7 @@ export function reservationService(): object {
         headers: header() 
       })
       .then((res) => {
+        console.log(res)
         return true;
       })
       .catch((err) => {
@@ -38,7 +39,27 @@ export function reservationService(): object {
       });
   };
 
+  const getExperts = ({ 
+    
+  }) => {
+    /* return axios
+      .post(process.env.BACKEND_HOST + "/reservations", {
+        
+      }, {
+        headers: header() 
+      })
+      .then((res) => {
+        //console.log(res)
+        return res;
+      })
+      .catch((err) => {
+        return false;
+      }); */
+      return Promise.resolve();
+  };
+
   return {
-    setNewReservation
+    setNewReservation,
+    getExperts
   };
 }

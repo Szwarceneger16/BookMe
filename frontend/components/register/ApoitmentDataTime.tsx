@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import { Field, Form, Formik, FormikProps } from 'formik';
 import { 
-  DatePicker ,
-  TimePicker ,
-  DateTimePicker,
   KeyboardDateTimePicker
 } from "@material-ui/pickers";
 import {
@@ -24,6 +20,7 @@ import useStyles from "./styles/ApoitmentDataTimeStyle";
 import theme from "../../src/theme";
 import classes from "*.module.css";
 import * as DateFns from "date-fns";
+import { reservationService } from "../../lib/reservationService";
 //if (window) { window.dateFns = DateFns; }
 
 const exampleData = {
@@ -52,6 +49,13 @@ const exampleData = {
 
     ]
   ]
+}
+
+interface Expert{
+  id: number;
+  job_title: string;
+  first_name: string;
+  last_name: string;
 }
 
 const disableDaysOfWeek = [0,6];
@@ -88,6 +92,16 @@ const config = {
 }
 const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,...props}) => {
   const classes = useStyles();
+  const { getExperts } = reservationService();
+  const [experts, setExperts] = React.useState<Expert[]>([]);
+
+  React.useEffect(async (): Promise<void> => {
+    await getExperts({
+
+    }).then( (res) => {
+      setExperts(res);
+    })
+  }, []);
 
   const [ displayedDate , setdisplayedDate ] = useState(
     DateFns.toDate( DateFns.set(new Date(), {hours: config.startTimeHour, minutes: 0}))
@@ -152,7 +166,7 @@ const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,...props}) => {
 
   const handleApoitmentSelect = (dateindex,expertId) => {
     setIsDateSelected(true);
-    props.setFieldValue('selectedExpertId',expertId);
+    props.setFieldValue('selectedExpertId', 1/* expertId */);
     props.setFieldValue('apoitmentDateStart',
       DateFns.toDate(apoitmentTimeInterval[dateindex]));
       props.setFieldValue('apoitmentDateEnd',
