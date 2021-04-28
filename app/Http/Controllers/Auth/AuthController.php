@@ -105,12 +105,6 @@ class AuthController extends Controller
         return $this->logoutActionService->execute();
     }
 
-    /**
-     * Refresh token
-     *
-     * @authenticated
-     *
-     */
     public function refresh(): JsonResponse
     {
         return $this->refreshActionService->execute();

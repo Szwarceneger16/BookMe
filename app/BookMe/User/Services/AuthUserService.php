@@ -28,9 +28,9 @@ class AuthUserService
                 'email'=>$user->email,
                 'phone'=>$user->phone,
 
-            ], 200, 'msg/success.update');
+            ], 200, 'msg/success.show');
         }else{
-            return Response::build([], 401, 'msg/error.update');
+            return Response::build([], 401, 'msg/error.show');
         }
     }
 }
