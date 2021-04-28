@@ -30,6 +30,11 @@ const validationSchema = yup.object({
     .string("Wprowadź nowe hasło")
     .min(8, "Hasło powinno zawierać co najmniej 8 znaków")
     .required("Nowe hasło jest wymagane"),
+  new_password_2: yup
+    .string("Powtórz nowe hasło")
+    .min(8, "Hasło powinno zawierać co najmniej 8 znaków")
+    .required("Powtórzenie hasła jest wymagane")
+    .oneOf([yup.ref('new_password'), null], 'Hasła muszą być identyczne'),
 });
 
 function ChangePasswordSettings(props) {
@@ -42,10 +47,12 @@ function ChangePasswordSettings(props) {
     initialValues: {
       password: "",
       new_password: "",
+      new_password_2: ""
     },
     validationSchema: validationSchema,
     onSubmit: async (values, actions) => {
       setIsSubmitLoading(true);
+
       await axios
         .post(
           process.env.BACKEND_HOST + "/user/change-password",
@@ -142,6 +149,37 @@ function ChangePasswordSettings(props) {
                   </InputAdornment>
                 ),
               }}
+            />
+            <TextField
+              fullWidth
+              id="new_password_2"
+              label="Powtórz nowe hasło"
+              type={showNewPassword ? "text" : "password"}
+              variant="outlined"
+              name="new_password_2"
+              className={classes.field}
+              value={formik.values.new_password_2}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.new_password_2 &&
+                Boolean(formik.errors.new_password_2)
+              }
+              helperText={
+                formik.touched.new_password_2 && formik.errors.new_password_2
+              }
+              // InputProps={{
+              //   endAdornment: (
+              //     <InputAdornment position="end">
+              //       <IconButton
+              //         aria-label="toggle new password visibility"
+              //         onClick={() => setShowNewPassword(!showNewPassword)}
+              //         onMouseDown={() => setShowNewPassword(!showNewPassword)}
+              //       >
+              //         {showNewPassword ? <Visibility /> : <VisibilityOff />}
+              //       </IconButton>
+              //     </InputAdornment>
+              //   ),
+              // }}
             />
             <Box display="flex" justifyContent="flex-end">
               <LoadingButton
