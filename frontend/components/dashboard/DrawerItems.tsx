@@ -108,6 +108,7 @@ const LinkedItem = ({ data, ...props }) => {
 
 export default function DrawerItems({ items }) {
   const classes = useStyles();
+  // @ts-ignore
   const { logout } = authService();
   const dispatch = useDispatch();
   return (
@@ -121,8 +122,8 @@ export default function DrawerItems({ items }) {
         ))}
         <ListItem
           button
-          onClick={() => {
-            logout();
+          onClick={async () => {
+            await logout();
             dispatch(setMessage("Pomyślnie się wylogowano", "success"));
           }}
           className={classes.listItem}

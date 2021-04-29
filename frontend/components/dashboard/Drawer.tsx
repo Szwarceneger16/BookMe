@@ -27,6 +27,8 @@ import { Notifications } from "@material-ui/icons";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import useStyles from "./styles/DrawerStyles";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function AppDrawer({ children, items, ...props }) {
   const classes = useStyles();

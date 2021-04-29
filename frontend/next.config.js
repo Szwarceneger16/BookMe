@@ -10,4 +10,11 @@ module.exports = {
   env: {
     BACKEND_HOST: "http://127.0.0.1:8000/api",
   },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
 };
