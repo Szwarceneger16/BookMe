@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class WorkHour extends Model
 {
+    protected $dates = ['datetime_start','datetime_end'];
+
     use HasFactory;
 
     public function employees(): HasMany

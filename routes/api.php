@@ -48,6 +48,7 @@ Route::group([
     'middleware' => 'api',
 ], function($router){
     Route::resource('reservations', ReservationController::class);
+    Route::post('get-available-reservations', [ReservationController::class,'listAvailable']);
 });
 
  /** TODO - endpoint do dodawania wizyt

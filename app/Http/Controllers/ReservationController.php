@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\BookMe\Reservation\Request\ListAvailableReservationRequest;
 use App\BookMe\Reservation\Request\StoreReservationRequest;
+use App\BookMe\Reservation\Services\ListAvailableReservationService;
 use App\BookMe\Reservation\Services\StoreReservationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,21 +14,18 @@ class ReservationController extends Controller
 {
 
     private StoreReservationService $storeReservationService;
+    private ListAvailableReservationService $listAvailableReservationService;
 
-    public function __construct(StoreReservationService $storeReservationService)
+    public function __construct(StoreReservationService $storeReservationService,
+                                ListAvailableReservationService $listAvailableReservationService)
     {
         $this->storeReservationService=$storeReservationService;
+        $this->listAvailableReservationService = $listAvailableReservationService;
     }
 
-    public function index()
+    public function listAvailable(ListAvailableReservationRequest $request): JsonResponse
     {
-        //
-    }
-
-
-    public function create()
-    {
-        //
+        return $this->listAvailableReservationService->execute($request->validated());
     }
 
     /**
@@ -54,26 +53,4 @@ class ReservationController extends Controller
         return $this->storeReservationService->execute($request->validated());
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
-    public function destroy($id)
-    {
-        //
-    }
 }

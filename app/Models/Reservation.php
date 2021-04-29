@@ -19,6 +19,9 @@ class Reservation extends Model
         'service_id'
     ];
 
+    protected $dates = ['datetime_start','datetime_end'];
+
+
     public function employees(): HasMany
     {
         return $this->hasMany(Employee::class);

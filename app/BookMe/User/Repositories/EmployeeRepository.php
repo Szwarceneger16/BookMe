@@ -17,5 +17,4 @@ class EmployeeRepository
     {
         return $this->employee->find($id);
     }
-
 }

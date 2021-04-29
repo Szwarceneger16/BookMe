@@ -18,4 +18,8 @@ class WorkHoursRepository
         return $this->workHour->find($id);
     }
 
+    public function getAllEmployee($employeeId)
+    {
+        return $this->workHour->where('employee_id',$employeeId)->orderBy('datetime_start', 'ASC')->get();
+    }
 }
