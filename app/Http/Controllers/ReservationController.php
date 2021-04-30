@@ -23,6 +23,22 @@ class ReservationController extends Controller
         $this->listAvailableReservationService = $listAvailableReservationService;
     }
 
+    /**
+     * List available reservations
+     *
+     * List available reservations
+     * @bodyParam employee_id integer required Employee id. Example: 1
+     * @bodyParam service_id integer required Service id. Example: 1
+     * @authenticated
+     * @response {
+     *    "data": "[]",
+     *    "message": "Data was returned",
+     *    "status": 200
+     *    }
+     *
+     * @param ListAvailableReservationRequest $request
+     * @return JsonResponse
+     */
     public function listAvailable(ListAvailableReservationRequest $request): JsonResponse
     {
         return $this->listAvailableReservationService->execute($request->validated());

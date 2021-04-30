@@ -8,6 +8,7 @@ use App\BookMe\Reservation\Repositories\WorkHoursRepository;
 use App\BookMe\Utility\Response;
 use App\DateFormatTrait;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
@@ -33,6 +34,7 @@ class ListAvailableReservationService
             $dateNow->add('1800', 'seconds');
             $service = $this->serviceRepository->find($request['service_id']);
             $workHours = $this->workHoursRepository->getAllEmployee($request['employee_id']);
+
             $reservations = $this->reservationRepository->getAllEmployee($request['employee_id']);
             $serviceDuration = $service->duration_time;
 
@@ -75,7 +77,7 @@ class ListAvailableReservationService
             }
             return Response::build($result, 200, "msg/success.list");
         } catch(Exception $exception){
-            return Response::build([], 200, "msg/error.list");
+            return Response::build([], 400, "msg/error.list");
         }
 
     }
