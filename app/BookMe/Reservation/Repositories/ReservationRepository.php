@@ -28,6 +28,11 @@ class ReservationRepository
         return $this->reservation->all();
     }
 
+    public function getAllEmployee($employeeId)
+    {
+        return $this->reservation->where('employee_id',$employeeId)->orderBy('datetime_start', 'ASC')->get();
+    }
+
     public function allReservationsCount()
     {
         return $this->reservation->all()->count();
