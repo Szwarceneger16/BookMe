@@ -25,7 +25,7 @@ class StoreReservationRequest extends FormRequest
     {
         return [
             'datetime_start' => 'required|date',
-            'datetime_end' => 'required|date',
+            'datetime_end' => 'required|date|after_or_equal:datetime_start',
             'client_id' => 'required|integer',
             'employee_id' => 'required|integer',
             'place_id' => 'required|integer',

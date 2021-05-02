@@ -30,7 +30,19 @@ class ReservationRepository
 
     public function getAllEmployee($employeeId)
     {
-        return $this->reservation->where('employee_id',$employeeId)->orderBy('datetime_start', 'ASC')->get();
+        return $this->reservation
+            ->where('employee_id',$employeeId)
+            ->orderBy('datetime_start', 'ASC')
+            ->get();
+    }
+
+    public function getAllEmployeeForDay($employeeId,$from,$to)
+    {
+        return $this->reservation
+            ->where('employee_id',$employeeId)
+            ->whereBetween('datetime_start', [$from, $to])
+            ->orWhereBetween('datetime_end', [$from, $to])
+            ->first();
     }
 
     public function allReservationsCount()
