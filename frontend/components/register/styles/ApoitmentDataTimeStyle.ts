@@ -11,59 +11,62 @@ export default makeStyles((theme: Theme) => ({
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
-    horizontalList: {
-      display: 'flex',
-      flexDirection: 'row',
-      wrap: "nowrap",
-      minHeight: "48px",
-      "& div": {
-        // border: "1px solid grey", 
-        padding: "4px",
-      }
-    },
-    listHours: {
-      width: "100px",
-      justifyContent: "center",
-      alignSelf: "stretch",
-      borderBottom: "1px solid black",
+    // horizontalList: {
+    //   display: 'flex',
+    //   flexDirection: 'row',
+    //   wrap: "nowrap",
+    //   minHeight: "48px",
+    //   "& div": {
+    //     // border: "1px solid grey", 
+    //     padding: "4px",
+    //   }
+    // },
+    // listHours: {
+    //   width: "100px",
+    //   justifyContent: "center",
+    //   alignSelf: "stretch",
+    //   borderBottom: "1px solid black",
+    // },
+    apoitmentDataPicker: {
+      width: "min-content",
     },
     apoitmentSelectListItem: {
-      height: "min-content",
-      [theme.breakpoints.up(1538)]: {
-        height: "60vh",
+      [theme.breakpoints.up('md')]: {
+        flex: 1,
       },
-      overflow: "auto",
-      minWidth: "400px",
-      width: "80vw",
-      maxWidth: "1000px",
-      margin: "0px !important",
-      padding: "0px !important",
+      maxWidth: "800px",
+      margin: "2px !important",
+      padding: "2px !important",
       backgroundColor: theme.palette.primary.light,
       alignItems: "center",
       display: "flex",
-      // scrollbarWidth: "none",
+      borderRadius: "10px",
     },
-    list: {
-      width: "fit-content",
-      height: "100%",
-      padding: "10px 0px",
-      //overflow: "clip",
+    // list: {
+    //   width: "fit-content",
+    //   height: "100%",
+    //   padding: "10px 0px",
+    //   //overflow: "clip",
 
-    },
+    // },
     listButton: {
       backgroundColor: theme.palette.common.white,
       borderRadius: "6px",
-      margin: "0px 4px",
+      margin: "4px",
       '&.Mui-selected': {
         backgroundColor: theme.palette.info.light,
       },
     },
-
-    hourBox: {
-      borderRadius: "10px",
-      margin: "auto",
-      padding: "3px",
-      borderStyle: "1px solid",
-      backgroundColor: theme.palette.primary.contrastText,
-    }
+    reservationContainer: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+    },
+    // hourBox: {
+    //   borderRadius: "10px",
+    //   margin: "auto",
+    //   padding: "3px",
+    //   borderStyle: "1px solid",
+    //   backgroundColor: theme.palette.primary.contrastText,
+    // }
   }));
