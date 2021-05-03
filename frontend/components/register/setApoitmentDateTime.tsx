@@ -68,18 +68,22 @@ const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,...props}) => {
       >{dayComponent}</Badge>);
   }
 
-  const displayedDateAsString = 
-    DateFns.formatISO(DateFns.toDate(displayedDate),{representation: 'date'});
+  const displayedDateAsString = displayedDate ?
+    DateFns.formatISO(DateFns.toDate(displayedDate || new Date()),{representation: 'date'}) : "";
   const handleApoitmentSelect = (hourIndex:number) => {
     setIsDateSelected(true);
     const selectedHours = 
       availableReservation[displayedDateAsString].available_status[hourIndex];
-    props.setFieldValue('apoitmentDateStart',selectedHours.from);
-    props.setFieldValue('apoitmentDateEnd',selectedHours.to);
+    props.setFieldValue('apoitmentDateStart',
+      DateFns.parseISO(displayedDateAsString+"T"+selectedHours.from)
+    );
+    props.setFieldValue('apoitmentDateEnd',
+      DateFns.parseISO(displayedDateAsString+"T"+selectedHours.to)
+    );
     setDisplayedDate(DateFns.parseISO(displayedDateAsString+"T"+selectedHours.from))
   }
 
-  const result = 
+  const result = displayedDate &&
     availableReservation[displayedDateAsString].available_status.map((fromToObject,index) => (
       <Button
         className={classes.listButton} 

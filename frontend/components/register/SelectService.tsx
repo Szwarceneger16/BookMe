@@ -21,7 +21,7 @@ interface Service{
 const exampleExperts = [
   {
     id: 1,
-    title: "Masazysta"
+    title: "muSZynek bambo"
   }
 ]
 
