@@ -23,7 +23,15 @@ class LoginActionService
     {
         if ($token = auth()->attempt($data)) {
             $newToken = $this->tokenHelper->createNewToken($token);
-            return Response::build($newToken, 201, 'msg/success.login');
+            $user = auth()->user();
+            $userInfo = [
+                'id'=>$user->id,
+                'first_name'=>$user->first_name,
+                'last_name'=>$user->last_name,
+                'email'=>$user->email,
+                'phone'=>$user->phone,
+            ];
+            return Response::build(array_merge($newToken, $userInfo), 201, 'msg/success.login');
         } else {
             Log::error("There was problem with AuthService.loginAction(): ");
             return Response::build([], 500, 'msg/error.login');
