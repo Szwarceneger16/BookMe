@@ -26,6 +26,7 @@ export function authService(): object {
         return true;
       })
       .catch((err) => {
+        console.log(err.response);
         return false;
       });
   };

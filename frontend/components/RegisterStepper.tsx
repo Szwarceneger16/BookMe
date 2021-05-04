@@ -34,6 +34,8 @@ import { login as loginAction } from "../src/actions/auth";
 import { setMessage } from "../src/actions/message";
 import * as DateFns from "date-fns";
 import { useRouter } from "next/router";
+import Payment from "./register/Payment";
+import LoadingButton from "./elements/buttons/LoadingButton";
 
 function CustomStepIcon(props: StepIconProps) {
   const classes = CustomStepIconStyles();
@@ -71,6 +73,7 @@ function getStepContent(
   step: number,
   props,
   isSubmitLoading,
+  setIsSubmitLoading,
   hasAccount,
   setHasAccount,
   isAuthorized,
@@ -99,7 +102,7 @@ function getStepContent(
         />
       );
     case 3:
-      return "Ta funckjonalność zostanie dodana za jakiś czas";
+      return <Payment setIsSubmitLoading={setIsSubmitLoading} />;
     default:
       return "Unknown step";
   }
@@ -162,7 +165,7 @@ export default function HorizontalLabelPositionBelowStepper() {
       if (activeStep === steps.length - 1) {
         console.log(values);
         // console.log(hasAccount,isAuthorized,isLoggedIn);
-        
+
         // let result;
         // if (hasAccount) {
         //   result = await setNewReservation({
@@ -186,20 +189,10 @@ export default function HorizontalLabelPositionBelowStepper() {
         });
 
         if (result) {
-          dispatch(
-            setMessage(
-              "Wizyta zarezerwowana",
-              "success"
-            )
-          );
+          dispatch(setMessage("Wizyta zarezerwowana", "success"));
           router.push("/");
         } else {
-          dispatch(
-            setMessage(
-              "Nie udało się zarezerwowac wizyty",
-              "error"
-            )
-          );
+          dispatch(setMessage("Nie udało się zarezerwowac wizyty", "error"));
         }
       } else {
         setIsSubmitLoading(true);
@@ -285,12 +278,11 @@ export default function HorizontalLabelPositionBelowStepper() {
             actions.setFieldError("email", "Niepoprawny email lub hasło");
           }
         }
-        setIsSubmitLoading(false);
       }
+      setIsSubmitLoading(false);
     },
     validationSchema: validationSchema,
   });
-
   return (
     <div className={classes.root}>
       <Stepper
@@ -308,68 +300,64 @@ export default function HorizontalLabelPositionBelowStepper() {
         ))}
       </Stepper>
       <Box className={classes.contentBox}>
-        {activeStep === steps.length ? (
-          <div>
-            <Typography className={classes.instructions}>
-              All steps completed
-            </Typography>
-            <Button onClick={handleReset}>Reset</Button>
-          </div>
-        ) : (
-          <>
-            <Container maxWidth={false}>
-              {getStepContent(
-                activeStep,
-                formik,
-                isSubmitLoading,
-                hasAccount,
-                setHasAccount,
-                isAuthorized,
-                isDateSelected,
-                setIsDateSelected
-              )}
-            </Container>
+        <>
+          <Container maxWidth={false}>
+            {getStepContent(
+              activeStep,
+              formik,
+              isSubmitLoading,
+              setIsSubmitLoading,
+              hasAccount,
+              setHasAccount,
+              isAuthorized,
+              isDateSelected,
+              setIsDateSelected
+            )}
+          </Container>
 
-            <Grid
-              container
-              // alignContent="flex-end"
-              // alignItems="flex-end"
-              justify="flex-end"
-              direction="row"
-              className={classes.stepperButtons}
-            >
-              <Grid item>
-                <Button
-                  variant="outlined"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  className={classes.backButton}
-                  startIcon={<NavigateBeforeIcon />}
-                >
-                  Wróć
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    activeStep === steps.length - 1
-                      ? formik.handleSubmit()
-                      : handleNext();
-                  }}
-                  endIcon={<NavigateNextIcon />}
-                  disabled={
-                    (!isAuthorized && activeStep === 2) ||
-                    (activeStep === 1 && !isDateSelected)
-                  }
-                >
-                  {activeStep === steps.length - 1 ? "Zakończ" : "Dalej"}
-                </Button>
-              </Grid>
+          <Grid
+            container
+            // alignContent="flex-end"
+            // alignItems="flex-end"
+            justify="flex-end"
+            direction="row"
+            className={classes.stepperButtons}
+          >
+            <Grid item>
+              <Button
+                variant="outlined"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className={classes.backButton}
+                startIcon={<NavigateBeforeIcon />}
+              >
+                Wróć
+              </Button>
             </Grid>
-          </>
-        )}
+            <Grid item>
+              <LoadingButton
+                loading={activeStep === steps.length - 1 && isSubmitLoading}
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  activeStep === steps.length - 1
+                    ? formik.handleSubmit()
+                    : handleNext();
+                }}
+                endIcon={<NavigateNextIcon />}
+                disabled={
+                  (!isAuthorized && activeStep === 2) ||
+                  (activeStep === 1 && !isDateSelected) ||
+                  isSubmitLoading
+                }
+                type={activeStep === steps.length - 1 ? "submit" : ""}
+                form={activeStep === steps.length - 1 ? "payment" : ""}
+              >
+                {activeStep === steps.length - 1 ? "Zapłać" : "Dalej"}
+              </LoadingButton>
+            </Grid>
+          </Grid>
+        </>
       </Box>
     </div>
   );

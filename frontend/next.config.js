@@ -9,12 +9,10 @@ module.exports = {
   },
   env: {
     BACKEND_HOST: "http://127.0.0.1:8000/api",
+    STRIPE_PK:
+      "pk_test_51Ilb2JH7D1TC3ju0tp1CNG0aQzyK9HhfHRoJjx5Gmj1PVfbVH9syHuIpTdTThxM2si51sh7umiBahtUyPXXAASQP00fZx4gB3A",
   },
   typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
     ignoreBuildErrors: true,
   },
 };
