@@ -2,17 +2,22 @@ import React from "react";
 import IndexLayout from "../layouts/IndexLayout";
 import { Grid, Typography } from "@material-ui/core";
 import Image from "next/image";
+import clsx from  'clsx';
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     height: "100%",
   },
+  flexItem: {
+    padding: "20px",
+  },
   flexContainer: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+
   },
   flexText: {
     display: "flex",
@@ -29,7 +34,7 @@ export default function index() {
   return (
     <>
       <Grid container className={classes.container}>
-        <Grid item xs={12} md={6} className={classes.flexContainer}>
+        <Grid item xs={12} md={6} className={ clsx(classes.flexContainer,classes.flexItem)}>
           <Image src="/images/booked.svg" height={400} width={500} />
         </Grid>
         <Grid item xs={12} md={6} className={classes.flexText}>
