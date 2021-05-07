@@ -149,7 +149,7 @@ export default function PrimarySearchAppBar() {
               </Button>
             </Link>
             {isLoggedIn && 
-              <Link href="/user/dashboard">
+              <Link href="/admin/dashboard">
               <Button variant="contained" color="primary">
                 Panel Admina
               </Button>
