@@ -190,7 +190,7 @@ export default function HorizontalLabelPositionBelowStepper() {
 
         if (result) {
           dispatch(setMessage("Wizyta zarezerwowana", "success"));
-          router.push("/");
+          //router.push("/");
         } else {
           dispatch(setMessage("Nie udało się zarezerwowac wizyty", "error"));
         }
