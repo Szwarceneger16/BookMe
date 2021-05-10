@@ -44,7 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: April 30 2021</li>
+            <li>Last updated: May 10 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -435,6 +435,60 @@ Service id.
 </p>
 
 </form>
+<h2>List all Employees</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>List all Servicess</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/employees" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/employees"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "[]",
+    "message": "Data was returned",
+    "status": 200
+}</code></pre>
+<div id="execution-results-GETapi-employees" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-employees"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-employees"></code></pre>
+</div>
+<div id="execution-error-GETapi-employees" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-employees"></code></pre>
+</div>
+<form id="form-GETapi-employees" data-method="GET" data-path="api/employees" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-employees', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-employees" onclick="tryItOut('GETapi-employees');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-employees" onclick="cancelTryOut('GETapi-employees');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-employees" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/employees</code></b>
+</p>
+<p>
+<label id="auth-GETapi-employees" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-employees" data-component="header"></label>
+</p>
+</form>
 <h2>List available reservations</h2>
 <p><small class="badge badge-darkred">requires authentication</small></p>
 <p>List available reservations</p>
@@ -510,10 +564,80 @@ Employee id.
 Service id.
 </p>
 
+</form>
+<h2>List employees by service_id</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>List employees by service_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/get-employees-by-service" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"service_id":1}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/get-employees-by-service"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "service_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "[]",
+    "message": "Data was returned",
+    "status": 200
+}</code></pre>
+<div id="execution-results-POSTapi-get-employees-by-service" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-get-employees-by-service"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-get-employees-by-service"></code></pre>
+</div>
+<div id="execution-error-POSTapi-get-employees-by-service" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-get-employees-by-service"></code></pre>
+</div>
+<form id="form-POSTapi-get-employees-by-service" data-method="POST" data-path="api/get-employees-by-service" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-get-employees-by-service', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-get-employees-by-service" onclick="tryItOut('POSTapi-get-employees-by-service');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-get-employees-by-service" onclick="cancelTryOut('POSTapi-get-employees-by-service');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-get-employees-by-service" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/get-employees-by-service</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-get-employees-by-service" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-get-employees-by-service" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>service_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="service_id" data-endpoint="POSTapi-get-employees-by-service" data-component="body" required  hidden>
+<br>
+Service id.
+</p>
+
 </form><h1>Services</h1>
 <p>APIs for services</p>
-<h2>All Services</h2>
-<p>Returns every service used in company</p>
+<h2>List all Services</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>List all Services</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -538,16 +662,7 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "data": [
-        {
-            "id": 1,
-            "title": "Masaż stóp"
-        },
-        {
-            "id": 2,
-            "title": "strzyzenie meskie"
-        }
-    ],
+    "data": "[]",
     "message": "Data was returned",
     "status": 200
 }</code></pre>
@@ -559,7 +674,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-GETapi-services"></code></pre>
 </div>
-<form id="form-GETapi-services" data-method="GET" data-path="api/services" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-services', this);">
+<form id="form-GETapi-services" data-method="GET" data-path="api/services" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-services', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-services" onclick="tryItOut('GETapi-services');">Try it out ⚡</button>
@@ -570,6 +685,9 @@ fetch(url, {
 <small class="badge badge-green">GET</small>
  <b><code>api/services</code></b>
 </p>
+<p>
+<label id="auth-GETapi-services" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-services" data-component="header"></label>
+</p>
 </form><h1>User</h1>
 <p>APIs for users</p>
 <h2>Check password</h2>
@@ -579,13 +697,13 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/user/check-password" \
+    "http://localhost/api/auth/check-password" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"password":"1235678"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/user/check-password"
+    "http://localhost/api/auth/check-password"
 );
 
 let headers = {
@@ -610,32 +728,32 @@ fetch(url, {
     "message": "Record was returned",
     "status": 200
 }</code></pre>
-<div id="execution-results-POSTapi-user-check-password" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-user-check-password"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-user-check-password"></code></pre>
+<div id="execution-results-POSTapi-auth-check-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-auth-check-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-auth-check-password"></code></pre>
 </div>
-<div id="execution-error-POSTapi-user-check-password" hidden>
+<div id="execution-error-POSTapi-auth-check-password" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-user-check-password"></code></pre>
+    <pre><code id="execution-error-message-POSTapi-auth-check-password"></code></pre>
 </div>
-<form id="form-POSTapi-user-check-password" data-method="POST" data-path="api/user/check-password" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-check-password', this);">
+<form id="form-POSTapi-auth-check-password" data-method="POST" data-path="api/auth/check-password" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-check-password', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-user-check-password" onclick="tryItOut('POSTapi-user-check-password');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-user-check-password" onclick="cancelTryOut('POSTapi-user-check-password');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-user-check-password" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-auth-check-password" onclick="tryItOut('POSTapi-auth-check-password');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-auth-check-password" onclick="cancelTryOut('POSTapi-auth-check-password');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-auth-check-password" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-black">POST</small>
- <b><code>api/user/check-password</code></b>
+ <b><code>api/auth/check-password</code></b>
 </p>
 <p>
-<label id="auth-POSTapi-user-check-password" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-user-check-password" data-component="header"></label>
+<label id="auth-POSTapi-auth-check-password" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-auth-check-password" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
 <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="password" name="password" data-endpoint="POSTapi-user-check-password" data-component="body" required  hidden>
+<input type="password" name="password" data-endpoint="POSTapi-auth-check-password" data-component="body" required  hidden>
 <br>
 Password to check.
 </p>
@@ -648,11 +766,11 @@ Password to check.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/user/me" \
+    -G "http://localhost/api/auth/me" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/user/me"
+    "http://localhost/api/auth/me"
 );
 
 let headers = {
@@ -676,27 +794,27 @@ fetch(url, {
     "message": "Record was returned",
     "status": 200
 }</code></pre>
-<div id="execution-results-GETapi-user-me" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-user-me"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-user-me"></code></pre>
+<div id="execution-results-GETapi-auth-me" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-auth-me"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-auth-me"></code></pre>
 </div>
-<div id="execution-error-GETapi-user-me" hidden>
+<div id="execution-error-GETapi-auth-me" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-user-me"></code></pre>
+    <pre><code id="execution-error-message-GETapi-auth-me"></code></pre>
 </div>
-<form id="form-GETapi-user-me" data-method="GET" data-path="api/user/me" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-user-me', this);">
+<form id="form-GETapi-auth-me" data-method="GET" data-path="api/auth/me" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-auth-me', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-user-me" onclick="tryItOut('GETapi-user-me');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-user-me" onclick="cancelTryOut('GETapi-user-me');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-user-me" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-auth-me" onclick="tryItOut('GETapi-auth-me');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-auth-me" onclick="cancelTryOut('GETapi-auth-me');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-auth-me" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-green">GET</small>
- <b><code>api/user/me</code></b>
+ <b><code>api/auth/me</code></b>
 </p>
 <p>
-<label id="auth-GETapi-user-me" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-user-me" data-component="header"></label>
+<label id="auth-GETapi-auth-me" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-auth-me" data-component="header"></label>
 </p>
 </form>
 <h2>Change password</h2>
@@ -706,13 +824,13 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/user/change-password" \
+    "http://localhost/api/auth/change-password" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"password":"1235678","new_password":"1235678"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/user/change-password"
+    "http://localhost/api/auth/change-password"
 );
 
 let headers = {
@@ -738,38 +856,38 @@ fetch(url, {
     "message": "Records was updated",
     "status": 201
 }</code></pre>
-<div id="execution-results-POSTapi-user-change-password" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-user-change-password"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-user-change-password"></code></pre>
+<div id="execution-results-POSTapi-auth-change-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-auth-change-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-auth-change-password"></code></pre>
 </div>
-<div id="execution-error-POSTapi-user-change-password" hidden>
+<div id="execution-error-POSTapi-auth-change-password" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-user-change-password"></code></pre>
+    <pre><code id="execution-error-message-POSTapi-auth-change-password"></code></pre>
 </div>
-<form id="form-POSTapi-user-change-password" data-method="POST" data-path="api/user/change-password" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-change-password', this);">
+<form id="form-POSTapi-auth-change-password" data-method="POST" data-path="api/auth/change-password" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-change-password', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-user-change-password" onclick="tryItOut('POSTapi-user-change-password');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-user-change-password" onclick="cancelTryOut('POSTapi-user-change-password');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-user-change-password" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-auth-change-password" onclick="tryItOut('POSTapi-auth-change-password');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-auth-change-password" onclick="cancelTryOut('POSTapi-auth-change-password');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-auth-change-password" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-black">POST</small>
- <b><code>api/user/change-password</code></b>
+ <b><code>api/auth/change-password</code></b>
 </p>
 <p>
-<label id="auth-POSTapi-user-change-password" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-user-change-password" data-component="header"></label>
+<label id="auth-POSTapi-auth-change-password" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-auth-change-password" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
 <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="password" name="password" data-endpoint="POSTapi-user-change-password" data-component="body" required  hidden>
+<input type="password" name="password" data-endpoint="POSTapi-auth-change-password" data-component="body" required  hidden>
 <br>
 User's current password.
 </p>
 <p>
 <b><code>new_password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="password" name="new_password" data-endpoint="POSTapi-user-change-password" data-component="body" required  hidden>
+<input type="password" name="new_password" data-endpoint="POSTapi-auth-change-password" data-component="body" required  hidden>
 <br>
 User's new password.
 </p>
@@ -782,13 +900,13 @@ User's new password.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/user/update-data" \
+    "http://localhost/api/auth/update-data" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"test@test.pl","phone":12345678}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/user/update-data"
+    "http://localhost/api/auth/update-data"
 );
 
 let headers = {
@@ -814,38 +932,38 @@ fetch(url, {
     "message": "Records was updated",
     "status": 201
 }</code></pre>
-<div id="execution-results-POSTapi-user-update-data" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-user-update-data"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-user-update-data"></code></pre>
+<div id="execution-results-POSTapi-auth-update-data" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-auth-update-data"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-auth-update-data"></code></pre>
 </div>
-<div id="execution-error-POSTapi-user-update-data" hidden>
+<div id="execution-error-POSTapi-auth-update-data" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-user-update-data"></code></pre>
+    <pre><code id="execution-error-message-POSTapi-auth-update-data"></code></pre>
 </div>
-<form id="form-POSTapi-user-update-data" data-method="POST" data-path="api/user/update-data" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-update-data', this);">
+<form id="form-POSTapi-auth-update-data" data-method="POST" data-path="api/auth/update-data" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-update-data', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-user-update-data" onclick="tryItOut('POSTapi-user-update-data');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-user-update-data" onclick="cancelTryOut('POSTapi-user-update-data');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-user-update-data" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-auth-update-data" onclick="tryItOut('POSTapi-auth-update-data');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-auth-update-data" onclick="cancelTryOut('POSTapi-auth-update-data');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-auth-update-data" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-black">POST</small>
- <b><code>api/user/update-data</code></b>
+ <b><code>api/auth/update-data</code></b>
 </p>
 <p>
-<label id="auth-POSTapi-user-update-data" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-user-update-data" data-component="header"></label>
+<label id="auth-POSTapi-auth-update-data" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-auth-update-data" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
 <b><code>email</code></b>&nbsp;&nbsp;<small>email</small>     <i>optional</i> &nbsp;
-<input type="text" name="email" data-endpoint="POSTapi-user-update-data" data-component="body"  hidden>
+<input type="text" name="email" data-endpoint="POSTapi-auth-update-data" data-component="body"  hidden>
 <br>
 Email field
 </p>
 <p>
 <b><code>phone</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
-<input type="number" name="phone" data-endpoint="POSTapi-user-update-data" data-component="body"  hidden>
+<input type="number" name="phone" data-endpoint="POSTapi-auth-update-data" data-component="body"  hidden>
 <br>
 Phone field.
 </p>
@@ -858,11 +976,11 @@ Phone field.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/user/dashboard-info" \
+    -G "http://localhost/api/auth/dashboard-info" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/user/dashboard-info"
+    "http://localhost/api/auth/dashboard-info"
 );
 
 let headers = {
@@ -885,27 +1003,27 @@ fetch(url, {
     "message": "Records was showed",
     "status": 201
 }</code></pre>
-<div id="execution-results-GETapi-user-dashboard-info" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-user-dashboard-info"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-user-dashboard-info"></code></pre>
+<div id="execution-results-GETapi-auth-dashboard-info" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-auth-dashboard-info"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-auth-dashboard-info"></code></pre>
 </div>
-<div id="execution-error-GETapi-user-dashboard-info" hidden>
+<div id="execution-error-GETapi-auth-dashboard-info" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-user-dashboard-info"></code></pre>
+    <pre><code id="execution-error-message-GETapi-auth-dashboard-info"></code></pre>
 </div>
-<form id="form-GETapi-user-dashboard-info" data-method="GET" data-path="api/user/dashboard-info" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-user-dashboard-info', this);">
+<form id="form-GETapi-auth-dashboard-info" data-method="GET" data-path="api/auth/dashboard-info" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-auth-dashboard-info', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-user-dashboard-info" onclick="tryItOut('GETapi-user-dashboard-info');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-user-dashboard-info" onclick="cancelTryOut('GETapi-user-dashboard-info');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-user-dashboard-info" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-auth-dashboard-info" onclick="tryItOut('GETapi-auth-dashboard-info');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-auth-dashboard-info" onclick="cancelTryOut('GETapi-auth-dashboard-info');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-auth-dashboard-info" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-green">GET</small>
- <b><code>api/user/dashboard-info</code></b>
+ <b><code>api/auth/dashboard-info</code></b>
 </p>
 <p>
-<label id="auth-GETapi-user-dashboard-info" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-user-dashboard-info" data-component="header"></label>
+<label id="auth-GETapi-auth-dashboard-info" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-auth-dashboard-info" data-component="header"></label>
 </p>
 </form>
     </div>

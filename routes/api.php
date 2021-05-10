@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\JobsServicesController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
@@ -31,9 +32,8 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'api',
-    'namespace' => 'App\Http\Controllers',
-    'prefix' => 'user',
+    'middleware' => 'jwt',
+    'prefix' => 'auth'
 ], function($router){
     Route::post('check-password', [UserController::class,'checkPassword']);
     Route::get('me',  [UserController::class,'authUser']);
@@ -42,13 +42,14 @@ Route::group([
     Route::get('dashboard-info',[UserController::class,'userDashboardInfo']);
 });
 
-Route::get('services', [JobsServicesController::class, 'index']);
-
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'jwt',
 ], function($router){
+    Route::get('services', [JobsServicesController::class, 'index']);
     Route::resource('reservations', ReservationController::class);
+    Route::resource('employees', EmployeeController::class);
     Route::post('get-available-reservations', [ReservationController::class,'listAvailable']);
+    Route::post('get-employees-by-service',[EmployeeController::class,'listEmployeesByService']);
 });
 
  /** TODO - endpoint do dodawania wizyt

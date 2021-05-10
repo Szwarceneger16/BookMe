@@ -1,6 +1,6 @@
 <?php
 
-namespace App\BookMe\User\Repositories;
+namespace App\BookMe\Employee\Repositories;
 
 use App\Models\Employee;
 
@@ -13,8 +13,8 @@ class EmployeeRepository
         $this->employee=$employee;
     }
 
-    public function find(int $id)
+    public function listEmployees()
     {
-        return $this->employee->find($id);
+        return $this->employee->all();
     }
 }

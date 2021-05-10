@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BookMe\JobsServices\Services\ShowAllService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Psy\Util\Json;
 
 
@@ -23,9 +24,15 @@ class JobsServicesController extends Controller
     }
 
     /**
-     * All Services
+     * List all Services
      *
-     * Returns every service used in company
+     * List all Services
+     * @authenticated
+     * @response {
+     *    "data": "[]",
+     *    "message": "Data was returned",
+     *    "status": 200
+     *    }
      */
     public function index(): JsonResponse
     {
