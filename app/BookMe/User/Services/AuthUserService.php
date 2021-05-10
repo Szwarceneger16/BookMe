@@ -28,7 +28,6 @@ class AuthUserService
                 'last_name'=>$user->last_name,
                 'email'=>$user->email,
                 'phone'=>$user->phone,
-
             ], 200, 'msg/success.show');
         }else{
             return Response::build([], 401, 'msg/error.show');

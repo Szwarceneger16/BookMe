@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\JobsServicesController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -51,6 +52,21 @@ Route::group([
     Route::post('get-available-reservations', [ReservationController::class,'listAvailable']);
     Route::post('get-employees-by-service',[EmployeeController::class,'listEmployeesByService']);
 });
+
+Route::group([
+    'middleware' => 'auth:api',
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'payments',
+], function ($router){
+    Route::post('create-payment-intent', [PaymentController::class, 'createPaymentIntent']);
+});
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'payments',
+], function ($router){
+    Route::get('handle-payment-response', [PaymentController::class, 'handlePaymentResponse']);
+});
+
 
  /** TODO - endpoint do dodawania wizyt
  *      - endpoint do wyświetlenia wizyt użytkownika
