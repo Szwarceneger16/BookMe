@@ -10,7 +10,7 @@ import {
   StepIconProps,
   Box,
 } from "@material-ui/core";
-import ApoitmentDataTime from "./register/ApoitmentDataTime";
+import ApoitmentDataTime from "./register/setApoitmentDateTime";
 import {
   useStyles,
   CustomStepIconStyles,
@@ -28,7 +28,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import SelectService from "./register/SelectService";
 import LoginOrRegister from "./register/LoginOrRegister";
 import { authService } from "../lib/authService";
-import { reservationService } from "../lib/reservationService";
+import { setNewReservation } from "../lib/reservationService";
 import { useDispatch, useSelector } from "react-redux";
 import { login as loginAction } from "../src/actions/auth";
 import { setMessage } from "../src/actions/message";
@@ -122,7 +122,6 @@ export default function HorizontalLabelPositionBelowStepper() {
   const router = useRouter();
 
   const { register, checkPassword, login } = authService();
-  const { setNewReservation } = reservationService();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -157,7 +156,7 @@ export default function HorizontalLabelPositionBelowStepper() {
       phone: "",
       firstName: "",
       lastName: "",
-      selectedExpertId: "",
+      selectedExpert: "",
       apoitmentDateStart: "",
       apoitmentDateEnd: "",
     },

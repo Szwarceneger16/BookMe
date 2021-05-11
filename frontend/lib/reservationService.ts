@@ -9,16 +9,14 @@ import { useRouter } from "next/router";
 
 import header from "./authHeader";
 
-export function reservationService(): object {
-
-  const setNewReservation = ({ 
+export const setNewReservation = (
     client_id, 
     place_id,
     service_id,
     employee_id,
     datetime_start,
     datetime_end 
-  }) => {
+  ) => {
     return axios
       .post(process.env.BACKEND_HOST + "/reservations", {
         client_id,
@@ -39,7 +37,27 @@ export function reservationService(): object {
       });
   };
 
-  const getExperts = ({ 
+export const getAvailableReservation = (
+    service_id,
+    employee_id
+  ) => {
+    return axios
+      .post(process.env.BACKEND_HOST + "/get-available-reservations", {
+        service_id,
+        employee_id,
+      }, {
+        headers: header() 
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  };
+
+
+export const getExperts = ({ 
     
   }) => {
     /* return axios
@@ -55,11 +73,5 @@ export function reservationService(): object {
       .catch((err) => {
         return false;
       }); */
-      return Promise.resolve();
+      return Promise.resolve('ss');
   };
-
-  return {
-    setNewReservation,
-    getExperts
-  };
-}
