@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BookMe\Reservation\Request\ListAvailableReservationRequest;
 use App\BookMe\Reservation\Request\StoreReservationRequest;
 use App\BookMe\Reservation\Services\ListAvailableReservationService;
+use App\BookMe\Reservation\Services\ListClientReservationsService;
 use App\BookMe\Reservation\Services\StoreReservationService;
 use App\BookMe\User\Enums\AccountType;
 use App\Models\Employee;
@@ -17,12 +18,15 @@ class ReservationController extends Controller
 
     private StoreReservationService $storeReservationService;
     private ListAvailableReservationService $listAvailableReservationService;
+    private ListClientReservationsService $listClientReservationsService;
 
     public function __construct(StoreReservationService $storeReservationService,
-                                ListAvailableReservationService $listAvailableReservationService)
+                                ListAvailableReservationService $listAvailableReservationService,
+                                ListClientReservationsService $listClientReservationsService)
     {
         $this->storeReservationService = $storeReservationService;
         $this->listAvailableReservationService = $listAvailableReservationService;
+        $this->listClientReservationsService = $listClientReservationsService;
     }
 
     /**
@@ -69,6 +73,11 @@ class ReservationController extends Controller
     public function store(StoreReservationRequest $request): JsonResponse
     {
         return $this->storeReservationService->execute($request->validated());
+    }
+
+    public function listClientReservations(): JsonResponse
+    {
+        return $this->listClientReservations()->execute();
     }
 
 }
