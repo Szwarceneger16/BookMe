@@ -13,7 +13,7 @@ import useStyles, { selectStyles } from "./styles/SelectServiceStyles";
 import axios from "axios";
 import { getExperts } from "../../lib/reservationService";
 
-interface Service{
+interface Service {
   id: number;
   title: string;
 }
@@ -21,9 +21,9 @@ interface Service{
 const exampleExperts = [
   {
     id: 1,
-    title: "muSZynek bambo"
-  }
-]
+    title: "muSZynek bambo",
+  },
+];
 
 export default function SelectService(props) {
   const classes = useStyles();
@@ -32,12 +32,15 @@ export default function SelectService(props) {
   const [experts, setExperts] = React.useState<Service[]>(exampleExperts);
 
   React.useEffect(async (): Promise<void> => {
-    const promises = []
-    promises.push( axios.get(process.env.BACKEND_HOST + "/services")
-        .then( res => setServices(res.data.data)));
-        //promises.push( getExperts().then(res => setExperts(res)));
+    const promises = [];
+    promises.push(
+      axios
+        .get(process.env.BACKEND_HOST + "/services")
+        .then((res) => setServices(res.data.data))
+    );
+    //promises.push( getExperts().then(res => setExperts(res)));
 
-        await Promise.all(promises);
+    await Promise.all(promises);
   }, []);
 
   return (
@@ -52,65 +55,72 @@ export default function SelectService(props) {
         <Typography className={classes.white}>
           Aby rozpocząć wybierz usługę, z której chcesz skorzystać.
         </Typography>
-          {services.length > 0 ? (
-              <>
-              <FormControl variant="outlined" fullWidth className={classes.marginTop}>
-                  <InputLabel
-                      id="services-select-label"
-                      className={select_styles.label}
-                  >
-                      Usługi
-                  </InputLabel>
-            <Select
-              labelId="services-select-label"
-              id="services-select"
-              label="Usługi"
-              name="selectedService"
-              className={select_styles.select}
-              value={props.values.selectedService}
-              onChange={props.handleChange}
+        {services.length > 0 ? (
+          <>
+            <FormControl
+              variant="outlined"
+              fullWidth
+              className={classes.marginTop}
             >
-              {services.map((service) => (
-                <MenuItem key={service.id} value={service.id}>
-                  {service.title}
-                </MenuItem>
-              ))}
-            </Select>
-              </FormControl>
-              </>
-          ) : (
-            <Skeleton variant="rect" style={{width: "100%"}} height={60} />
-          )}
-              {experts.length > 0 ? (
-              <>
-              <FormControl variant="outlined" fullWidth className={classes.marginTop}>
-                  <InputLabel
-                      id="experts-select-label"
-                      className={select_styles.label}
-                  >
-                      Specjalisci
-                  </InputLabel>
-            <Select
-              labelId="experts-select-label"
-              id="experts-select"
-              label="Specjalisci"
-              name="selectedExpert"
-              className={select_styles.select}
-              value={props.values.selectedExpert}
-              onChange={props.handleChange}
+              <InputLabel
+                id="services-select-label"
+                className={select_styles.label}
+              >
+                Usługi
+              </InputLabel>
+              <Select
+                labelId="services-select-label"
+                id="services-select"
+                label="Usługi"
+                name="selectedService"
+                className={select_styles.select}
+                value={props.values.selectedService}
+                onChange={props.handleChange}
+              >
+                {services.map((service) => (
+                  <MenuItem key={service.id} value={service.id}>
+                    {service.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </>
+        ) : (
+          <Skeleton variant="rect" style={{ width: "100%" }} height={60} />
+        )}
+        {experts.length > 0 ? (
+          <>
+            <FormControl
+              variant="outlined"
+              fullWidth
+              className={classes.marginTop}
             >
-              {experts.map((expert) => (
-                <MenuItem key={expert.id} value={expert.id}>
-                  {expert.title}
-                </MenuItem>
-              ))}
-            </Select>
-              </FormControl>
-              </>
-          ) : (
-            <Skeleton variant="rect" style={{width: "100%"}} height={60} />
-          )}
-
+              <InputLabel
+                id="experts-select-label"
+                className={select_styles.label}
+              >
+                Specjalisci
+              </InputLabel>
+              <Select
+                labelId="experts-select-label"
+                id="experts-select"
+                label="Specjalisci"
+                name="selectedExpert"
+                className={select_styles.select}
+                value={props.values.selectedExpert}
+                onChange={props.handleChange}
+              >
+                {experts.map((expert) => (
+                  <MenuItem key={expert.id} value={expert.id}>
+                    {expert.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </>
+        ) : (
+          <Skeleton variant="rect" style={{ width: "100%" }} height={60} />
+        )}
       </Grid>
     </Grid>
   );

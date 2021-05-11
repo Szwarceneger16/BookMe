@@ -24,7 +24,7 @@ const ITEMS = [
     subitems: [
       {
         name: "Odwołaj",
-        href: SECTION_PREFIX + "/remove",
+        href: SECTION_PREFIX + "/cancel",
       },
       {
         name: "Pokaż wszystkie",
@@ -48,18 +48,10 @@ export default function CustomerLayout({ children }) {
   const [isAuth, setIsAuth] = React.useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const router = useRouter();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push("/");
-    }
-  }, [isLoggedIn]);
-
   useAuth().then((res) => {
-    if (res !== isAuth) {
-      setIsAuth(res);
-    }
+    setIsAuth(res);
   });
+
   if (isAuth !== true) {
     return (
       <div

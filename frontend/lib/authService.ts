@@ -26,6 +26,7 @@ export function authService(): object {
         return true;
       })
       .catch((err) => {
+        console.log(err.response);
         return false;
       });
   };
@@ -80,7 +81,7 @@ export async function useAuth() {
     })
     // Render compoment when
     .then((res) => {
-      if (res.status === 200) {
+      if (res.status === 200 && res.data.status !== "Token is Expired") {
         dispatch(login(res.data.data));
         return true;
       }
@@ -89,8 +90,8 @@ export async function useAuth() {
     .catch((err) => {
       if (typeof window !== "undefined") {
         router.push("/");
-        return false;
       }
+      return false;
     });
   return response;
 }
@@ -108,7 +109,7 @@ export function useLogin() {
     })
     // Render compoment when
     .then((res) => {
-      if (res.status === 200) {
+      if (res.status === 200 && res.data.status !== "Token is Expired") {
         dispatch(login(res.data.data));
         return true;
       }
