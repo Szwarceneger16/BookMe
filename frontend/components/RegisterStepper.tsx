@@ -170,6 +170,7 @@ export default function HorizontalLabelPositionBelowStepper() {
       apoitmentDateEnd: "",
     },
     onSubmit: async (values, actions): Promise<void> => {
+      // Sending request for create reservation on step 3 when user is authorized
       if (activeStep === steps.length - 2 && isAuthorized) {
         setIsSubmitLoading(true);
         const result = await setNewReservation({
@@ -341,9 +342,13 @@ export default function HorizontalLabelPositionBelowStepper() {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  activeStep === steps.length - 2
-                    ? formik.handleSubmit()
-                    : handleNext();
+                  if (activeStep === steps.length - 2) {
+                    return formik.handleSubmit();
+                  } else if (activeStep === steps.length - 1) {
+                    return;
+                  } else {
+                    return handleNext();
+                  }
                 }}
                 endIcon={<NavigateNextIcon />}
                 disabled={

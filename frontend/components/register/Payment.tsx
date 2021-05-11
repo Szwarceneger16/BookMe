@@ -129,7 +129,7 @@ function CheckoutForm({ setIsSubmitLoading, reservation }) {
   );
 }
 
-function Payment({ setIsSubmitLoading }) {
+function Payment({ setIsSubmitLoading, reservation }) {
   const classes = useStyles();
   return (
     <Grid container alignItems="center" justifycontent="center">
@@ -145,7 +145,10 @@ function Payment({ setIsSubmitLoading }) {
       </Hidden>
       <Grid item xs={12} md={6}>
         <Elements stripe={stripePromise}>
-          <CheckoutForm setIsSubmitLoading={setIsSubmitLoading} />
+          <CheckoutForm
+            setIsSubmitLoading={setIsSubmitLoading}
+            reservation={reservation}
+          />
         </Elements>
       </Grid>
     </Grid>
