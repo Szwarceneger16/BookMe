@@ -36,6 +36,13 @@ import * as DateFns from "date-fns";
 import { useRouter } from "next/router";
 import Payment from "./register/Payment";
 import LoadingButton from "./elements/buttons/LoadingButton";
+import { utcToZonedTime } from "date-fns-tz";
+
+const timezoned = (date) => {
+  let d = new Date(date);
+  d.setTime(d.getTime() - d.getTimezoneOffset() * 60 * 1000);
+  return d;
+};
 
 function CustomStepIcon(props: StepIconProps) {
   const classes = CustomStepIconStyles();
@@ -178,8 +185,8 @@ export default function HorizontalLabelPositionBelowStepper() {
           place_id: 1, //TODO -replace when fixed backend
           service_id: values.selectedService,
           employee_id: values.selectedExpert,
-          datetime_start: DateFns.parseJSON(values.apoitmentDateStart),
-          datetime_end: DateFns.parseJSON(values.apoitmentDateEnd),
+          datetime_start: timezoned(formik.values.apoitmentDateStart),
+          datetime_end: timezoned(formik.values.apoitmentDateEnd),
         });
         if (result) {
           setReservation(result.data.data.id);
@@ -282,6 +289,11 @@ export default function HorizontalLabelPositionBelowStepper() {
       setIsSubmitLoading(false);
     },
     validationSchema: validationSchema,
+  });
+
+  console.log({
+    start: timezoned(formik.values.apoitmentDateStart),
+    end: timezoned(formik.values.apoitmentDateStart),
   });
   return (
     <div className={classes.root}>
