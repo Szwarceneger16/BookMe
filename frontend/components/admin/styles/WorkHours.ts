@@ -18,37 +18,43 @@ export const useStyles = makeStyles((theme: Theme) =>
       width: calendarElementsSize,
     } */
       display: "flex",
-      flexDirection: "row",
+      flexDirection: "column",
       alignItems: "center",
     },
     paper: {
       width: "100%",
       marginBottom: theme.spacing(2),
     },
-    modalBody: {
-      backgroundColor: theme.palette.background.paper,
-      border: "2px solid #000",
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
+
+    rootItem: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      width: "max-content",
     },
-    calendar: {
+    flexItemFormFields: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      width: 300,
+      margin: 10,
+    },
+    formItem: {
+      margin: 10,
+      width: "inherit",
+    },
+    flexItemCalendar: {
       /*     day: {
       fontSize: "22px",
       color: "red"
     }, */
-      width: "min-content",
     },
-    modal: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    allVisitContainer: {
+    busyRoomList: {
       display: "flex",
       flexDirection: "column",
-      flexWrap: "wrap",
+      alignItems: "start",
     },
-    listButton: {
+    busyRoomItem: {
       backgroundColor: theme.palette.common.white,
       borderRadius: "6px",
       width: "max-content",
@@ -60,9 +66,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     label: {
       color: theme.palette.white.main,
     },
-    marginTop: {
-      marginTop: theme.spacing(2),
-    },
+
     select: {
       color: "white",
 
