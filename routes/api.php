@@ -33,7 +33,7 @@ Route::group([
 
 Route::group([
     'middleware' => 'jwt',
-    'prefix' => 'auth'
+    'prefix' => 'user'
 ], function($router){
     Route::post('check-password', [UserController::class,'checkPassword']);
     Route::get('me',  [UserController::class,'authUser']);
