@@ -77,7 +77,7 @@ class ListAvailableReservationService
             }
             return Response::build($result, 200, "msg/success.list");
         } catch(Exception $exception){
-            return Response::build([], 400, "msg/error.list");
+            return Response::build([], 204, "msg/success.list");
         }
 
     }
