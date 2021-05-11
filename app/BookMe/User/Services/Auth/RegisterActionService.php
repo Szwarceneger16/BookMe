@@ -4,6 +4,7 @@
 namespace App\BookMe\User\Services\Auth;
 
 
+use App\BookMe\User\Enums\AccountType;
 use App\BookMe\User\Repositories\UserRepository;
 use App\BookMe\Utility\Response;
 use App\Models\User;
@@ -27,6 +28,9 @@ class RegisterActionService
                 $data,
                 ['password' => Hash::make($data['password'])]
             ));
+            if ($user->account_type == AccountType::CLIENT){
+                $user = $this->userRepository->getUserWithClient($user);
+            }
             return Response::build($user
                 , 201, 'msg/success.create');
         } catch (\Exception $e) {

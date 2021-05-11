@@ -51,4 +51,15 @@ class UserRepository
         return Reservation::where('client_id', $user->id)->get()->count();
     }
 
+    public function getUserWithClient($user)
+    {
+        return [
+            'id'=>$user->id,
+            'first_name'=>$user->first_name,
+            'last_name'=>$user->last_name,
+            'email'=>$user->email,
+            'phone'=>$user->phone,
+            'client_id'=>$user->client->id ?? null,
+        ];
+    }
 }
