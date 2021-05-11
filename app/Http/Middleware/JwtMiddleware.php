@@ -19,7 +19,6 @@ class JwtMiddleware
      * @param \Closure $next
      * @return mixed
      */
-
     public function handle($request, Closure $next)
     {
         try {
@@ -36,6 +35,4 @@ class JwtMiddleware
         }
         return $next($request);
     }
-
-
 }

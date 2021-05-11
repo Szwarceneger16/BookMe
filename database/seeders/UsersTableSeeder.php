@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\BookMe\User\Enums\AccountType;
 use App\Models\Bookable;
 use App\Models\Employee;
 use App\Models\User;
@@ -22,6 +23,20 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Jan',
             'last_name' => 'Kowalski',
             'phone' => '123 123 123',
+            'account_type' => AccountType::ADMIN
+        ];
+        Employee::create([
+            'job_title'=>'Recepcjonista',
+            'user_id'=>User::create($user)->id
+        ]);
+
+        $user=[
+            'email' => 'nowak@gmail.com',
+            'password' => '$2y$10$OWo6yTJ6Lpc3Y3m1NMkN3unijqGeQ7g1IyoqVqQUQyOGjSvoLURJ.',
+            'first_name' => 'Kuba',
+            'last_name' => 'Nowak',
+            'phone' => '123 123 123',
+            'account_type' => AccountType::EMPLOYEE
         ];
         Employee::create([
             'job_title'=>'Fryzjer',

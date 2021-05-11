@@ -6,6 +6,8 @@ use App\BookMe\Reservation\Request\ListAvailableReservationRequest;
 use App\BookMe\Reservation\Request\StoreReservationRequest;
 use App\BookMe\Reservation\Services\ListAvailableReservationService;
 use App\BookMe\Reservation\Services\StoreReservationService;
+use App\BookMe\User\Enums\AccountType;
+use App\Models\Employee;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Psy\Util\Json;
@@ -19,7 +21,7 @@ class ReservationController extends Controller
     public function __construct(StoreReservationService $storeReservationService,
                                 ListAvailableReservationService $listAvailableReservationService)
     {
-        $this->storeReservationService=$storeReservationService;
+        $this->storeReservationService = $storeReservationService;
         $this->listAvailableReservationService = $listAvailableReservationService;
     }
 
@@ -64,7 +66,7 @@ class ReservationController extends Controller
      * @param StoreReservationRequest $request
      * @return JsonResponse
      */
-    public function store(StoreReservationRequest $request):JsonResponse
+    public function store(StoreReservationRequest $request): JsonResponse
     {
         return $this->storeReservationService->execute($request->validated());
     }
