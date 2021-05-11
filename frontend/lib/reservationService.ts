@@ -57,9 +57,7 @@ export const getAvailableReservation = (
   };
 
 
-export const getExperts = ({ 
-    
-  }) => {
+export const getExperts = () => {
     /* return axios
       .post(process.env.BACKEND_HOST + "/reservations", {
         
