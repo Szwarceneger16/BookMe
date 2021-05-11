@@ -18,9 +18,11 @@ class EmployeesServicesTableSeeder extends Seeder
     {
         $services = Service::all();
 
-        Employee::with(['user' => function ($q) {
-            $q->where('account_type',AccountType::ADMIN);
-        }])->get()->each(function ($employee) use ($services) {
+        $employee = Employee::with(['user' => function ($q) {
+            $q->where('account_type', AccountType::EMPLOYEE);
+        }])->get();
+        $employeeFiltered = $employee->where('user', '!=', null);
+        $employeeFiltered->each(function ($employee) use ($services) {
             $employee->services()->attach(
                 $services->random(rand(1, 3))->pluck('id')->toArray()
             );
