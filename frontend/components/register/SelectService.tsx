@@ -30,6 +30,17 @@ export default function SelectService(props) {
   const [services, setServices] = React.useState<Service[]>([]);
   const [experts, setExperts] = React.useState<Employee[]>([]);
 
+  const servicesPromise = (service_id) =>
+    axios
+      .post(process.env.BACKEND_HOST + "/get-employees-by-service", {
+        service_id,
+      })
+      .then((res) => {
+        props.setFieldValue("selectedExpert", "");
+        setExperts(res.data.data);
+      })
+      .catch((err) => console.error(err));
+
   React.useEffect(async (): Promise<void> => {
     const promises = [];
     promises.push(
@@ -37,21 +48,25 @@ export default function SelectService(props) {
         .get(process.env.BACKEND_HOST + "/services")
         .then((res) => setServices(res.data.data))
     );
+    if (props.values.selectedExpert) {
+      promises.push(
+        axios
+          .post(process.env.BACKEND_HOST + "/get-employees-by-service", {
+            service_id: props.values.selectedService,
+          })
+          .then((res) => {
+            setExperts(res.data.data);
+          })
+          .catch((err) => console.error(err))
+      );
+    }
     //promises.push( getExperts().then(res => setExperts(res)));
 
     await Promise.all(promises);
   }, []);
 
   const handleServiceChange = async (e): Promise<void> => {
-    await axios
-      .post(process.env.BACKEND_HOST + "/get-employees-by-service", {
-        service_id: e.target.value,
-      })
-      .then((res) => {
-        props.setFieldValue("selectedExpert", "");
-        setExperts(res.data.data);
-      })
-      .catch((err) => console.error(err));
+    await servicesPromise(e.target.value);
   };
 
   return (
