@@ -51,7 +51,7 @@ function P24BankSection() {
   );
 }
 
-function CheckoutForm({ setIsSubmitLoading }) {
+function CheckoutForm({ setIsSubmitLoading, reservation }) {
   const stripe = useStripe();
   const elements = useElements();
   const user = useSelector((state) => state.auth.user);
@@ -79,7 +79,7 @@ function CheckoutForm({ setIsSubmitLoading }) {
       .post(
         process.env.BACKEND_HOST + "/payments/create-payment-intent",
         {
-          reservation_id: 6,
+          reservation_id: reservation,
         },
         {
           headers: authHeader(),

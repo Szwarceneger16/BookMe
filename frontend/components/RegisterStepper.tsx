@@ -79,7 +79,8 @@ function getStepContent(
   isAuthorized,
   isDateSelected,
   setIsDateSelected,
-  handleBack
+  handleBack,
+  reservation
 ) {
   switch (step) {
     case 0:
@@ -104,7 +105,12 @@ function getStepContent(
         />
       );
     case 3:
-      return <Payment setIsSubmitLoading={setIsSubmitLoading} />;
+      return (
+        <Payment
+          setIsSubmitLoading={setIsSubmitLoading}
+          reservation={reservation}
+        />
+      );
     default:
       return "Unknown step";
   }
@@ -117,6 +123,7 @@ export default function HorizontalLabelPositionBelowStepper() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [isDateSelected, setIsDateSelected] = useState<boolean>(false);
   const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
+  const [reservation, setReservation] = useState<number>(null);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const authUser = useSelector((state) => state.auth.user);
   const steps = getSteps();
@@ -163,38 +170,29 @@ export default function HorizontalLabelPositionBelowStepper() {
       apoitmentDateEnd: "",
     },
     onSubmit: async (values, actions): Promise<void> => {
-      if (activeStep === steps.length - 1) {
-        console.log(values);
-        // console.log(hasAccount,isAuthorized,isLoggedIn);
-
-        // let result;
-        // if (hasAccount) {
-        //   result = await setNewReservation({
-        //     client_id: authUser.id,
-        //     place_id: 1,
-        //     service_id: values.selectedService,
-        //     employee_id: values.selectedExpertId,
-        //     datetime_start: DateFns.parseJSON(values.apoitmentDateStart),
-        //     datetime_end: DateFns.parseJSON(values.apoitmentDateEnd),
-        //   });
-        // } else {
-
-        // }
+      if (activeStep === steps.length - 2 && isAuthorized) {
+        setIsSubmitLoading(true);
         const result = await setNewReservation({
-          client_id: 1 /* authUser.id */,
-          place_id: 1,
+          client_id: authUser.client_id,
+          place_id: 1, //TODO -replace when fixed backend
           service_id: values.selectedService,
-          employee_id: values.selectedExpertId,
+          employee_id: values.selectedExpert,
           datetime_start: DateFns.parseJSON(values.apoitmentDateStart),
           datetime_end: DateFns.parseJSON(values.apoitmentDateEnd),
         });
-
         if (result) {
+          setReservation(result.data.data.id);
           dispatch(setMessage("Wizyta zarezerwowana", "success"));
-          //router.push("/");
+          handleNext();
         } else {
-          dispatch(setMessage("Nie udało się zarezerwowac wizyty", "error"));
+          dispatch(
+            setMessage(
+              "Nie udało się zarezerwowac wizyty. Spróbuj jeszcze raz",
+              "error"
+            )
+          );
         }
+        setIsSubmitLoading(false);
       } else {
         setIsSubmitLoading(true);
         if (isLoggedIn) {
@@ -313,7 +311,8 @@ export default function HorizontalLabelPositionBelowStepper() {
               isAuthorized,
               isDateSelected,
               setIsDateSelected,
-              handleBack
+              handleBack,
+              reservation
             )}
           </Container>
 
@@ -342,7 +341,7 @@ export default function HorizontalLabelPositionBelowStepper() {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  activeStep === steps.length - 1
+                  activeStep === steps.length - 2
                     ? formik.handleSubmit()
                     : handleNext();
                 }}
