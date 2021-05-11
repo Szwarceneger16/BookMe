@@ -10,6 +10,8 @@ import {
 import useStyles from "./styles/ApoitmentDataTimeStyle";
 import * as DateFns from "date-fns";
 import { getAvailableReservation } from "../../lib/reservationService";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../src/actions/message";
 
 const lowApotimentCOunts = 3;
 const mediumApotimentCOunts = 7;
@@ -19,10 +21,11 @@ const config = {
   startTimeHour: 9,
   endTimeHour: 15,
 }
-const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,...props}) => {
+const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,handleBack,...props}) => {
   const classes = useStyles();
   const [availableReservation, setAvailableReservation] = React.useState<{}>(null);
   const availableReservationKeys = availableReservation ? Object.keys(availableReservation) : [];
+  const dispatch = useDispatch();
   const [ displayedDate , setDisplayedDate ] = useState<Date>(
     // DateFns.toDate( DateFns.set(new Date(), {hours: config.startTimeHour, minutes: 0}))
     availableReservationKeys.length ? 
@@ -35,11 +38,21 @@ const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,...props}) => {
         props.values.selectedService,
         props.values.selectedExpert
       ).then( (res) => {
-        const dates = Object.keys(res.data);
-        if (res.data && dates) {
-          setAvailableReservation(res.data);
-          setDisplayedDate(DateFns.parseISO(dates[0]));
+
+        if (res.status === 200 && res.data) {
+          const dates = Object.keys(res.data);
+          if (dates) {
+            setAvailableReservation(res.data);
+            setDisplayedDate(DateFns.parseISO(dates[0]));
+          }
+        } else {
+          dispatch(setMessage(
+            "Brak mozliwych godzin do rezerwacji",
+            "error"
+          ))
+          handleBack();
         }
+        
     });
     return;
   }, []);

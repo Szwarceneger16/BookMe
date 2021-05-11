@@ -78,7 +78,8 @@ function getStepContent(
   setHasAccount,
   isAuthorized,
   isDateSelected,
-  setIsDateSelected
+  setIsDateSelected,
+  handleBack
 ) {
   switch (step) {
     case 0:
@@ -89,6 +90,7 @@ function getStepContent(
           {...props}
           setIsDateSelected={setIsDateSelected}
           isDateSelected={isDateSelected}
+          handleBack={handleBack}
         />
       );
     case 2:
@@ -310,7 +312,8 @@ export default function HorizontalLabelPositionBelowStepper() {
               setHasAccount,
               isAuthorized,
               isDateSelected,
-              setIsDateSelected
+              setIsDateSelected,
+              handleBack
             )}
           </Container>
 
