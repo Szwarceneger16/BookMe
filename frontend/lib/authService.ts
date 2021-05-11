@@ -8,6 +8,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import authHeader from "./authHeader";
 import header from "./authHeader";
+import React from "react";
 
 export function authService(): object {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export function authService(): object {
         return true;
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
         return false;
       });
   };
@@ -68,31 +69,38 @@ export function authService(): object {
   };
 }
 
-export async function useAuth() {
+export function useAuth() {
   const ISSERVER = typeof window === "undefined";
   if (ISSERVER) {
     return;
   }
+
+  const [response, setResponse] = React.useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
-  const response = await axios
-    .get(process.env.BACKEND_HOST + "/user/me", {
-      headers: header(),
-    })
-    // Render compoment when
-    .then((res) => {
-      if (res.status === 200 && res.data.status !== "Token is Expired") {
-        dispatch(login(res.data.data));
-        return true;
-      }
-      return false;
-    })
-    .catch((err) => {
-      if (typeof window !== "undefined") {
-        router.push("/");
-      }
-      return false;
-    });
+
+  React.useEffect(() => {
+    axios
+      .get(process.env.BACKEND_HOST + "/user/me", {
+        headers: header(),
+      })
+      // Render compoment when
+      .then((res) => {
+        if (res.status === 200 && res.data.status !== "Token is Expired") {
+          dispatch(login(res.data.data));
+          setResponse(true);
+          return;
+        }
+        setResponse(false);
+      })
+      .catch((err) => {
+        if (typeof window !== "undefined") {
+          router.push("/");
+        }
+        setResponse(false);
+      });
+  }, []);
+
   return response;
 }
 

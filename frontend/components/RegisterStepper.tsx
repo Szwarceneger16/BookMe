@@ -350,6 +350,9 @@ export default function HorizontalLabelPositionBelowStepper() {
                 disabled={
                   (!isAuthorized && activeStep === 2) ||
                   (activeStep === 1 && !isDateSelected) ||
+                  (activeStep === 0 &&
+                    (!formik.values.selectedExpert ||
+                      !formik.values.selectedService)) ||
                   isSubmitLoading
                 }
                 type={activeStep === steps.length - 1 ? "submit" : ""}

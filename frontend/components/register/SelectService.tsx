@@ -18,18 +18,17 @@ interface Service {
   title: string;
 }
 
-const exampleExperts = [
-  {
-    id: 1,
-    title: "muSZynek bambo",
-  },
-];
+interface Employee {
+  id: number;
+  first_name: string;
+  last_name: string;
+}
 
 export default function SelectService(props) {
   const classes = useStyles();
   const select_styles = selectStyles();
   const [services, setServices] = React.useState<Service[]>([]);
-  const [experts, setExperts] = React.useState<Service[]>(exampleExperts);
+  const [experts, setExperts] = React.useState<Employee[]>([]);
 
   React.useEffect(async (): Promise<void> => {
     const promises = [];
@@ -42,6 +41,18 @@ export default function SelectService(props) {
 
     await Promise.all(promises);
   }, []);
+
+  const handleServiceChange = async (e): Promise<void> => {
+    await axios
+      .post(process.env.BACKEND_HOST + "/get-employees-by-service", {
+        service_id: e.target.value,
+      })
+      .then((res) => {
+        props.setFieldValue("selectedExpert", "");
+        setExperts(res.data.data);
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <Grid container justifycontent="center" alignItems="center">
@@ -75,7 +86,10 @@ export default function SelectService(props) {
                 name="selectedService"
                 className={select_styles.select}
                 value={props.values.selectedService}
-                onChange={props.handleChange}
+                onChange={(e) => {
+                  props.handleChange(e);
+                  handleServiceChange(e);
+                }}
               >
                 {services.map((service) => (
                   <MenuItem key={service.id} value={service.id}>
@@ -112,15 +126,13 @@ export default function SelectService(props) {
               >
                 {experts.map((expert) => (
                   <MenuItem key={expert.id} value={expert.id}>
-                    {expert.title}
+                    {expert.first_name + " " + expert.last_name}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </>
-        ) : (
-          <Skeleton variant="rect" style={{ width: "100%" }} height={60} />
-        )}
+        ) : null}
       </Grid>
     </Grid>
   );

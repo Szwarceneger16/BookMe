@@ -9,8 +9,11 @@ const options = {
 function createAxiosResponseInterceptor() {
   axios.interceptors.request.use((req) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    const token = user.access_token || "";
-    req.headers["Authorization"] = "Bearer " + token;
+    if (user) {
+      const token = user.access_token || "";
+      req.headers["Authorization"] = "Bearer " + token;
+    }
+
     return req;
   });
   const interceptor = axios.interceptors.response.use(
@@ -21,7 +24,6 @@ function createAxiosResponseInterceptor() {
         response.status === 200 &&
         response.data.status === "Token is Expired"
       ) {
-        console.log("Expired");
         const token = response.data.token;
         user.access_token = token;
         localStorage.setItem("user", JSON.stringify(user));
