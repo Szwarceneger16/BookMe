@@ -47,7 +47,7 @@ const ApoitmentDataTime = ({isDateSelected,setIsDateSelected,handleBack,...props
           }
         } else {
           dispatch(setMessage(
-            "Brak mozliwych godzin do rezerwacji",
+            "Brak dostepnych godzin do rezerwacji",
             "error"
           ))
           handleBack();
