@@ -49,4 +49,9 @@ class ReservationRepository
     {
         return $this->reservation->all()->count();
     }
+
+    public function getClientReservations($clientId)
+    {
+        return $this->reservation->where('client_id', $clientId)->get();
+    }
 }

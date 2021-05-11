@@ -41,6 +41,7 @@ Route::group([
     Route::post('change-password',[UserController::class,'changePassword']);
     Route::post('update-data',[UserController::class,'update']);
     Route::get('dashboard-info',[UserController::class,'userDashboardInfo']);
+    Route::get('client-reservations', [ReservationController::class, 'listClientReservations']);
 });
 
 Route::group([], function($router){
