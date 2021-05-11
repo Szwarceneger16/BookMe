@@ -22,6 +22,11 @@ const ITEMS = [
     name: "Wizyty",
     icon: <EventNoteIcon />,
     href: SECTION_PREFIX + "/visits/all",
+  },
+  {
+    name: "Godizny pracy",
+    icon: <EventNoteIcon />,
+    href: SECTION_PREFIX + "/workHours/manage",
     // subitems: [
     //   {
     //     name: "Odwołaj",
@@ -37,20 +42,20 @@ const ITEMS = [
     //   },
     // ],
   },
-  {
-    name: "Edytuj",
-    icon: <EventNoteIcon />,
-    subitems: [
-      {
-        name: "Pracownika",
-        href: SECTION_PREFIX + "/remove",
-      },
-      {
-        name: "Rodzaj usługi",
-        href: SECTION_PREFIX + "/all",
-      }
-    ],
-  },
+  // {
+  //   name: "Edytuj",
+  //   icon: <EventNoteIcon />,
+  //   subitems: [
+  //     {
+  //       name: "Pracownika",
+  //       href: SECTION_PREFIX + "/remove",
+  //     },
+  //     {
+  //       name: "Rodzaj usługi",
+  //       href: SECTION_PREFIX + "/all",
+  //     }
+  //   ],
+  // },
   {
     name: "Ustawienia placówki",
     icon: <SettingsIcon />,

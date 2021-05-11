@@ -60,8 +60,8 @@ export const getAvailableReservation = (service_id, employee_id) => {
     });
 };
 
-export const getExperts = ({}) => {
-  /* return axios
+export const getExperts = () => {
+    /* return axios
       .post(process.env.BACKEND_HOST + "/reservations", {
         
       }, {
