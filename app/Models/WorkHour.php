@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class WorkHour extends Model
 {
+    protected $fillable=['employee_id','place_id','datetime_start','datetime_end'];
     protected $dates = ['datetime_start','datetime_end'];
 
     use HasFactory;

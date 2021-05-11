@@ -1,6 +1,6 @@
 <?php
 
-namespace App\BookMe\Reservation\Repositories;
+namespace App\BookMe\Place\Repositories;
 
 use App\Models\Place;
 

@@ -44,7 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: May 10 2021</li>
+            <li>Last updated: May 11 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -437,7 +437,7 @@ Service id.
 </form>
 <h2>List all Employees</h2>
 <p><small class="badge badge-darkred">requires authentication</small></p>
-<p>List all Servicess</p>
+<p>List all Employees</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -487,6 +487,398 @@ fetch(url, {
 </p>
 <p>
 <label id="auth-GETapi-employees" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-employees" data-component="header"></label>
+</p>
+</form>
+<h2>Display a listing of the resource.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/workHours" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/workHours"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "Authorization Token not found"
+}</code></pre>
+<div id="execution-results-GETapi-workHours" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-workHours"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-workHours"></code></pre>
+</div>
+<div id="execution-error-GETapi-workHours" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-workHours"></code></pre>
+</div>
+<form id="form-GETapi-workHours" data-method="GET" data-path="api/workHours" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-workHours', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-workHours" onclick="tryItOut('GETapi-workHours');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-workHours" onclick="cancelTryOut('GETapi-workHours');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-workHours" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/workHours</code></b>
+</p>
+</form>
+<h2>Show the form for creating a new resource.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/workHours/create" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/workHours/create"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "Authorization Token not found"
+}</code></pre>
+<div id="execution-results-GETapi-workHours-create" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-workHours-create"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-workHours-create"></code></pre>
+</div>
+<div id="execution-error-GETapi-workHours-create" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-workHours-create"></code></pre>
+</div>
+<form id="form-GETapi-workHours-create" data-method="GET" data-path="api/workHours/create" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-workHours-create', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-workHours-create" onclick="tryItOut('GETapi-workHours-create');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-workHours-create" onclick="cancelTryOut('GETapi-workHours-create');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-workHours-create" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/workHours/create</code></b>
+</p>
+</form>
+<h2>Store new workHours</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>Store new workHours</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/workHours" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"datetime_start":"\"2019-09-18T19:00:52Z\"","datetime_end":"\"2019-09-18T19:30:52Z\"","employee_id":1,"place_id":1}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/workHours"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "datetime_start": "\"2019-09-18T19:00:52Z\"",
+    "datetime_end": "\"2019-09-18T19:30:52Z\"",
+    "employee_id": 1,
+    "place_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "[]",
+    "message": "Records was stored",
+    "status": 201
+}</code></pre>
+<div id="execution-results-POSTapi-workHours" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-workHours"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-workHours"></code></pre>
+</div>
+<div id="execution-error-POSTapi-workHours" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-workHours"></code></pre>
+</div>
+<form id="form-POSTapi-workHours" data-method="POST" data-path="api/workHours" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-workHours', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-workHours" onclick="tryItOut('POSTapi-workHours');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-workHours" onclick="cancelTryOut('POSTapi-workHours');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-workHours" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/workHours</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-workHours" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-workHours" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>datetime_start</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
+<input type="text" name="datetime_start" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
+<br>
+Datetime start reservation.
+</p>
+<p>
+<b><code>datetime_end</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
+<input type="text" name="datetime_end" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
+<br>
+Datetime end password.
+</p>
+<p>
+<b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="employee_id" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
+<br>
+Employee id.
+</p>
+<p>
+<b><code>place_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="place_id" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
+<br>
+Place id.
+</p>
+
+</form>
+<h2>Display the specified resource.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/workHours/molestiae" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/workHours/molestiae"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "Authorization Token not found"
+}</code></pre>
+<div id="execution-results-GETapi-workHours--workHour-" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-workHours--workHour-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-workHours--workHour-"></code></pre>
+</div>
+<div id="execution-error-GETapi-workHours--workHour-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-workHours--workHour-"></code></pre>
+</div>
+<form id="form-GETapi-workHours--workHour-" data-method="GET" data-path="api/workHours/{workHour}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-workHours--workHour-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-workHours--workHour-" onclick="tryItOut('GETapi-workHours--workHour-');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-workHours--workHour-" onclick="cancelTryOut('GETapi-workHours--workHour-');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-workHours--workHour-" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/workHours/{workHour}</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>workHour</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="workHour" data-endpoint="GETapi-workHours--workHour-" data-component="url" required  hidden>
+<br>
+
+</p>
+</form>
+<h2>Show the form for editing the specified resource.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/workHours/qui/edit" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/workHours/qui/edit"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "Authorization Token not found"
+}</code></pre>
+<div id="execution-results-GETapi-workHours--workHour--edit" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-workHours--workHour--edit"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-workHours--workHour--edit"></code></pre>
+</div>
+<div id="execution-error-GETapi-workHours--workHour--edit" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-workHours--workHour--edit"></code></pre>
+</div>
+<form id="form-GETapi-workHours--workHour--edit" data-method="GET" data-path="api/workHours/{workHour}/edit" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-workHours--workHour--edit', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-workHours--workHour--edit" onclick="tryItOut('GETapi-workHours--workHour--edit');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-workHours--workHour--edit" onclick="cancelTryOut('GETapi-workHours--workHour--edit');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-workHours--workHour--edit" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/workHours/{workHour}/edit</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>workHour</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="workHour" data-endpoint="GETapi-workHours--workHour--edit" data-component="url" required  hidden>
+<br>
+
+</p>
+</form>
+<h2>Update the specified resource in storage.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://localhost/api/workHours/laborum" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/workHours/laborum"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-PUTapi-workHours--workHour-" hidden>
+    <blockquote>Received response<span id="execution-response-status-PUTapi-workHours--workHour-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-workHours--workHour-"></code></pre>
+</div>
+<div id="execution-error-PUTapi-workHours--workHour-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-workHours--workHour-"></code></pre>
+</div>
+<form id="form-PUTapi-workHours--workHour-" data-method="PUT" data-path="api/workHours/{workHour}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-workHours--workHour-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-PUTapi-workHours--workHour-" onclick="tryItOut('PUTapi-workHours--workHour-');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-PUTapi-workHours--workHour-" onclick="cancelTryOut('PUTapi-workHours--workHour-');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-PUTapi-workHours--workHour-" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-darkblue">PUT</small>
+ <b><code>api/workHours/{workHour}</code></b>
+</p>
+<p>
+<small class="badge badge-purple">PATCH</small>
+ <b><code>api/workHours/{workHour}</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>workHour</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="workHour" data-endpoint="PUTapi-workHours--workHour-" data-component="url" required  hidden>
+<br>
+
+</p>
+</form>
+<h2>Remove the specified resource from storage.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "http://localhost/api/workHours/nisi" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/workHours/nisi"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-DELETEapi-workHours--workHour-" hidden>
+    <blockquote>Received response<span id="execution-response-status-DELETEapi-workHours--workHour-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-workHours--workHour-"></code></pre>
+</div>
+<div id="execution-error-DELETEapi-workHours--workHour-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-workHours--workHour-"></code></pre>
+</div>
+<form id="form-DELETEapi-workHours--workHour-" data-method="DELETE" data-path="api/workHours/{workHour}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-workHours--workHour-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-DELETEapi-workHours--workHour-" onclick="tryItOut('DELETEapi-workHours--workHour-');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-DELETEapi-workHours--workHour-" onclick="cancelTryOut('DELETEapi-workHours--workHour-');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-DELETEapi-workHours--workHour-" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-red">DELETE</small>
+ <b><code>api/workHours/{workHour}</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>workHour</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="workHour" data-endpoint="DELETEapi-workHours--workHour-" data-component="url" required  hidden>
+<br>
+
 </p>
 </form>
 <h2>List available reservations</h2>
@@ -633,6 +1025,618 @@ fetch(url, {
 Service id.
 </p>
 
+</form><h1>Payments</h1>
+<p>APIs for using payments</p>
+<h2>Create Payment Intent</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>Create Payment Intent and link payment to reservation</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/payments/create-payment-intent" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"reservation_id":1}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/payments/create-payment-intent"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "reservation_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">
+{
+   "data": {
+         "client_secret": "pi_123dsdsvsfdsfds",
+     },
+   "message": "Records was showed",
+   "status": 201
+   }</code></pre>
+<div id="execution-results-POSTapi-payments-create-payment-intent" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-payments-create-payment-intent"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-payments-create-payment-intent"></code></pre>
+</div>
+<div id="execution-error-POSTapi-payments-create-payment-intent" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-payments-create-payment-intent"></code></pre>
+</div>
+<form id="form-POSTapi-payments-create-payment-intent" data-method="POST" data-path="api/payments/create-payment-intent" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-payments-create-payment-intent', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-payments-create-payment-intent" onclick="tryItOut('POSTapi-payments-create-payment-intent');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-payments-create-payment-intent" onclick="cancelTryOut('POSTapi-payments-create-payment-intent');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-payments-create-payment-intent" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/payments/create-payment-intent</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-payments-create-payment-intent" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-payments-create-payment-intent" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>reservation_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="reservation_id" data-endpoint="POSTapi-payments-create-payment-intent" data-component="body" required  hidden>
+<br>
+Current reservation id.
+</p>
+
+</form>
+<h2>Handle response</h2>
+<p>Handling and store data returning from stripe</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/payments/handle-payment-response?payment_intent=aliquid&amp;payment_intent_client_secret=voluptatum&amp;redirect_status=dolor" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/payments/handle-payment-response"
+);
+
+let params = {
+    "payment_intent": "aliquid",
+    "payment_intent_client_secret": "voluptatum",
+    "redirect_status": "dolor",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Class 'Stripe\\Stripe' not found",
+    "exception": "Error",
+    "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\app\\BookMe\\Payments\\Services\\CreatePaymentIntentService.php",
+    "line": 14,
+    "trace": [
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\composer\\ClassLoader.php",
+            "line": 478,
+            "function": "include"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\composer\\ClassLoader.php",
+            "line": 346,
+            "function": "Composer\\Autoload\\includeFile"
+        },
+        {
+            "function": "loadClass",
+            "class": "Composer\\Autoload\\ClassLoader",
+            "type": "-&gt;"
+        },
+        {
+            "function": "spl_autoload_call"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 833,
+            "function": "__construct",
+            "class": "ReflectionClass",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 714,
+            "function": "build",
+            "class": "Illuminate\\Container\\Container",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php",
+            "line": 841,
+            "function": "resolve",
+            "class": "Illuminate\\Container\\Container",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 652,
+            "function": "resolve",
+            "class": "Illuminate\\Foundation\\Application",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php",
+            "line": 826,
+            "function": "make",
+            "class": "Illuminate\\Container\\Container",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 987,
+            "function": "make",
+            "class": "Illuminate\\Foundation\\Application",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 907,
+            "function": "resolveClass",
+            "class": "Illuminate\\Container\\Container",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 868,
+            "function": "resolveDependencies",
+            "class": "Illuminate\\Container\\Container",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 714,
+            "function": "build",
+            "class": "Illuminate\\Container\\Container",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php",
+            "line": 841,
+            "function": "resolve",
+            "class": "Illuminate\\Container\\Container",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 652,
+            "function": "resolve",
+            "class": "Illuminate\\Foundation\\Application",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php",
+            "line": 826,
+            "function": "make",
+            "class": "Illuminate\\Container\\Container",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+            "line": 268,
+            "function": "make",
+            "class": "Illuminate\\Foundation\\Application",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+            "line": 1019,
+            "function": "getController",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+            "line": 980,
+            "function": "controllerMiddleware",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 712,
+            "function": "gatherMiddleware",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 688,
+            "function": "gatherRouteMiddleware",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 672,
+            "function": "runRouteWithinStack",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 636,
+            "function": "runRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 625,
+            "function": "dispatchToRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+            "line": 166,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 128,
+            "function": "Illuminate\\Foundation\\Http\\{closure}",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php",
+            "line": 31,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 167,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php",
+            "line": 40,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 167,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
+            "line": 27,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 167,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php",
+            "line": 86,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 167,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\fruitcake\\laravel-cors\\src\\HandleCors.php",
+            "line": 57,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 167,
+            "function": "handle",
+            "class": "Fruitcake\\Cors\\HandleCors",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\fideloper\\proxy\\src\\TrustProxies.php",
+            "line": 57,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 167,
+            "function": "handle",
+            "class": "Fideloper\\Proxy\\TrustProxies",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 103,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+            "line": 141,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+            "line": 110,
+            "function": "sendRequestThroughRouter",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+            "line": 324,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+            "line": 305,
+            "function": "callLaravelOrLumenRoute",
+            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+            "line": 76,
+            "function": "makeApiCall",
+            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+            "line": 51,
+            "function": "makeResponseCall",
+            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+            "line": 41,
+            "function": "makeResponseCallIfEnabledAndNoSuccessResponses",
+            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Generator.php",
+            "line": 236,
+            "function": "__invoke",
+            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Generator.php",
+            "line": 172,
+            "function": "iterateThroughStrategies",
+            "class": "Knuckles\\Scribe\\Extracting\\Generator",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Generator.php",
+            "line": 127,
+            "function": "fetchResponses",
+            "class": "Knuckles\\Scribe\\Extracting\\Generator",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php",
+            "line": 119,
+            "function": "processRoute",
+            "class": "Knuckles\\Scribe\\Extracting\\Generator",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php",
+            "line": 73,
+            "function": "processRoutes",
+            "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+            "line": 36,
+            "function": "handle",
+            "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php",
+            "line": 40,
+            "function": "Illuminate\\Container\\{closure}",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+            "line": 93,
+            "function": "unwrapIfClosure",
+            "class": "Illuminate\\Container\\Util",
+            "type": "::"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+            "line": 37,
+            "function": "callBoundMethod",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 611,
+            "function": "call",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+            "line": 136,
+            "function": "call",
+            "class": "Illuminate\\Container\\Container",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\symfony\\console\\Command\\Command.php",
+            "line": 256,
+            "function": "execute",
+            "class": "Illuminate\\Console\\Command",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+            "line": 121,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Command\\Command",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\symfony\\console\\Application.php",
+            "line": 971,
+            "function": "run",
+            "class": "Illuminate\\Console\\Command",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\symfony\\console\\Application.php",
+            "line": 290,
+            "function": "doRunCommand",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\symfony\\console\\Application.php",
+            "line": 166,
+            "function": "doRun",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php",
+            "line": 92,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
+            "line": 129,
+            "function": "run",
+            "class": "Illuminate\\Console\\Application",
+            "type": "-&gt;"
+        },
+        {
+            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\artisan",
+            "line": 37,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Console\\Kernel",
+            "type": "-&gt;"
+        }
+    ]
+}</code></pre>
+<div id="execution-results-GETapi-payments-handle-payment-response" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-payments-handle-payment-response"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-payments-handle-payment-response"></code></pre>
+</div>
+<div id="execution-error-GETapi-payments-handle-payment-response" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-payments-handle-payment-response"></code></pre>
+</div>
+<form id="form-GETapi-payments-handle-payment-response" data-method="GET" data-path="api/payments/handle-payment-response" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-payments-handle-payment-response', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-payments-handle-payment-response" onclick="tryItOut('GETapi-payments-handle-payment-response');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-payments-handle-payment-response" onclick="cancelTryOut('GETapi-payments-handle-payment-response');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-payments-handle-payment-response" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/payments/handle-payment-response</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p>
+<b><code>payment_intent</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="payment_intent" data-endpoint="GETapi-payments-handle-payment-response" data-component="query"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>payment_intent_client_secret</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="payment_intent_client_secret" data-endpoint="GETapi-payments-handle-payment-response" data-component="query"  hidden>
+<br>
+
+</p>
+<p>
+<b><code>redirect_status</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="redirect_status" data-endpoint="GETapi-payments-handle-payment-response" data-component="query"  hidden>
+<br>
+
+</p>
 </form><h1>Services</h1>
 <p>APIs for services</p>
 <h2>List all Services</h2>
@@ -697,13 +1701,13 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/auth/check-password" \
+    "http://localhost/api/user/check-password" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"password":"1235678"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/check-password"
+    "http://localhost/api/user/check-password"
 );
 
 let headers = {
@@ -728,32 +1732,32 @@ fetch(url, {
     "message": "Record was returned",
     "status": 200
 }</code></pre>
-<div id="execution-results-POSTapi-auth-check-password" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-auth-check-password"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-auth-check-password"></code></pre>
+<div id="execution-results-POSTapi-user-check-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-user-check-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-user-check-password"></code></pre>
 </div>
-<div id="execution-error-POSTapi-auth-check-password" hidden>
+<div id="execution-error-POSTapi-user-check-password" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-auth-check-password"></code></pre>
+    <pre><code id="execution-error-message-POSTapi-user-check-password"></code></pre>
 </div>
-<form id="form-POSTapi-auth-check-password" data-method="POST" data-path="api/auth/check-password" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-check-password', this);">
+<form id="form-POSTapi-user-check-password" data-method="POST" data-path="api/user/check-password" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-check-password', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-auth-check-password" onclick="tryItOut('POSTapi-auth-check-password');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-auth-check-password" onclick="cancelTryOut('POSTapi-auth-check-password');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-auth-check-password" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-user-check-password" onclick="tryItOut('POSTapi-user-check-password');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-user-check-password" onclick="cancelTryOut('POSTapi-user-check-password');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-user-check-password" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-black">POST</small>
- <b><code>api/auth/check-password</code></b>
+ <b><code>api/user/check-password</code></b>
 </p>
 <p>
-<label id="auth-POSTapi-auth-check-password" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-auth-check-password" data-component="header"></label>
+<label id="auth-POSTapi-user-check-password" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-user-check-password" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
 <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="password" name="password" data-endpoint="POSTapi-auth-check-password" data-component="body" required  hidden>
+<input type="password" name="password" data-endpoint="POSTapi-user-check-password" data-component="body" required  hidden>
 <br>
 Password to check.
 </p>
@@ -766,11 +1770,11 @@ Password to check.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/auth/me" \
+    -G "http://localhost/api/user/me" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/me"
+    "http://localhost/api/user/me"
 );
 
 let headers = {
@@ -794,27 +1798,27 @@ fetch(url, {
     "message": "Record was returned",
     "status": 200
 }</code></pre>
-<div id="execution-results-GETapi-auth-me" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-auth-me"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-auth-me"></code></pre>
+<div id="execution-results-GETapi-user-me" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-user-me"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-user-me"></code></pre>
 </div>
-<div id="execution-error-GETapi-auth-me" hidden>
+<div id="execution-error-GETapi-user-me" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-auth-me"></code></pre>
+    <pre><code id="execution-error-message-GETapi-user-me"></code></pre>
 </div>
-<form id="form-GETapi-auth-me" data-method="GET" data-path="api/auth/me" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-auth-me', this);">
+<form id="form-GETapi-user-me" data-method="GET" data-path="api/user/me" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-user-me', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-auth-me" onclick="tryItOut('GETapi-auth-me');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-auth-me" onclick="cancelTryOut('GETapi-auth-me');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-auth-me" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-user-me" onclick="tryItOut('GETapi-user-me');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-user-me" onclick="cancelTryOut('GETapi-user-me');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-user-me" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-green">GET</small>
- <b><code>api/auth/me</code></b>
+ <b><code>api/user/me</code></b>
 </p>
 <p>
-<label id="auth-GETapi-auth-me" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-auth-me" data-component="header"></label>
+<label id="auth-GETapi-user-me" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-user-me" data-component="header"></label>
 </p>
 </form>
 <h2>Change password</h2>
@@ -824,13 +1828,13 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/auth/change-password" \
+    "http://localhost/api/user/change-password" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"password":"1235678","new_password":"1235678"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/change-password"
+    "http://localhost/api/user/change-password"
 );
 
 let headers = {
@@ -856,38 +1860,38 @@ fetch(url, {
     "message": "Records was updated",
     "status": 201
 }</code></pre>
-<div id="execution-results-POSTapi-auth-change-password" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-auth-change-password"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-auth-change-password"></code></pre>
+<div id="execution-results-POSTapi-user-change-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-user-change-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-user-change-password"></code></pre>
 </div>
-<div id="execution-error-POSTapi-auth-change-password" hidden>
+<div id="execution-error-POSTapi-user-change-password" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-auth-change-password"></code></pre>
+    <pre><code id="execution-error-message-POSTapi-user-change-password"></code></pre>
 </div>
-<form id="form-POSTapi-auth-change-password" data-method="POST" data-path="api/auth/change-password" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-change-password', this);">
+<form id="form-POSTapi-user-change-password" data-method="POST" data-path="api/user/change-password" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-change-password', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-auth-change-password" onclick="tryItOut('POSTapi-auth-change-password');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-auth-change-password" onclick="cancelTryOut('POSTapi-auth-change-password');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-auth-change-password" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-user-change-password" onclick="tryItOut('POSTapi-user-change-password');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-user-change-password" onclick="cancelTryOut('POSTapi-user-change-password');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-user-change-password" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-black">POST</small>
- <b><code>api/auth/change-password</code></b>
+ <b><code>api/user/change-password</code></b>
 </p>
 <p>
-<label id="auth-POSTapi-auth-change-password" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-auth-change-password" data-component="header"></label>
+<label id="auth-POSTapi-user-change-password" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-user-change-password" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
 <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="password" name="password" data-endpoint="POSTapi-auth-change-password" data-component="body" required  hidden>
+<input type="password" name="password" data-endpoint="POSTapi-user-change-password" data-component="body" required  hidden>
 <br>
 User's current password.
 </p>
 <p>
 <b><code>new_password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="password" name="new_password" data-endpoint="POSTapi-auth-change-password" data-component="body" required  hidden>
+<input type="password" name="new_password" data-endpoint="POSTapi-user-change-password" data-component="body" required  hidden>
 <br>
 User's new password.
 </p>
@@ -900,13 +1904,13 @@ User's new password.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/auth/update-data" \
+    "http://localhost/api/user/update-data" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"test@test.pl","phone":12345678}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/update-data"
+    "http://localhost/api/user/update-data"
 );
 
 let headers = {
@@ -932,38 +1936,38 @@ fetch(url, {
     "message": "Records was updated",
     "status": 201
 }</code></pre>
-<div id="execution-results-POSTapi-auth-update-data" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-auth-update-data"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-auth-update-data"></code></pre>
+<div id="execution-results-POSTapi-user-update-data" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-user-update-data"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-user-update-data"></code></pre>
 </div>
-<div id="execution-error-POSTapi-auth-update-data" hidden>
+<div id="execution-error-POSTapi-user-update-data" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-auth-update-data"></code></pre>
+    <pre><code id="execution-error-message-POSTapi-user-update-data"></code></pre>
 </div>
-<form id="form-POSTapi-auth-update-data" data-method="POST" data-path="api/auth/update-data" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-update-data', this);">
+<form id="form-POSTapi-user-update-data" data-method="POST" data-path="api/user/update-data" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-update-data', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-auth-update-data" onclick="tryItOut('POSTapi-auth-update-data');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-auth-update-data" onclick="cancelTryOut('POSTapi-auth-update-data');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-auth-update-data" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-user-update-data" onclick="tryItOut('POSTapi-user-update-data');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-user-update-data" onclick="cancelTryOut('POSTapi-user-update-data');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-user-update-data" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-black">POST</small>
- <b><code>api/auth/update-data</code></b>
+ <b><code>api/user/update-data</code></b>
 </p>
 <p>
-<label id="auth-POSTapi-auth-update-data" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-auth-update-data" data-component="header"></label>
+<label id="auth-POSTapi-user-update-data" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-user-update-data" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
 <b><code>email</code></b>&nbsp;&nbsp;<small>email</small>     <i>optional</i> &nbsp;
-<input type="text" name="email" data-endpoint="POSTapi-auth-update-data" data-component="body"  hidden>
+<input type="text" name="email" data-endpoint="POSTapi-user-update-data" data-component="body"  hidden>
 <br>
 Email field
 </p>
 <p>
 <b><code>phone</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
-<input type="number" name="phone" data-endpoint="POSTapi-auth-update-data" data-component="body"  hidden>
+<input type="number" name="phone" data-endpoint="POSTapi-user-update-data" data-component="body"  hidden>
 <br>
 Phone field.
 </p>
@@ -976,11 +1980,11 @@ Phone field.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/auth/dashboard-info" \
+    -G "http://localhost/api/user/dashboard-info" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/dashboard-info"
+    "http://localhost/api/user/dashboard-info"
 );
 
 let headers = {
@@ -1003,27 +2007,27 @@ fetch(url, {
     "message": "Records was showed",
     "status": 201
 }</code></pre>
-<div id="execution-results-GETapi-auth-dashboard-info" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-auth-dashboard-info"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-auth-dashboard-info"></code></pre>
+<div id="execution-results-GETapi-user-dashboard-info" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-user-dashboard-info"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-user-dashboard-info"></code></pre>
 </div>
-<div id="execution-error-GETapi-auth-dashboard-info" hidden>
+<div id="execution-error-GETapi-user-dashboard-info" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-auth-dashboard-info"></code></pre>
+    <pre><code id="execution-error-message-GETapi-user-dashboard-info"></code></pre>
 </div>
-<form id="form-GETapi-auth-dashboard-info" data-method="GET" data-path="api/auth/dashboard-info" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-auth-dashboard-info', this);">
+<form id="form-GETapi-user-dashboard-info" data-method="GET" data-path="api/user/dashboard-info" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-user-dashboard-info', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-auth-dashboard-info" onclick="tryItOut('GETapi-auth-dashboard-info');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-auth-dashboard-info" onclick="cancelTryOut('GETapi-auth-dashboard-info');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-auth-dashboard-info" hidden>Send Request 💥</button>
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-user-dashboard-info" onclick="tryItOut('GETapi-user-dashboard-info');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-user-dashboard-info" onclick="cancelTryOut('GETapi-user-dashboard-info');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-user-dashboard-info" hidden>Send Request 💥</button>
     </h3>
 <p>
 <small class="badge badge-green">GET</small>
- <b><code>api/auth/dashboard-info</code></b>
+ <b><code>api/user/dashboard-info</code></b>
 </p>
 <p>
-<label id="auth-GETapi-auth-dashboard-info" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-auth-dashboard-info" data-component="header"></label>
+<label id="auth-GETapi-user-dashboard-info" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-user-dashboard-info" data-component="header"></label>
 </p>
 </form>
     </div>

@@ -8,6 +8,12 @@ use App\BookMe\Employee\Services\ListEmployeesService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+
+/**
+ * @group Employees
+ *
+ * APIs for employees
+ */
 class EmployeeController extends Controller
 {
     private ListEmployeesService $listEmployeesService;
@@ -23,7 +29,7 @@ class EmployeeController extends Controller
     /**
      * List all Employees
      *
-     * List all Servicess
+     * List all Employees
      * @authenticated
      * @response {
      *    "data": "[]",

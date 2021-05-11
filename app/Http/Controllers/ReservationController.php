@@ -12,6 +12,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Psy\Util\Json;
 
+/**
+ * @group Reservations
+ *
+ * APIs for using Reservations
+ */
 class ReservationController extends Controller
 {
 

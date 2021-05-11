@@ -58,7 +58,4 @@ class StoreReservationService
         $reservation->service_id = $request['service_id'];
         return $reservation;
     }
-
-
-
 }
