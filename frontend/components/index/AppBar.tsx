@@ -106,6 +106,14 @@ export default function PrimarySearchAppBar() {
           </Button>
         </Link>
       </MenuItem>
+      <MenuItem>
+        {isLoggedIn && 
+        <Link href="/admin/dashboard">
+          <Button variant="contained" color="primary">
+            Panel Admina
+          </Button>
+        </Link>}
+      </MenuItem>
     </Menu>
   );
 
@@ -140,6 +148,12 @@ export default function PrimarySearchAppBar() {
                 {!isLoggedIn ? "Zaloguj się" : "Panel klienta"}
               </Button>
             </Link>
+            {isLoggedIn && 
+              <Link href="/admin/dashboard">
+              <Button variant="contained" color="primary">
+                Panel Admina
+              </Button>
+            </Link>}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
