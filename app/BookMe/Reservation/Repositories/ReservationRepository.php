@@ -50,8 +50,11 @@ class ReservationRepository
         return $this->reservation->all()->count();
     }
 
-    public function getClientReservations($clientId)
+    public function getClientReservations($clientId, $from)
     {
-        return $this->reservation->where('client_id', $clientId)->get();
+        return $this->reservation
+            ->where('client_id', $clientId)
+            ->where('datetime_start', ">=", $from)
+            ->get();
     }
 }
