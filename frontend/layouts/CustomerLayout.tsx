@@ -49,7 +49,6 @@ export default function CustomerLayout({ children }) {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const router = useRouter();
   const isAuth = useAuth();
-  console.log(isAuth);
 
   if (isAuth !== true) {
     return (
