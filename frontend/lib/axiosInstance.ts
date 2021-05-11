@@ -2,55 +2,37 @@ import axios from "axios";
 import authHeader from "./authHeader";
 
 const options = {
-  baseURL: process.env.BACKEND_HOST + "/auth/refresh",
   headers: {
     "Content-Type": "application/json",
   },
 };
-
 function createAxiosResponseInterceptor() {
+  axios.interceptors.request.use((req) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user.access_token || "";
+    req.headers["Authorization"] = "Bearer " + token;
+    return req;
+  });
   const interceptor = axios.interceptors.response.use(
     (response) => {
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (user) {
-        const token = user.access_token;
-        response.headers.Authorization = token ? `Bearer ${token}` : "";
+      let user = JSON.parse(localStorage.getItem("user"));
+      //Change token when expired
+      if (
+        response.status === 200 &&
+        response.data.status === "Token is Expired"
+      ) {
+        console.log("Expired");
+        const token = response.data.token;
+        user.access_token = token;
+        localStorage.setItem("user", JSON.stringify(user));
+        //axios.interceptors.response.eject(interceptor);
+        response.config.headers["Authorization"] = "Bearer " + token;
+        return axios(response.config);
       }
       return response;
     },
     (error) => {
-      // Reject promise if usual error
-      if (
-        error &&
-        typeof error.response !== undefined &&
-        error.response.status !== 401
-      ) {
-        return Promise.reject(error);
-      }
-
-      /*
-       * When response code is 404, try to refresh the token.
-       * Eject the interceptor so it doesn't loop in case
-       * token refresh causes the 404 response
-       */
-      axios.interceptors.response.eject(interceptor);
-
-      const header = authHeader();
-      options["method"] = "POST";
-      options["headers"] = { ...options["headers"], ...header };
-      return axios(options)
-        .then((response) => {
-          let user = JSON.parse(localStorage.getItem("user"));
-          user.access_token = response.data.token;
-          localStorage.setItem("user", JSON.stringify(user));
-          error.response.config.headers["Authorization"] =
-            "Bearer " + response.data.token;
-          return axios(error.response.config);
-        })
-        .catch((error) => {
-          return Promise.reject(error);
-        })
-        .finally(createAxiosResponseInterceptor);
+      return Promise.reject(error);
     }
   );
 }
