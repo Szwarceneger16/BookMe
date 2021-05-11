@@ -23,6 +23,11 @@ class WorkHoursRepository
         return $this->workHour->where('employee_id',$employeeId)->orderBy('datetime_start', 'ASC')->get();
     }
 
+    public function getByDate($date)
+    {
+        return $this->workHour->whereDate('datetime_start',$date)->get();
+    }
+
     public function getAllPlace($placeId)
     {
         return $this->workHour->where('place_id',$placeId)->orderBy('datetime_start', 'ASC')->get();
