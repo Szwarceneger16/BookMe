@@ -330,111 +330,8 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/auth/refresh</code></b>
 </p>
-</form><h1>Endpoints</h1>
-<h2>Store new reservation</h2>
-<p><small class="badge badge-darkred">requires authentication</small></p>
-<p>Store new reservation</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/reservations" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"datetime_start":"\"2019-09-18T19:00:52Z\"","datetime_end":"\"2019-09-18T19:30:52Z\"","client_id":1,"employee_id":1,"place_id":1,"service_id":1}'
-</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/reservations"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "datetime_start": "\"2019-09-18T19:00:52Z\"",
-    "datetime_end": "\"2019-09-18T19:30:52Z\"",
-    "client_id": 1,
-    "employee_id": 1,
-    "place_id": 1,
-    "service_id": 1
-}
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "data": "[]",
-    "message": "Records was stored",
-    "status": 201
-}</code></pre>
-<div id="execution-results-POSTapi-reservations" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-reservations"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-reservations"></code></pre>
-</div>
-<div id="execution-error-POSTapi-reservations" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-reservations"></code></pre>
-</div>
-<form id="form-POSTapi-reservations" data-method="POST" data-path="api/reservations" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-reservations', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-reservations" onclick="tryItOut('POSTapi-reservations');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-reservations" onclick="cancelTryOut('POSTapi-reservations');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-reservations" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-black">POST</small>
- <b><code>api/reservations</code></b>
-</p>
-<p>
-<label id="auth-POSTapi-reservations" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-reservations" data-component="header"></label>
-</p>
-<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-<p>
-<b><code>datetime_start</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
-<input type="text" name="datetime_start" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
-<br>
-Datetime start reservation.
-</p>
-<p>
-<b><code>datetime_end</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
-<input type="text" name="datetime_end" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
-<br>
-Datetime end password.
-</p>
-<p>
-<b><code>client_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="client_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
-<br>
-Client id.
-</p>
-<p>
-<b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="employee_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
-<br>
-Employee id.
-</p>
-<p>
-<b><code>place_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="place_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
-<br>
-Place id.
-</p>
-<p>
-<b><code>service_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="service_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
-<br>
-Service id.
-</p>
-
-</form>
+</form><h1>Employees</h1>
+<p>APIs for employees</p>
 <h2>List all Employees</h2>
 <p><small class="badge badge-darkred">requires authentication</small></p>
 <p>List all Employees</p>
@@ -488,474 +385,6 @@ fetch(url, {
 <p>
 <label id="auth-GETapi-employees" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-employees" data-component="header"></label>
 </p>
-</form>
-<h2>Display a listing of the resource.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/workHours" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/workHours"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (404):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "status": "Authorization Token not found"
-}</code></pre>
-<div id="execution-results-GETapi-workHours" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-workHours"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-workHours"></code></pre>
-</div>
-<div id="execution-error-GETapi-workHours" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-workHours"></code></pre>
-</div>
-<form id="form-GETapi-workHours" data-method="GET" data-path="api/workHours" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-workHours', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-workHours" onclick="tryItOut('GETapi-workHours');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-workHours" onclick="cancelTryOut('GETapi-workHours');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-workHours" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/workHours</code></b>
-</p>
-</form>
-<h2>Show the form for creating a new resource.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/workHours/create" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/workHours/create"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (404):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "status": "Authorization Token not found"
-}</code></pre>
-<div id="execution-results-GETapi-workHours-create" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-workHours-create"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-workHours-create"></code></pre>
-</div>
-<div id="execution-error-GETapi-workHours-create" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-workHours-create"></code></pre>
-</div>
-<form id="form-GETapi-workHours-create" data-method="GET" data-path="api/workHours/create" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-workHours-create', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-workHours-create" onclick="tryItOut('GETapi-workHours-create');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-workHours-create" onclick="cancelTryOut('GETapi-workHours-create');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-workHours-create" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/workHours/create</code></b>
-</p>
-</form>
-<h2>Store new workHours</h2>
-<p><small class="badge badge-darkred">requires authentication</small></p>
-<p>Store new workHours</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/workHours" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"datetime_start":"\"2019-09-18T19:00:52Z\"","datetime_end":"\"2019-09-18T19:30:52Z\"","employee_id":1,"place_id":1}'
-</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/workHours"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "datetime_start": "\"2019-09-18T19:00:52Z\"",
-    "datetime_end": "\"2019-09-18T19:30:52Z\"",
-    "employee_id": 1,
-    "place_id": 1
-}
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "data": "[]",
-    "message": "Records was stored",
-    "status": 201
-}</code></pre>
-<div id="execution-results-POSTapi-workHours" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-workHours"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-workHours"></code></pre>
-</div>
-<div id="execution-error-POSTapi-workHours" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-workHours"></code></pre>
-</div>
-<form id="form-POSTapi-workHours" data-method="POST" data-path="api/workHours" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-workHours', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-workHours" onclick="tryItOut('POSTapi-workHours');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-workHours" onclick="cancelTryOut('POSTapi-workHours');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-workHours" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-black">POST</small>
- <b><code>api/workHours</code></b>
-</p>
-<p>
-<label id="auth-POSTapi-workHours" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-workHours" data-component="header"></label>
-</p>
-<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-<p>
-<b><code>datetime_start</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
-<input type="text" name="datetime_start" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
-<br>
-Datetime start reservation.
-</p>
-<p>
-<b><code>datetime_end</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
-<input type="text" name="datetime_end" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
-<br>
-Datetime end password.
-</p>
-<p>
-<b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="employee_id" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
-<br>
-Employee id.
-</p>
-<p>
-<b><code>place_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="place_id" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
-<br>
-Place id.
-</p>
-
-</form>
-<h2>Display the specified resource.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/workHours/molestiae" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/workHours/molestiae"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (404):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "status": "Authorization Token not found"
-}</code></pre>
-<div id="execution-results-GETapi-workHours--workHour-" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-workHours--workHour-"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-workHours--workHour-"></code></pre>
-</div>
-<div id="execution-error-GETapi-workHours--workHour-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-workHours--workHour-"></code></pre>
-</div>
-<form id="form-GETapi-workHours--workHour-" data-method="GET" data-path="api/workHours/{workHour}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-workHours--workHour-', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-workHours--workHour-" onclick="tryItOut('GETapi-workHours--workHour-');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-workHours--workHour-" onclick="cancelTryOut('GETapi-workHours--workHour-');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-workHours--workHour-" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/workHours/{workHour}</code></b>
-</p>
-<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<p>
-<b><code>workHour</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="workHour" data-endpoint="GETapi-workHours--workHour-" data-component="url" required  hidden>
-<br>
-
-</p>
-</form>
-<h2>Show the form for editing the specified resource.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/workHours/qui/edit" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/workHours/qui/edit"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (404):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "status": "Authorization Token not found"
-}</code></pre>
-<div id="execution-results-GETapi-workHours--workHour--edit" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-workHours--workHour--edit"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-workHours--workHour--edit"></code></pre>
-</div>
-<div id="execution-error-GETapi-workHours--workHour--edit" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-workHours--workHour--edit"></code></pre>
-</div>
-<form id="form-GETapi-workHours--workHour--edit" data-method="GET" data-path="api/workHours/{workHour}/edit" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-workHours--workHour--edit', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-workHours--workHour--edit" onclick="tryItOut('GETapi-workHours--workHour--edit');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-workHours--workHour--edit" onclick="cancelTryOut('GETapi-workHours--workHour--edit');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-workHours--workHour--edit" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/workHours/{workHour}/edit</code></b>
-</p>
-<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<p>
-<b><code>workHour</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="workHour" data-endpoint="GETapi-workHours--workHour--edit" data-component="url" required  hidden>
-<br>
-
-</p>
-</form>
-<h2>Update the specified resource in storage.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X PUT \
-    "http://localhost/api/workHours/laborum" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/workHours/laborum"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-<div id="execution-results-PUTapi-workHours--workHour-" hidden>
-    <blockquote>Received response<span id="execution-response-status-PUTapi-workHours--workHour-"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-PUTapi-workHours--workHour-"></code></pre>
-</div>
-<div id="execution-error-PUTapi-workHours--workHour-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PUTapi-workHours--workHour-"></code></pre>
-</div>
-<form id="form-PUTapi-workHours--workHour-" data-method="PUT" data-path="api/workHours/{workHour}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-workHours--workHour-', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-PUTapi-workHours--workHour-" onclick="tryItOut('PUTapi-workHours--workHour-');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-PUTapi-workHours--workHour-" onclick="cancelTryOut('PUTapi-workHours--workHour-');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-PUTapi-workHours--workHour-" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-darkblue">PUT</small>
- <b><code>api/workHours/{workHour}</code></b>
-</p>
-<p>
-<small class="badge badge-purple">PATCH</small>
- <b><code>api/workHours/{workHour}</code></b>
-</p>
-<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<p>
-<b><code>workHour</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="workHour" data-endpoint="PUTapi-workHours--workHour-" data-component="url" required  hidden>
-<br>
-
-</p>
-</form>
-<h2>Remove the specified resource from storage.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/api/workHours/nisi" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/workHours/nisi"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-<div id="execution-results-DELETEapi-workHours--workHour-" hidden>
-    <blockquote>Received response<span id="execution-response-status-DELETEapi-workHours--workHour-"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-workHours--workHour-"></code></pre>
-</div>
-<div id="execution-error-DELETEapi-workHours--workHour-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-workHours--workHour-"></code></pre>
-</div>
-<form id="form-DELETEapi-workHours--workHour-" data-method="DELETE" data-path="api/workHours/{workHour}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-workHours--workHour-', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-DELETEapi-workHours--workHour-" onclick="tryItOut('DELETEapi-workHours--workHour-');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-DELETEapi-workHours--workHour-" onclick="cancelTryOut('DELETEapi-workHours--workHour-');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-DELETEapi-workHours--workHour-" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-red">DELETE</small>
- <b><code>api/workHours/{workHour}</code></b>
-</p>
-<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<p>
-<b><code>workHour</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="workHour" data-endpoint="DELETEapi-workHours--workHour-" data-component="url" required  hidden>
-<br>
-
-</p>
-</form>
-<h2>List available reservations</h2>
-<p><small class="badge badge-darkred">requires authentication</small></p>
-<p>List available reservations</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/get-available-reservations" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"employee_id":1,"service_id":1}'
-</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/get-available-reservations"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "employee_id": 1,
-    "service_id": 1
-}
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "data": "[]",
-    "message": "Data was returned",
-    "status": 200
-}</code></pre>
-<div id="execution-results-POSTapi-get-available-reservations" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-get-available-reservations"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-get-available-reservations"></code></pre>
-</div>
-<div id="execution-error-POSTapi-get-available-reservations" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-get-available-reservations"></code></pre>
-</div>
-<form id="form-POSTapi-get-available-reservations" data-method="POST" data-path="api/get-available-reservations" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-get-available-reservations', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-get-available-reservations" onclick="tryItOut('POSTapi-get-available-reservations');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-get-available-reservations" onclick="cancelTryOut('POSTapi-get-available-reservations');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-get-available-reservations" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-black">POST</small>
- <b><code>api/get-available-reservations</code></b>
-</p>
-<p>
-<label id="auth-POSTapi-get-available-reservations" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-get-available-reservations" data-component="header"></label>
-</p>
-<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-<p>
-<b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="employee_id" data-endpoint="POSTapi-get-available-reservations" data-component="body" required  hidden>
-<br>
-Employee id.
-</p>
-<p>
-<b><code>service_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<input type="number" name="service_id" data-endpoint="POSTapi-get-available-reservations" data-component="body" required  hidden>
-<br>
-Service id.
-</p>
-
 </form>
 <h2>List employees by service_id</h2>
 <p><small class="badge badge-darkred">requires authentication</small></p>
@@ -1105,7 +534,7 @@ Current reservation id.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/payments/handle-payment-response?payment_intent=aliquid&amp;payment_intent_client_secret=voluptatum&amp;redirect_status=dolor" \
+    -G "http://localhost/api/payments/handle-payment-response?payment_intent=est&amp;payment_intent_client_secret=sequi&amp;redirect_status=praesentium" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -1113,9 +542,9 @@ Current reservation id.
 );
 
 let params = {
-    "payment_intent": "aliquid",
-    "payment_intent_client_secret": "voluptatum",
-    "redirect_status": "dolor",
+    "payment_intent": "est",
+    "payment_intent_client_secret": "sequi",
+    "redirect_status": "praesentium",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -1637,6 +1066,187 @@ fetch(url, {
 <br>
 
 </p>
+</form><h1>Reservations</h1>
+<p>APIs for using Reservations</p>
+<h2>Store new reservation</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>Store new reservation</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/reservations" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"datetime_start":"\"2019-09-18T19:00:52Z\"","datetime_end":"\"2019-09-18T19:30:52Z\"","client_id":1,"employee_id":1,"place_id":1,"service_id":1}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/reservations"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "datetime_start": "\"2019-09-18T19:00:52Z\"",
+    "datetime_end": "\"2019-09-18T19:30:52Z\"",
+    "client_id": 1,
+    "employee_id": 1,
+    "place_id": 1,
+    "service_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "[]",
+    "message": "Records was stored",
+    "status": 201
+}</code></pre>
+<div id="execution-results-POSTapi-reservations" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-reservations"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-reservations"></code></pre>
+</div>
+<div id="execution-error-POSTapi-reservations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-reservations"></code></pre>
+</div>
+<form id="form-POSTapi-reservations" data-method="POST" data-path="api/reservations" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-reservations', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-reservations" onclick="tryItOut('POSTapi-reservations');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-reservations" onclick="cancelTryOut('POSTapi-reservations');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-reservations" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/reservations</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-reservations" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-reservations" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>datetime_start</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
+<input type="text" name="datetime_start" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
+<br>
+Datetime start reservation.
+</p>
+<p>
+<b><code>datetime_end</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
+<input type="text" name="datetime_end" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
+<br>
+Datetime end password.
+</p>
+<p>
+<b><code>client_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="client_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
+<br>
+Client id.
+</p>
+<p>
+<b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="employee_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
+<br>
+Employee id.
+</p>
+<p>
+<b><code>place_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="place_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
+<br>
+Place id.
+</p>
+<p>
+<b><code>service_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="service_id" data-endpoint="POSTapi-reservations" data-component="body" required  hidden>
+<br>
+Service id.
+</p>
+
+</form>
+<h2>List available reservations</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>List available reservations</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/get-available-reservations" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"employee_id":1,"service_id":1}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/get-available-reservations"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "employee_id": 1,
+    "service_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "[]",
+    "message": "Data was returned",
+    "status": 200
+}</code></pre>
+<div id="execution-results-POSTapi-get-available-reservations" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-get-available-reservations"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-get-available-reservations"></code></pre>
+</div>
+<div id="execution-error-POSTapi-get-available-reservations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-get-available-reservations"></code></pre>
+</div>
+<form id="form-POSTapi-get-available-reservations" data-method="POST" data-path="api/get-available-reservations" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-get-available-reservations', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-get-available-reservations" onclick="tryItOut('POSTapi-get-available-reservations');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-get-available-reservations" onclick="cancelTryOut('POSTapi-get-available-reservations');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-get-available-reservations" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/get-available-reservations</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-get-available-reservations" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-get-available-reservations" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="employee_id" data-endpoint="POSTapi-get-available-reservations" data-component="body" required  hidden>
+<br>
+Employee id.
+</p>
+<p>
+<b><code>service_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="service_id" data-endpoint="POSTapi-get-available-reservations" data-component="body" required  hidden>
+<br>
+Service id.
+</p>
+
 </form><h1>Services</h1>
 <p>APIs for services</p>
 <h2>List all Services</h2>
@@ -2029,6 +1639,160 @@ fetch(url, {
 <p>
 <label id="auth-GETapi-user-dashboard-info" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-user-dashboard-info" data-component="header"></label>
 </p>
+</form><h1>WorkHour</h1>
+<p>APIs for using WorkHour</p>
+<h2>Store new workHours</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>Store new workHours</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/workHours" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"datetime_start":"\"2019-09-18T19:00:52Z\"","datetime_end":"\"2019-09-18T19:30:52Z\"","employee_id":1,"place_id":1}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/workHours"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "datetime_start": "\"2019-09-18T19:00:52Z\"",
+    "datetime_end": "\"2019-09-18T19:30:52Z\"",
+    "employee_id": 1,
+    "place_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "[]",
+    "message": "Records was stored",
+    "status": 201
+}</code></pre>
+<div id="execution-results-POSTapi-workHours" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-workHours"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-workHours"></code></pre>
+</div>
+<div id="execution-error-POSTapi-workHours" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-workHours"></code></pre>
+</div>
+<form id="form-POSTapi-workHours" data-method="POST" data-path="api/workHours" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-workHours', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-workHours" onclick="tryItOut('POSTapi-workHours');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-workHours" onclick="cancelTryOut('POSTapi-workHours');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-workHours" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/workHours</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-workHours" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-workHours" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>datetime_start</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
+<input type="text" name="datetime_start" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
+<br>
+Datetime start reservation.
+</p>
+<p>
+<b><code>datetime_end</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
+<input type="text" name="datetime_end" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
+<br>
+Datetime end password.
+</p>
+<p>
+<b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="employee_id" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
+<br>
+Employee id.
+</p>
+<p>
+<b><code>place_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="place_id" data-endpoint="POSTapi-workHours" data-component="body" required  hidden>
+<br>
+Place id.
+</p>
+
+</form>
+<h2>api/list-workhours</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/list-workhours" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"date":"2021-05-11T18:26:21+0000","employee_id":15}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/list-workhours"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "date": "2021-05-11T18:26:21+0000",
+    "employee_id": 15
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-POSTapi-list-workhours" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-list-workhours"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-list-workhours"></code></pre>
+</div>
+<div id="execution-error-POSTapi-list-workhours" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-list-workhours"></code></pre>
+</div>
+<form id="form-POSTapi-list-workhours" data-method="POST" data-path="api/list-workhours" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-list-workhours', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-list-workhours" onclick="tryItOut('POSTapi-list-workhours');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-list-workhours" onclick="cancelTryOut('POSTapi-list-workhours');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-list-workhours" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/list-workhours</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>date</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="date" data-endpoint="POSTapi-list-workhours" data-component="body" required  hidden>
+<br>
+The value must be a valid date.
+</p>
+<p>
+<b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="employee_id" data-endpoint="POSTapi-list-workhours" data-component="body"  hidden>
+<br>
+
+</p>
+
 </form>
     </div>
     <div class="dark-box">

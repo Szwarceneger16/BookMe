@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Client extends Model
 {
@@ -19,9 +20,9 @@ class Client extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reservation(): BelongsTo
+    public function reservations(): HasMany
     {
-        return $this->belongsTo(Reservation::class);
+        return $this->HasMany(Reservation::class);
     }
 
 }

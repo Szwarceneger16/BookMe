@@ -43,11 +43,8 @@ Route::group([
     Route::get('dashboard-info',[UserController::class,'userDashboardInfo']);
 });
 
-Route::get('services', [JobsServicesController::class, 'index']);
-
-Route::group([
-    'middleware' => 'jwt',
-], function($router){
+Route::group([], function($router){
+    Route::get('services', [JobsServicesController::class, 'index']);
     Route::resource('reservations', ReservationController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('workHours', WorkHourController::class);
