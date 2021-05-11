@@ -20,7 +20,13 @@ class ListClientReservationsService
     {
         $user = auth()->user();
         $clientReservations = $this->reservationRepository->getClientReservations($user->client->id);
-        dd($clientReservations->toArray());
+        $clientReservationsData = $clientReservations->map( function ($reservation){
+            return [
+                'service' => $reservation->service_id,
+            ];
+        });
+        dd($clientReservationsData);
+
     }
 
 

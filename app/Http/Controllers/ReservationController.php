@@ -77,7 +77,7 @@ class ReservationController extends Controller
 
     public function listClientReservations(): JsonResponse
     {
-        return $this->listClientReservations()->execute();
+        return $this->listClientReservationsService->execute();
     }
 
 }
