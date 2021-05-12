@@ -61,6 +61,7 @@ class ReservationRepository
         return $this->reservation
             ->where('client_id', $clientId)
             ->where('datetime_start', ">=", $from)
+            ->where('reservation_status', ReservationStatuses::ACTIVE)
             ->get();
     }
 
