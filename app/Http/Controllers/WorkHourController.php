@@ -65,6 +65,5 @@ class WorkHourController extends Controller
     public function list(ListWorkHourRequest $request): JsonResponse
     {
         return $this->listWorkHourService->execute($request->validated());
-
     }
 }
