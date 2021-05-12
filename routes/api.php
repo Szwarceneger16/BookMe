@@ -52,6 +52,7 @@ Route::group([], function($router){
     Route::resource('workHours', WorkHourController::class);
     Route::post('list-workhours', [WorkHourController::class,'list']);
     Route::post('get-available-reservations', [ReservationController::class,'listAvailable']);
+    Route::post('get-all-reservations', [ReservationController::class,'listAll']);
     Route::post('get-employees-by-service',[EmployeeController::class,'listEmployeesByService']);
 });
 
