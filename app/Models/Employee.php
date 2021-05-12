@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employee extends Model
 {
@@ -21,14 +22,14 @@ class Employee extends Model
         return $this->belongsToMany(Service::class,'employees_services')->withPivot('service_id');
     }
 
-    public function workHour(): BelongsTo
+    public function workHours(): HasMany
     {
-        return $this->belongsTo(WorkHour::class);
+        return $this->HasMany(WorkHour::class);
     }
 
-    public function reservation(): BelongsTo
+    public function reservations(): HasMany
     {
-        return $this->belongsTo(Reservation::class);
+        return $this->HasMany(Reservation::class);
     }
 
 

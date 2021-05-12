@@ -4,21 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class WorkHour extends Model
 {
+    protected $fillable=['employee_id','place_id','datetime_start','datetime_end'];
     protected $dates = ['datetime_start','datetime_end'];
 
     use HasFactory;
 
-    public function employees(): HasMany
+    public function employee(): belongsTo
     {
-        return $this->hasMany(Employee::class);
+        return $this->belongsTo(Employee::class);
     }
 
-    public function places(): HasMany
+    public function place(): belongsTo
     {
-        return $this->hasMany(Place::class);
+        return $this->belongsTo(Place::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Reservation extends Model
@@ -22,24 +23,24 @@ class Reservation extends Model
     protected $dates = ['datetime_start','datetime_end'];
 
 
-    public function employees(): HasMany
+    public function employee(): belongsTo
     {
-        return $this->hasMany(Employee::class);
+        return $this->belongsTo(Employee::class);
     }
 
-    public function places(): HasMany
+    public function place(): belongsTo
     {
-        return $this->hasMany(Place::class);
+        return $this->belongsTo(Place::class);
     }
 
-    public function services(): HasMany
+    public function service(): belongsTo
     {
-        return $this->hasMany(Service::class);
+        return $this->belongsTo(Service::class);
     }
 
-    public function clients(): HasMany
+    public function client(): belongsTo
     {
-        return $this->hasMany(Client::class);
+        return $this->belongsTo(Client::class);
     }
 
     public function payments(): HasMany

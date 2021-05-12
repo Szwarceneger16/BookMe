@@ -4,7 +4,7 @@ namespace App\BookMe\Reservation\Services;
 
 use App\BookMe\JobsServices\Repositories\ServiceRepository;
 use App\BookMe\Reservation\Repositories\ReservationRepository;
-use App\BookMe\Reservation\Repositories\WorkHoursRepository;
+use App\BookMe\WorkHours\Repositories\WorkHoursRepository;
 use App\BookMe\Utility\Response;
 use App\DateFormatTrait;
 use Carbon\Carbon;

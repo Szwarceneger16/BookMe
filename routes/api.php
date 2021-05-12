@@ -6,6 +6,7 @@ use App\Http\Controllers\JobsServicesController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkHourController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,8 @@ Route::group([], function($router){
     Route::get('services', [JobsServicesController::class, 'index']);
     Route::resource('reservations', ReservationController::class);
     Route::resource('employees', EmployeeController::class);
+    Route::resource('workHours', WorkHourController::class);
+    Route::post('list-workhours', [WorkHourController::class,'list']);
     Route::post('get-available-reservations', [ReservationController::class,'listAvailable']);
     Route::post('get-employees-by-service',[EmployeeController::class,'listEmployeesByService']);
 });

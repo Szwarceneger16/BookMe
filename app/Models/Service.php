@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Service extends Model
 {
@@ -16,9 +17,9 @@ class Service extends Model
         return $this->belongsToMany(Employee::class, 'employees_services')->withPivot('employee_id');
     }
 
-    public function reservation(): BelongsTo
+    public function reservations(): HasMany
     {
-        return $this->belongsTo(Reservation::class);
+        return $this->HasMany(Reservation::class);
     }
 
 }

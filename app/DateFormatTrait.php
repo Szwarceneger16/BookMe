@@ -19,4 +19,5 @@ trait DateFormatTrait
     {
         return $date->format('Y-m-d');
     }
+
 }
