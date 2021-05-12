@@ -7,6 +7,7 @@ use App\BookMe\Reservation\Request\ListAvailableReservationRequest;
 use App\BookMe\Reservation\Request\StoreReservationRequest;
 use App\BookMe\Reservation\Services\CancelReservationService;
 use App\BookMe\Reservation\Services\ListAvailableReservationService;
+use App\BookMe\Reservation\Services\ListClientEveryReservationsService;
 use App\BookMe\Reservation\Services\ListClientReservationsService;
 use App\BookMe\Reservation\Services\StoreReservationService;
 use App\BookMe\User\Enums\AccountType;
@@ -27,16 +28,19 @@ class ReservationController extends Controller
     private ListAvailableReservationService $listAvailableReservationService;
     private ListClientReservationsService $listClientReservationsService;
     private CancelReservationService $cancelReservationService;
+    private ListClientEveryReservationsService $listClientEveryReservationsService;
 
     public function __construct(StoreReservationService $storeReservationService,
                                 ListAvailableReservationService $listAvailableReservationService,
                                 ListClientReservationsService $listClientReservationsService,
-                                CancelReservationService $cancelReservationService)
+                                CancelReservationService $cancelReservationService,
+                                ListClientEveryReservationsService $listClientEveryReservationsService)
     {
         $this->storeReservationService = $storeReservationService;
         $this->listAvailableReservationService = $listAvailableReservationService;
         $this->listClientReservationsService = $listClientReservationsService;
         $this->cancelReservationService = $cancelReservationService;
+        $this->listClientEveryReservationsService = $listClientEveryReservationsService;
     }
 
     /**
@@ -88,6 +92,11 @@ class ReservationController extends Controller
     public function listClientReservations(): JsonResponse
     {
         return $this->listClientReservationsService->execute();
+    }
+
+    public function listClientEveryReservations(): JsonResponse
+    {
+        return $this->listClientEveryReservationsService->execute();
     }
 
     public function cancelReservation(CancelReservationRequest $request): JsonResponse
