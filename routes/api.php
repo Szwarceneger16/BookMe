@@ -41,7 +41,7 @@ Route::group([
     Route::post('change-password',[UserController::class,'changePassword']);
     Route::post('update-data',[UserController::class,'update']);
     Route::get('dashboard-info',[UserController::class,'userDashboardInfo']);
-    Route::get('client-active-reservations', [ReservationController::class, 'listClientReservations']);
+    Route::get('client-active-reservations', [ReservationController::class, 'listClientActiveReservations']);
     Route::get('client-every-reservations', [ReservationController::class, 'listClientEveryReservations']);
     Route::post('cancel-reservation', [ReservationController::class, 'cancelReservation']);
 });

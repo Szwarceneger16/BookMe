@@ -76,4 +76,9 @@ class ReservationRepository
     {
         return $this->find($reservation_id)->client->id === $client_id;
     }
+
+    public function updateReservationStatus(Object $reservation, $status)
+    {
+        return $reservation->update(['reservation_status' => $status]);
+    }
 }

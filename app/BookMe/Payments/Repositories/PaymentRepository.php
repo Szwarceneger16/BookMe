@@ -25,4 +25,11 @@ class PaymentRepository
             ->where('payment_intent_client_secret', $payment_intent_client_secret)
             ->first();
     }
+
+    public function updatePaymentStatus(Object $payment, $status)
+    {
+        return $payment->update([
+            'payment_status' => $status
+        ]);
+    }
 }

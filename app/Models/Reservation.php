@@ -17,7 +17,8 @@ class Reservation extends Model
         'client_id',
         'employee_id',
         'place_id',
-        'service_id'
+        'service_id',
+        'reservation_status',
     ];
 
     protected $dates = ['datetime_start','datetime_end'];

@@ -13,8 +13,8 @@ class Payment extends Model
     protected $fillable=[
         'payment_intent',
         'payment_intent_client_secret',
-        'is_success',
         'reservation_id',
+        'payment_status',
     ];
 
     public function reservation(): BelongsTo
