@@ -19,6 +19,9 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../../src/actions/message";
+import LoadingButton from "../../elements/buttons/LoadingButton";
 
 interface Data {
   id: number;
@@ -149,11 +152,10 @@ interface EnhancedTableProps {
 
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { classes, order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property: keyof Data) => (
-    event: React.MouseEvent<unknown>
-  ) => {
-    onRequestSort(event, property);
-  };
+  const createSortHandler =
+    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+      onRequestSort(event, property);
+    };
 
   return (
     <TableHead>
@@ -254,6 +256,31 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+function Row({ row, index, handleButtonClick }) {
+  const [loading, setLoading] = React.useState(false);
+  const labelId = `enhanced-table-checkbox-${index}`;
+  return (
+    <TableRow hover>
+      <TableCell component="th" id={labelId} scope="row">
+        {row.service}
+      </TableCell>
+      <TableCell align="right">{row.employee}</TableCell>
+      <TableCell align="right">{row.date}</TableCell>
+      <TableCell align="right">{row.time}</TableCell>
+      <TableCell align="right">
+        <LoadingButton
+          loading={loading}
+          variant="contained"
+          color="secondary"
+          onClick={() => handleButtonClick(row.id, setLoading)}
+        >
+          Odwołaj
+        </LoadingButton>
+      </TableCell>
+    </TableRow>
+  );
+}
+
 export default function CancelReservation() {
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>("asc");
@@ -262,6 +289,7 @@ export default function CancelReservation() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rows, setRows] = React.useState<Data[]>([]);
+  const dispatch = useDispatch();
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -274,6 +302,33 @@ export default function CancelReservation() {
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
+  };
+
+  const handleReservationCancel = async (reservation_id, setLoading) => {
+    const isSure = confirm("Czy na pewno chcesz anulować tę wizytę?");
+    setLoading(true);
+    if (isSure) {
+      axios
+        .post(process.env.BACKEND_HOST + "/user/cancel-reservation", {
+          reservation_id,
+        })
+        .then((res) => {
+          if (res.data.data) {
+            dispatch(setMessage("Pomyślnie odwołano wizytę", "success"));
+            setRows(rows.filter((curRow) => curRow.id !== reservation_id));
+          }
+        })
+        .catch((err) => {
+          if (err.response.data.data.type === "Day before") {
+            dispatch(
+              setMessage("Nie możesz anulować wizyty dzień przed", "error")
+            );
+          } else {
+            dispatch(setMessage("Wystąpił błąd", "error"));
+          }
+        });
+    }
+    setLoading(false);
   };
 
   const handleChangeRowsPerPage = (
@@ -316,25 +371,14 @@ export default function CancelReservation() {
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
-                  return (
-                    <TableRow hover key={row.service}>
-                      <TableCell component="th" id={labelId} scope="row">
-                        {row.service}
-                      </TableCell>
-                      <TableCell align="right">{row.employee}</TableCell>
-                      <TableCell align="right">{row.date}</TableCell>
-                      <TableCell align="right">{row.time}</TableCell>
-                      <TableCell align="right">
-                        <Button variant="contained" color="secondary">
-                          Odwołaj
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                .map((row, index) => (
+                  <Row
+                    row={row}
+                    index={index}
+                    key={row.id}
+                    handleButtonClick={handleReservationCancel}
+                  />
+                ))}
               {emptyRows > 0 && (
                 <TableRow>
                   <TableCell colSpan={6} />
