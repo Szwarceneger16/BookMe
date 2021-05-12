@@ -65,6 +65,13 @@ class ReservationRepository
             ->get();
     }
 
+    public function getClientEveryReservations($clientId)
+    {
+        return $this->reservation
+            ->where('client_id', $clientId)
+            ->get();
+    }
+
     public function isClientOwnerOfReservation($reservation_id, $client_id)
     {
         return $this->find($reservation_id)->client->id === $client_id;
