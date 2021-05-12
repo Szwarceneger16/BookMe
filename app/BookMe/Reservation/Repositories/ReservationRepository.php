@@ -45,7 +45,7 @@ class ReservationRepository
     public function getAllEmployeeForDay($employeeId,$from,$to)
     {
         return $this->reservation
-            ->where('employee_id',$employeeId)
+            ->where([['employee_id',$employeeId],['reservation_status',ReservationStatuses::ACTIVE]])
             ->whereBetween('datetime_start', [$from, $to])
             ->orWhereBetween('datetime_end', [$from, $to])
             ->first();
