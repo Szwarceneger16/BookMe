@@ -57,4 +57,9 @@ class ReservationRepository
             ->where('datetime_start', ">=", $from)
             ->get();
     }
+
+    public function isClientOwnerOfReservation($reservation_id, $client_id)
+    {
+        return $this->find($reservation_id)->client->id === $client_id;
+    }
 }

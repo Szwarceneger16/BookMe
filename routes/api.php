@@ -42,6 +42,7 @@ Route::group([
     Route::post('update-data',[UserController::class,'update']);
     Route::get('dashboard-info',[UserController::class,'userDashboardInfo']);
     Route::get('client-reservations', [ReservationController::class, 'listClientReservations']);
+    Route::post('cancel-reservation', [ReservationController::class, 'cancelReservation']);
 });
 
 Route::group([], function($router){

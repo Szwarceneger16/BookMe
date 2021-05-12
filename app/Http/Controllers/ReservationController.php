@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\BookMe\Reservation\Request\CancelReservationRequest;
 use App\BookMe\Reservation\Request\ListAvailableReservationRequest;
 use App\BookMe\Reservation\Request\StoreReservationRequest;
+use App\BookMe\Reservation\Services\CancelReservationService;
 use App\BookMe\Reservation\Services\ListAvailableReservationService;
 use App\BookMe\Reservation\Services\ListClientReservationsService;
 use App\BookMe\Reservation\Services\StoreReservationService;
@@ -24,14 +26,17 @@ class ReservationController extends Controller
     private StoreReservationService $storeReservationService;
     private ListAvailableReservationService $listAvailableReservationService;
     private ListClientReservationsService $listClientReservationsService;
+    private CancelReservationService $cancelReservationService;
 
     public function __construct(StoreReservationService $storeReservationService,
                                 ListAvailableReservationService $listAvailableReservationService,
-                                ListClientReservationsService $listClientReservationsService)
+                                ListClientReservationsService $listClientReservationsService,
+                                CancelReservationService $cancelReservationService)
     {
         $this->storeReservationService = $storeReservationService;
         $this->listAvailableReservationService = $listAvailableReservationService;
         $this->listClientReservationsService = $listClientReservationsService;
+        $this->cancelReservationService = $cancelReservationService;
     }
 
     /**
@@ -84,5 +89,12 @@ class ReservationController extends Controller
     {
         return $this->listClientReservationsService->execute();
     }
+
+    public function cancelReservation(CancelReservationRequest $request): JsonResponse
+    {
+        return $this->cancelReservationService->execute($request->validated());
+    }
+
+
 
 }
