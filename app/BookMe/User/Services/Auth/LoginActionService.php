@@ -31,10 +31,10 @@ class LoginActionService
 
             if ($user->account_type == AccountType::CLIENT) {
                 $user = $this->userRepository->getUserWithClient($user);
+
             } elseif ($user->account_type == (AccountType::ADMIN || AccountType::EMPLOYEE)) {
                 $user=$user->toArray();
             }
-
             return Response::build(array_merge($newToken, $user), 201, 'msg/success.login');
         } else {
             Log::error("There was problem with AuthService.loginAction(): ");
