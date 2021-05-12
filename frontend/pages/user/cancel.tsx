@@ -1,17 +1,19 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import CustomerLayout from "../../layouts/CustomerLayout";
+import CancelReservation from "../../components/user/cancel/CancelReservation";
 
-function All(props) {
+function Cancel(props) {
   return (
     <>
       <Typography variant="h2" component="h1">
-        Odwołaj wizytę
+        Odwołaj wizyty
       </Typography>
+      <CancelReservation></CancelReservation>
     </>
   );
 }
 
-All.Layout = CustomerLayout;
+Cancel.Layout = CustomerLayout;
 
-export default All;
+export default Cancel;
