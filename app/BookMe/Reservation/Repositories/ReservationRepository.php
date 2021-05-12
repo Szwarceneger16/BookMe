@@ -24,6 +24,11 @@ class ReservationRepository
         return $this->reservation->create($reservation->toArray());
     }
 
+    public function getByDate($date)
+    {
+        return $this->reservation->whereDate('datetime_start',$date)->get();
+    }
+
     public function getAll()
     {
         return $this->reservation->all();
@@ -32,7 +37,7 @@ class ReservationRepository
     public function getAllEmployee($employeeId)
     {
         return $this->reservation
-            ->where('employee_id',$employeeId)
+            ->where([['employee_id',$employeeId],['reservation_status',ReservationStatuses::ACTIVE]])
             ->orderBy('datetime_start', 'ASC')
             ->get();
     }

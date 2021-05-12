@@ -51,9 +51,19 @@ class WorkHourController extends Controller
         return $this->storeWorkHourService->execute($request->validated());
     }
 
+    /**
+     * List all Workhours (daily)
+     *
+     * List all Workhours (daily)
+     * @bodyParam date date required Date. Example: "2019-09-18"
+     * @bodyParam employee_id integer Employee_id. Example: 1
+     * @authenticated
+     *
+     * @param ListWorkHourRequest $request
+     * @return JsonResponse
+     */
     public function list(ListWorkHourRequest $request): JsonResponse
     {
         return $this->listWorkHourService->execute($request->validated());
-
     }
 }

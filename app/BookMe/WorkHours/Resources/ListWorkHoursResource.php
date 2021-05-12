@@ -15,15 +15,14 @@ class ListWorkHoursResource extends JsonResource
      */
     public function toArray($request)
     {
-
         return [
             'work_hour_id' => $this->id,
-//            'first_name' => $this->employee->user->first_name,
-//            'last_name' => $this->employee->user->last_name,
+            'employee_id' => $this->employee->id,
+            'first_name' => $this->employee->user->first_name,
+            'last_name' => $this->employee->user->last_name,
             'time_start' => DateFormatTrait::format_His($this->datetime_start),
             'time_end' => DateFormatTrait::format_His($this->datetime_end),
             'place' => $this->place->name,
         ];
     }
-
 }

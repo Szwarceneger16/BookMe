@@ -24,23 +24,19 @@ class ListWorkHourService
 
     public function execute(array $request): JsonResponse
     {
-//        try{
-        //TODO ListWorkHourService
-
+        try{
         $workHours=$this->workHoursRepository->getByDate($request['date']);
         $result['date']=$request['date'];
         if(isset($request['employee_id']))
         {
             $employeeWorkHour=$workHours->where('employee_id',$request['employee_id']);
-            //$result['work_hours']=ListWorkHoursResource::collection($employeeWorkHour);
-            $test=ListWorkHoursResource::collection($employeeWorkHour);
-            return Response::build($test, 200, "msg/success.list");
+            $result['work_hours']=ListWorkHoursResource::collection($employeeWorkHour);
+            return Response::build($result, 200, "msg/success.list");
         }
-
         $result['work_hours']=ListWorkHoursResource::collection($workHours);
         return Response::build($result, 200, "msg/success.list");
-//        }catch(Exception $exception){
-//            return Response::build($exception, 400, "msg/error.list");
-//        }
+        }catch(Exception $exception){
+            return Response::build($exception, 400, "msg/error.list");
+        }
     }
 }

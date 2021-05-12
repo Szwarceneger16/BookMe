@@ -44,7 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: May 11 2021</li>
+            <li>Last updated: May 12 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -534,7 +534,7 @@ Current reservation id.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/payments/handle-payment-response?payment_intent=est&amp;payment_intent_client_secret=sequi&amp;redirect_status=praesentium" \
+    -G "http://localhost/api/payments/handle-payment-response?payment_intent=sunt&amp;payment_intent_client_secret=quia&amp;redirect_status=vitae" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -542,9 +542,9 @@ Current reservation id.
 );
 
 let params = {
-    "payment_intent": "est",
-    "payment_intent_client_secret": "sequi",
-    "redirect_status": "praesentium",
+    "payment_intent": "sunt",
+    "payment_intent_client_secret": "quia",
+    "redirect_status": "vitae",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -559,475 +559,21 @@ fetch(url, {
     headers,
 }).then(response =&gt; response.json());</code></pre>
 <blockquote>
-<p>Example response (500):</p>
+<p>Example response (302):</p>
 </blockquote>
-<pre><code class="language-json">{
-    "message": "Class 'Stripe\\Stripe' not found",
-    "exception": "Error",
-    "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\app\\BookMe\\Payments\\Services\\CreatePaymentIntentService.php",
-    "line": 14,
-    "trace": [
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\composer\\ClassLoader.php",
-            "line": 478,
-            "function": "include"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\composer\\ClassLoader.php",
-            "line": 346,
-            "function": "Composer\\Autoload\\includeFile"
-        },
-        {
-            "function": "loadClass",
-            "class": "Composer\\Autoload\\ClassLoader",
-            "type": "-&gt;"
-        },
-        {
-            "function": "spl_autoload_call"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 833,
-            "function": "__construct",
-            "class": "ReflectionClass",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 714,
-            "function": "build",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php",
-            "line": 841,
-            "function": "resolve",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 652,
-            "function": "resolve",
-            "class": "Illuminate\\Foundation\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php",
-            "line": 826,
-            "function": "make",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 987,
-            "function": "make",
-            "class": "Illuminate\\Foundation\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 907,
-            "function": "resolveClass",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 868,
-            "function": "resolveDependencies",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 714,
-            "function": "build",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php",
-            "line": 841,
-            "function": "resolve",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 652,
-            "function": "resolve",
-            "class": "Illuminate\\Foundation\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php",
-            "line": 826,
-            "function": "make",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
-            "line": 268,
-            "function": "make",
-            "class": "Illuminate\\Foundation\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
-            "line": 1019,
-            "function": "getController",
-            "class": "Illuminate\\Routing\\Route",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
-            "line": 980,
-            "function": "controllerMiddleware",
-            "class": "Illuminate\\Routing\\Route",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 712,
-            "function": "gatherMiddleware",
-            "class": "Illuminate\\Routing\\Route",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 688,
-            "function": "gatherRouteMiddleware",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 672,
-            "function": "runRouteWithinStack",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 636,
-            "function": "runRoute",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 625,
-            "function": "dispatchToRoute",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
-            "line": 166,
-            "function": "dispatch",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 128,
-            "function": "Illuminate\\Foundation\\Http\\{closure}",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
-            "line": 21,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php",
-            "line": 31,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 167,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
-            "line": 21,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php",
-            "line": 40,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 167,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
-            "line": 27,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 167,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php",
-            "line": 86,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 167,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\fruitcake\\laravel-cors\\src\\HandleCors.php",
-            "line": 57,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 167,
-            "function": "handle",
-            "class": "Fruitcake\\Cors\\HandleCors",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\fideloper\\proxy\\src\\TrustProxies.php",
-            "line": 57,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 167,
-            "function": "handle",
-            "class": "Fideloper\\Proxy\\TrustProxies",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 103,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
-            "line": 141,
-            "function": "then",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
-            "line": 110,
-            "function": "sendRequestThroughRouter",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-            "line": 324,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-            "line": 305,
-            "function": "callLaravelOrLumenRoute",
-            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-            "line": 76,
-            "function": "makeApiCall",
-            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-            "line": 51,
-            "function": "makeResponseCall",
-            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
-            "line": 41,
-            "function": "makeResponseCallIfEnabledAndNoSuccessResponses",
-            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Generator.php",
-            "line": 236,
-            "function": "__invoke",
-            "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Generator.php",
-            "line": 172,
-            "function": "iterateThroughStrategies",
-            "class": "Knuckles\\Scribe\\Extracting\\Generator",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Generator.php",
-            "line": 127,
-            "function": "fetchResponses",
-            "class": "Knuckles\\Scribe\\Extracting\\Generator",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php",
-            "line": 119,
-            "function": "processRoute",
-            "class": "Knuckles\\Scribe\\Extracting\\Generator",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php",
-            "line": 73,
-            "function": "processRoutes",
-            "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
-            "line": 36,
-            "function": "handle",
-            "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php",
-            "line": 40,
-            "function": "Illuminate\\Container\\{closure}",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
-            "line": 93,
-            "function": "unwrapIfClosure",
-            "class": "Illuminate\\Container\\Util",
-            "type": "::"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
-            "line": 37,
-            "function": "callBoundMethod",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 611,
-            "function": "call",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
-            "line": 136,
-            "function": "call",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\symfony\\console\\Command\\Command.php",
-            "line": 256,
-            "function": "execute",
-            "class": "Illuminate\\Console\\Command",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
-            "line": 121,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Command\\Command",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\symfony\\console\\Application.php",
-            "line": 971,
-            "function": "run",
-            "class": "Illuminate\\Console\\Command",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\symfony\\console\\Application.php",
-            "line": 290,
-            "function": "doRunCommand",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\symfony\\console\\Application.php",
-            "line": 166,
-            "function": "doRun",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php",
-            "line": 92,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
-            "line": 129,
-            "function": "run",
-            "class": "Illuminate\\Console\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\xampp\\htdocs\\Uczelnia - 6 semestr\\BookMe\\artisan",
-            "line": 37,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Console\\Kernel",
-            "type": "-&gt;"
-        }
-    ]
-}</code></pre>
+<pre><code class="language-json">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8" /&gt;
+        &lt;meta http-equiv="refresh" content="0;url='http://localhost/register/failed'" /&gt;
+
+        &lt;title&gt;Redirecting to http://localhost/register/failed&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        Redirecting to &lt;a href="http://localhost/register/failed"&gt;http://localhost/register/failed&lt;/a&gt;.
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
 <div id="execution-results-GETapi-payments-handle-payment-response" hidden>
     <blockquote>Received response<span id="execution-response-status-GETapi-payments-handle-payment-response"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-GETapi-payments-handle-payment-response"></code></pre>
@@ -1068,6 +614,109 @@ fetch(url, {
 </p>
 </form><h1>Reservations</h1>
 <p>APIs for using Reservations</p>
+<h2>api/user/client-reservations</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/user/client-reservations" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/user/client-reservations"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "Authorization Token not found"
+}</code></pre>
+<div id="execution-results-GETapi-user-client-reservations" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-user-client-reservations"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-user-client-reservations"></code></pre>
+</div>
+<div id="execution-error-GETapi-user-client-reservations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-user-client-reservations"></code></pre>
+</div>
+<form id="form-GETapi-user-client-reservations" data-method="GET" data-path="api/user/client-reservations" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-user-client-reservations', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-user-client-reservations" onclick="tryItOut('GETapi-user-client-reservations');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-user-client-reservations" onclick="cancelTryOut('GETapi-user-client-reservations');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-user-client-reservations" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/user/client-reservations</code></b>
+</p>
+</form>
+<h2>api/user/cancel-reservation</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/user/cancel-reservation" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"reservation_id":16}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/user/cancel-reservation"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "reservation_id": 16
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-POSTapi-user-cancel-reservation" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-user-cancel-reservation"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-user-cancel-reservation"></code></pre>
+</div>
+<div id="execution-error-POSTapi-user-cancel-reservation" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-user-cancel-reservation"></code></pre>
+</div>
+<form id="form-POSTapi-user-cancel-reservation" data-method="POST" data-path="api/user/cancel-reservation" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-cancel-reservation', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-user-cancel-reservation" onclick="tryItOut('POSTapi-user-cancel-reservation');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-user-cancel-reservation" onclick="cancelTryOut('POSTapi-user-cancel-reservation');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-user-cancel-reservation" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/user/cancel-reservation</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>reservation_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="reservation_id" data-endpoint="POSTapi-user-cancel-reservation" data-component="body" required  hidden>
+<br>
+
+</p>
+
+</form>
 <h2>Store new reservation</h2>
 <p><small class="badge badge-darkred">requires authentication</small></p>
 <p>Store new reservation</p>
@@ -1078,7 +727,7 @@ fetch(url, {
     "http://localhost/api/reservations" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"datetime_start":"\"2019-09-18T19:00:52Z\"","datetime_end":"\"2019-09-18T19:30:52Z\"","client_id":1,"employee_id":1,"place_id":1,"service_id":1}'
+    -d '{"datetime_start":"\"2019-09-18T19:00:00Z\"","datetime_end":"\"2019-09-18T19:30:00Z\"","client_id":1,"employee_id":1,"place_id":1,"service_id":1}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/reservations"
@@ -1090,8 +739,8 @@ let headers = {
 };
 
 let body = {
-    "datetime_start": "\"2019-09-18T19:00:52Z\"",
-    "datetime_end": "\"2019-09-18T19:30:52Z\"",
+    "datetime_start": "\"2019-09-18T19:00:00Z\"",
+    "datetime_end": "\"2019-09-18T19:30:00Z\"",
     "client_id": 1,
     "employee_id": 1,
     "place_id": 1,
@@ -1245,6 +894,74 @@ Employee id.
 <input type="number" name="service_id" data-endpoint="POSTapi-get-available-reservations" data-component="body" required  hidden>
 <br>
 Service id.
+</p>
+
+</form>
+<h2>List all reservation (daily)</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>List all reservation (daily)</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/get-all-reservations" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"date":"\"2019-09-18\"","employee_id":1}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/get-all-reservations"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "date": "\"2019-09-18\"",
+    "employee_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<div id="execution-results-POSTapi-get-all-reservations" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-get-all-reservations"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-get-all-reservations"></code></pre>
+</div>
+<div id="execution-error-POSTapi-get-all-reservations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-get-all-reservations"></code></pre>
+</div>
+<form id="form-POSTapi-get-all-reservations" data-method="POST" data-path="api/get-all-reservations" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-get-all-reservations', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-get-all-reservations" onclick="tryItOut('POSTapi-get-all-reservations');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-get-all-reservations" onclick="cancelTryOut('POSTapi-get-all-reservations');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-get-all-reservations" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/get-all-reservations</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-get-all-reservations" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-get-all-reservations" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>date</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
+<input type="text" name="date" data-endpoint="POSTapi-get-all-reservations" data-component="body" required  hidden>
+<br>
+Date.
+</p>
+<p>
+<b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="employee_id" data-endpoint="POSTapi-get-all-reservations" data-component="body"  hidden>
+<br>
+Employee_id.
 </p>
 
 </form><h1>Services</h1>
@@ -1731,7 +1448,9 @@ Place id.
 </p>
 
 </form>
-<h2>api/list-workhours</h2>
+<h2>List all Workhours (daily)</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>List all Workhours (daily)</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1739,7 +1458,7 @@ Place id.
     "http://localhost/api/list-workhours" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"date":"2021-05-11T18:26:21+0000","employee_id":15}'
+    -d '{"date":"\"2019-09-18\"","employee_id":1}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/list-workhours"
@@ -1751,8 +1470,8 @@ let headers = {
 };
 
 let body = {
-    "date": "2021-05-11T18:26:21+0000",
-    "employee_id": 15
+    "date": "\"2019-09-18\"",
+    "employee_id": 1
 }
 
 fetch(url, {
@@ -1768,7 +1487,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-list-workhours"></code></pre>
 </div>
-<form id="form-POSTapi-list-workhours" data-method="POST" data-path="api/list-workhours" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-list-workhours', this);">
+<form id="form-POSTapi-list-workhours" data-method="POST" data-path="api/list-workhours" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-list-workhours', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-list-workhours" onclick="tryItOut('POSTapi-list-workhours');">Try it out ⚡</button>
@@ -1779,18 +1498,21 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/list-workhours</code></b>
 </p>
+<p>
+<label id="auth-POSTapi-list-workhours" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-list-workhours" data-component="header"></label>
+</p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
-<b><code>date</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<b><code>date</code></b>&nbsp;&nbsp;<small>date</small>  &nbsp;
 <input type="text" name="date" data-endpoint="POSTapi-list-workhours" data-component="body" required  hidden>
 <br>
-The value must be a valid date.
+Date.
 </p>
 <p>
 <b><code>employee_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
 <input type="number" name="employee_id" data-endpoint="POSTapi-list-workhours" data-component="body"  hidden>
 <br>
-
+Employee_id.
 </p>
 
 </form>
