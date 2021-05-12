@@ -49,10 +49,10 @@ export function authService(): object {
       });
   };
 
-  const logout = async () => {
+  const logout = () => {
     router.push("/");
-    await localStorage.removeItem("user");
-    await dispatch(logoutAction());
+    localStorage.removeItem("user");
+    dispatch(logoutAction());
   };
   const checkPassword = (password) => {
     return axios.post(

@@ -1,55 +1,52 @@
-import React from 'react';
-import clsx from 'clsx';
-import { 
-  useMediaQuery,
-  useTheme 
-} from "@material-ui/core";
-import ArchiveIcon from '@material-ui/icons/Archive';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import * as DateFns from 'date-fns';
-import { useToolbarStyles, useStyles } from './style/VisitHistoryStyle'
+import React from "react";
+import clsx from "clsx";
+import {
+  createStyles,
+  lighten,
+  makeStyles,
+  Theme,
+} from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../src/actions/message";
+import LoadingButton from "../elements/buttons/LoadingButton";
+import CheckIcon from "@material-ui/icons/Check";
+import CloseIcon from "@material-ui/icons/Close";
+import { blue, green, grey, orange, red } from "@material-ui/core/colors";
+import { Chip } from "@material-ui/core";
+
+enum PaymentStatuses {
+  CANCELED = "CANCELED",
+  REFFUNDED = "REFFUNDED",
+  SUCCEEDED = "SUCCEEDED",
+  INCOMPLETE = "INCOMPLETE",
+}
+
+enum ReservationStatuses {
+  UNACTIVE = "UNACTIVE",
+  ACTIVE = "ACTIVE",
+}
 
 interface Data {
-    title: string;
-    date: Date;
-    specialist: string;
-    cost: number;
-    description: string;
+  id: number;
+  service: string;
+  employee: string;
+  date: string;
+  time: number;
+  active: ReservationStatuses;
+  payment_status: PaymentStatuses;
 }
-
-function createData(
-    title: string,
-    date: Date,
-    specialist: string,
-    cost: number,
-    description: string,
-): Data {
-  return { title, date, specialist, cost, description };
-}
-
-const rows = [
-    createData('Wizyta nr 1', new Date(), "dr Kowlaski", 40, "opis nr 1"),
-    createData('Wizyta nr 2',  DateFns.addBusinessDays(new Date(),1), "dr Kowlaski", 80, "opis nr 2"),
-    createData('Wizyta nr 3',  DateFns.addBusinessDays(new Date(),2), "dr Kowlaski", 120, "opis nr 3"),
-    createData('Wizyta nr 4',  DateFns.addBusinessDays(new Date(),3), "dr Kowlaski", 160, "opis nr 4"),
-
-];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -61,13 +58,16 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-type Order = 'asc' | 'desc';
+type Order = "asc" | "desc";
 
 function getComparator<Key extends keyof any>(
   order: Order,
-  orderBy: Key,
-): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
-  return order === 'desc'
+  orderBy: Key
+): (
+  a: { [key in Key]: number | string },
+  b: { [key in Key]: number | string }
+) => number {
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -84,23 +84,64 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
 
 interface HeadCell {
   disablePadding: boolean;
-  id: keyof Data;
+  id: keyof Data | string;
   label: string;
   numeric: boolean;
+  needSort: boolean;
 }
 
 const headCells: HeadCell[] = [
-  { id: 'title', numeric: false, disablePadding: true, label: 'Tytuł' },
-  { id: 'date', numeric: false, disablePadding: false, label: 'Data' },
-  { id: 'specialist', numeric: false, disablePadding: false, label: 'Specjalista' },
-  { id: 'cost', numeric: true, disablePadding: false, label: 'Koszt' },
-  { id: 'description', numeric: false, disablePadding: false, label: 'Opis' },
+  {
+    id: "service",
+    numeric: false,
+    disablePadding: false,
+    label: "Usługa",
+    needSort: true,
+  },
+  {
+    id: "employee",
+    numeric: true,
+    disablePadding: false,
+    label: "Specjalista",
+    needSort: true,
+  },
+  {
+    id: "date",
+    numeric: true,
+    disablePadding: false,
+    label: "Data",
+    needSort: true,
+  },
+  {
+    id: "time",
+    numeric: true,
+    disablePadding: false,
+    label: "Czas trwania",
+    needSort: true,
+  },
+  {
+    id: "active",
+    numeric: true,
+    disablePadding: false,
+    label: "Aktywna",
+    needSort: true,
+  },
+  {
+    id: "payment_status",
+    numeric: true,
+    disablePadding: false,
+    label: "Status płatności",
+    needSort: false,
+  },
 ];
 
 interface EnhancedTableProps {
   classes: ReturnType<typeof useStyles>;
   numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  onRequestSort: (
+    event: React.MouseEvent<unknown>,
+    property: keyof Data
+  ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
   orderBy: string;
@@ -108,41 +149,40 @@ interface EnhancedTableProps {
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-  const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
-    onRequestSort(event, property);
-  };
+  const { classes, order, orderBy, onRequestSort } = props;
+  const createSortHandler =
+    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+      onRequestSort(event, property);
+    };
 
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-          />
-        </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-              ) : null}
-            </TableSortLabel>
+            {headCell.needSort ? (
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : "asc"}
+                onClick={createSortHandler(headCell.id)}
+              >
+                {headCell.label}
+                {orderBy === headCell.id ? (
+                  <span className={classes.visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </span>
+                ) : null}
+              </TableSortLabel>
+            ) : (
+              <>{headCell.label}</>
+            )}
           </TableCell>
         ))}
       </TableRow>
@@ -150,115 +190,193 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-interface EnhancedTableToolbarProps {
-  numSelected: number;
-}
+const useToolbarStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1),
+    },
+    highlight:
+      theme.palette.type === "light"
+        ? {
+            color: theme.palette.secondary.main,
+            backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+          }
+        : {
+            color: theme.palette.text.primary,
+            backgroundColor: theme.palette.secondary.dark,
+          },
+    title: {
+      flex: "1 1 100%",
+    },
+  })
+);
 
-const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
+const EnhancedTableToolbar = () => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
-
   return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      {numSelected > 0 ? (
-        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Nutrition
-        </Typography>
-      )}
-      {numSelected > 0 ? (
-        <Tooltip title="Archive">
-          <IconButton aria-label="archive">
-            <ArchiveIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+    <Toolbar className={classes.root}>
+      <Typography
+        className={classes.title}
+        variant="h6"
+        id="tableTitle"
+        component="div"
+      >
+        Wizyty
+      </Typography>
     </Toolbar>
   );
 };
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+    },
+    paper: {
+      width: "100%",
+      marginBottom: theme.spacing(2),
+    },
+    table: {
+      minWidth: 750,
+    },
+    visuallyHidden: {
+      border: 0,
+      clip: "rect(0 0 0 0)",
+      height: 1,
+      margin: -1,
+      overflow: "hidden",
+      padding: 0,
+      position: "absolute",
+      top: 20,
+      width: 1,
+    },
+  })
+);
 
+function Row({ row, index, handleButtonClick }) {
+  const [loading, setLoading] = React.useState(false);
+  const labelId = `enhanced-table-checkbox-${index}`;
+  let chip = {};
+  switch (row.payment_status) {
+    case PaymentStatuses.CANCELED:
+      chip = { color: red[600], text: "Anulowano" };
+      break;
+    case PaymentStatuses.INCOMPLETE:
+      chip = { color: orange[600], text: "Nieuczkończona" };
+      break;
+    case PaymentStatuses.REFFUNDED:
+      chip = { color: blue[600], text: "Zwrócona" };
+      break;
+    case PaymentStatuses.SUCCEEDED:
+      chip = { color: green[600], text: "Ukończona" };
+      break;
+    default:
+      chip = { color: grey[600], text: "Brak" };
+  }
 
-export default function EnhancedTable() {
+  return (
+    <TableRow hover>
+      <TableCell component="th" id={labelId} scope="row">
+        {row.service}
+      </TableCell>
+      <TableCell align="right">{row.employee}</TableCell>
+      <TableCell align="right">{row.date}</TableCell>
+      <TableCell align="right">{row.time}</TableCell>
+      <TableCell align="right">
+        {row.active === ReservationStatuses.ACTIVE ? (
+          <CheckIcon />
+        ) : (
+          <CloseIcon />
+        )}
+      </TableCell>
+      <TableCell align="right">
+        <Chip
+          style={{ backgroundColor: chip.color, color: "white", width: "100%" }}
+          label={chip.text}
+        />
+      </TableCell>
+    </TableRow>
+  );
+}
+
+export default function CancelReservation() {
   const classes = useStyles();
-  const theme = useTheme();
-  const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('cost');
+  const [order, setOrder] = React.useState<Order>("asc");
+  const [orderBy, setOrderBy] = React.useState<keyof Data>("date");
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
-  const dense = useMediaQuery(theme.breakpoints.down('sm'));
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setRows] = React.useState<Data[]>([]);
+  const dispatch = useDispatch();
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof Data
+  ) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.title);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected: string[] = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleReservationCancel = async (reservation_id, setLoading) => {
+    const isSure = confirm("Czy na pewno chcesz anulować tę wizytę?");
+    setLoading(true);
+    if (isSure) {
+      axios
+        .post(process.env.BACKEND_HOST + "/user/cancel-reservation", {
+          reservation_id,
+        })
+        .then((res) => {
+          if (res.data.data) {
+            dispatch(setMessage("Pomyślnie odwołano wizytę", "success"));
+            setRows(rows.filter((curRow) => curRow.id !== reservation_id));
+          }
+        })
+        .catch((err) => {
+          if (err.response.data.data.type === "Day before") {
+            dispatch(
+              setMessage("Nie możesz anulować wizyty dzień przed", "error")
+            );
+          } else {
+            dispatch(setMessage("Wystąpił błąd", "error"));
+          }
+        });
+    }
+    setLoading(false);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  const customDiplayedRowText = ({ from, to, count }) =>
+    `${from}-${to} z ${count}`;
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  const isSelected = (name: string) => selected.indexOf(name) !== -1;
-
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  React.useEffect(() => {
+    axios
+      .get(process.env.BACKEND_HOST + "/user/client-every-reservations")
+      .then((res) => setRows(res.data.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar />
         <TableContainer>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size="medium"
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -266,45 +384,22 @@ export default function EnhancedTable() {
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.title);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.title)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.title}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
-                      </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.title}
-                      </TableCell>
-                      <TableCell align="right">{DateFns.formatISO9075(row.date)}</TableCell>
-                      <TableCell align="right">{row.specialist}</TableCell>
-                      <TableCell align="right">{row.cost}</TableCell>
-                      <TableCell align="right">{row.description}</TableCell>
-                    </TableRow>
-                  );
-                })}
+                .map((row, index) => (
+                  <Row
+                    row={row}
+                    index={index}
+                    key={row.id}
+                    handleButtonClick={handleReservationCancel}
+                  />
+                ))}
               {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                <TableRow>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
@@ -319,6 +414,9 @@ export default function EnhancedTable() {
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
+          labelRowsPerPage={"Wiersze na stronę"}
+          labelDisplayedRows={customDiplayedRowText}
+          nextIconButtonText={"Następna strona"}
         />
       </Paper>
     </div>

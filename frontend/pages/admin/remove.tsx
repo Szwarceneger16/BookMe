@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import CustomerLayout from "../../layouts/AdminLayout";
+import AdminLayout from "../../layouts/AdminLayout";
 
 function All(props) {
   return (
@@ -12,6 +12,6 @@ function All(props) {
   );
 }
 
-All.Layout = CustomerLayout;
+All.Layout = AdminLayout;
 
 export default All;

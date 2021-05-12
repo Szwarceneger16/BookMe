@@ -64,7 +64,7 @@ const ITEMS = [
 ];
 
 export default function CustomerLayout({ children }) {
-  const [isAuth, setIsAuth] = React.useState(false);
+  //const [isAuth, setIsAuth] = React.useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const router = useRouter();
 
@@ -74,11 +74,8 @@ export default function CustomerLayout({ children }) {
     }
   }, [isLoggedIn]);
 
-  useAuth().then((res) => {
-    if (res !== isAuth) {
-      setIsAuth(res);
-    }
-  });
+  const isAuth = useAuth();
+
   if (isAuth !== true) {
     return (
       <div

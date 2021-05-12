@@ -17,7 +17,6 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import { Button } from "@material-ui/core";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../../src/actions/message";
@@ -40,22 +39,6 @@ function createData(
 ): Data {
   return { id, service, employee, date, time };
 }
-
-// const rows = [
-//   createData("Cupcake", "XD", "2021-06-05 21:21:21", 67),
-//   createData("Donut", "XD", "2021-06-05 21:21:21", 51),
-//   createData("Eclair", "XD", "2021-06-05 21:21:21", 24),
-//   createData("Frozen yoghurt", "XD", "2021-06-05 21:21:21", 24),
-//   createData("Gingerbread", "XD", "2021-06-05 21:21:21", 49),
-//   createData("Honeycomb", "XD", "2021-06-05 21:21:21", 87),
-//   createData("Ice cream sandwich", "XD", "2021-06-05 21:21:21", 37),
-//   createData("Jelly Bean", "XD", "2021-06-05 21:21:21", 94),
-//   createData("KitKat", "XD", "2021-06-05 21:21:21", 65),
-//   createData("Lollipop", "XD", "2021-06-05 21:21:21", 98),
-//   createData("Marshmallow", "XD", "2021-06-05 21:21:21", 81),
-//   createData("Nougat", "XD", "2021-06-05 21:21:21", 9),
-//   createData("Oreo", "XD", "2021-06-05 21:21:21", 63),
-// ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -344,7 +327,7 @@ export default function CancelReservation() {
 
   React.useEffect(() => {
     axios
-      .get(process.env.BACKEND_HOST + "/user/client-reservations")
+      .get(process.env.BACKEND_HOST + "/user/client-active-reservations")
       .then((res) => setRows(res.data.data))
       .catch((err) => console.error(err));
   }, []);
