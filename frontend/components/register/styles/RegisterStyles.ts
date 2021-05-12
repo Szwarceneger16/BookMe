@@ -14,6 +14,11 @@ export const useStyles = makeStyles((theme: Theme) =>
       height: "100%",
       display: "grid",
       gridTemplateRows: "auto 1fr",
+      flexBasis: "100%",
+      "& .MuiContainer-root": {
+        flexBasis: "100%",
+        display: "flex",
+      },
     },
     backButton: {
       marginRight: theme.spacing(1),
@@ -27,7 +32,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       overflowY: "auto",
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-between",
+      // justifyContent: "space-between",
     },
     stepper: {
       backgroundColor: "transparent",

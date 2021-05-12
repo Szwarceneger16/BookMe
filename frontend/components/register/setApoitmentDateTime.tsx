@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { KeyboardDateTimePicker } from "@material-ui/pickers";
+import {
+  KeyboardDatePicker,
+  KeyboardDateTimePicker,
+} from "@material-ui/pickers";
 import { Grid, Badge, Button } from "@material-ui/core";
 import useStyles from "./styles/ApoitmentDataTimeStyle";
 import * as DateFns from "date-fns";
@@ -139,7 +142,7 @@ const ApoitmentDataTime = ({
     <Grid container alignItems="center" justify="center" spacing={2}>
       <Grid item className={classes.apoitmentDataPicker}>
         {displayedDate && (
-          <KeyboardDateTimePicker
+          <KeyboardDatePicker
             name="apoitmentDate"
             value={displayedDate}
             allowKeyboardControl
@@ -147,10 +150,12 @@ const ApoitmentDataTime = ({
             openTo="date"
             disablePast
             clearable
-            minutesStep={15}
+            // minutesStep={15}
             variant="static"
             renderDay={renderDate}
-            onChange={(date) => {}}
+            onChange={(date) => {
+              setDisplayedDate(date);
+            }}
           />
         )}
       </Grid>

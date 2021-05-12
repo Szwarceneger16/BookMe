@@ -291,10 +291,10 @@ export default function HorizontalLabelPositionBelowStepper() {
     validationSchema: validationSchema,
   });
 
-  console.log({
-    start: timezoned(formik.values.apoitmentDateStart),
-    end: timezoned(formik.values.apoitmentDateStart),
-  });
+  // console.log({
+  //   start: timezoned(formik.values.apoitmentDateStart),
+  //   end: timezoned(formik.values.apoitmentDateStart),
+  // });
   return (
     <div className={classes.root}>
       <Stepper
