@@ -2,6 +2,7 @@
 
 namespace App\BookMe\Reservation\Repositories;
 
+use App\BookMe\Reservation\Enums\ReservationStatuses;
 use App\Models\Reservation;
 
 class ReservationRepository
@@ -55,6 +56,7 @@ class ReservationRepository
         return $this->reservation
             ->where('client_id', $clientId)
             ->where('datetime_start', ">=", $from)
+            ->where('reservation_status', ReservationStatuses::ACTIVE)
             ->get();
     }
 
