@@ -21,6 +21,7 @@ import { useStyles } from "./styles/AdminVisitsCalendar";
 import { getExperts } from "../../lib/reservationService";
 import { Form, Formik } from "formik";
 import { Autocomplete, Skeleton } from "@material-ui/lab";
+import axios from "axios";
 
 const exampleData = {
   date: "2021-05-11",
@@ -115,22 +116,9 @@ export default function AdminVisitsCalendar(params) {
   };
 
   useEffect(() => {
-    //getExperts().then(res => setExperts(res));
-    setTimeout(() => {
-      const exampleExperts = [
-        {
-          id: 1,
-          first_name: "Jan",
-          last_name: "Kowalski",
-        },
-        {
-          id: 2,
-          first_name: "Kuba",
-          last_name: "Nowak",
-        },
-      ];
-      setExperts(exampleExperts);
-    }, 2000);
+    axios
+      .get(process.env.BACKEND_HOST + "/employees")
+      .then((res) => setExperts(res.data.data));
   }, []);
 
   const handleSubmit = (values, actions) => {};
@@ -161,7 +149,7 @@ export default function AdminVisitsCalendar(params) {
                     className={classes.select}
                     getOptionLabel={(option) => {
                       //debugger;
-                      return option.first_name;
+                      return option.first_name + " " + option.last_name;
                     }}
                     renderInput={(params) => (
                       <TextField

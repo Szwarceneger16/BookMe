@@ -86,35 +86,34 @@ export default function AdminVisitsCalendar(params) {
   //const [selectedPlace, setSelectedPlace] = useState();
 
   useEffect(() => {
-    //getExperts().then(res => setExperts(res));
-    setTimeout(() => {
-      // const exampleExperts = [
-      //   {
-      //     id: 1,
-      //     first_name: "Jan",
-      //     last_name: "Kowalski",
-      //   },
-      //   {
-      //     id: 2,
-      //     first_name: "Kuba",
-      //     last_name: "Nowak",
-      //   },
-      // ];
-      axios
-        .get(process.env.BACKEND_HOST + "/employees")
-        .then((res) => setExperts(res.data.data));
-      const examplePlaces = [
-        {
-          place_id: 1,
-          place_name: "gabinet nr1",
-        },
-        {
-          place_id: 2,
-          place_name: "gabinet nr2",
-        },
-      ];
-      setPlaces(examplePlaces);
-    }, 2000);
+    axios
+      .get(process.env.BACKEND_HOST + "/employees")
+      .then((res) => setExperts(res.data.data));
+
+    // const exampleExperts = [
+    //   {
+    //     id: 1,
+    //     first_name: "Jan",
+    //     last_name: "Kowalski",
+    //   },
+    //   {
+    //     id: 2,
+    //     first_name: "Kuba",
+    //     last_name: "Nowak",
+    //   },
+    // ];
+
+    const examplePlaces = [
+      {
+        place_id: 1,
+        place_name: "gabinet nr1",
+      },
+      {
+        place_id: 2,
+        place_name: "gabinet nr2",
+      },
+    ];
+    setPlaces(examplePlaces);
   }, []);
 
   const handleSubmit = (values, actions) => {
