@@ -2,6 +2,7 @@
 
 namespace App\BookMe\Reservation\Repositories;
 
+use App\BookMe\Reservation\Enums\ReservationStatuses;
 use App\Models\Reservation;
 
 class ReservationRepository
@@ -50,8 +51,24 @@ class ReservationRepository
         return $this->reservation->all()->count();
     }
 
-    public function getClientReservations($clientId)
+    public function getClientReservations($clientId, $from)
     {
-        return $this->reservation->where('client_id', $clientId)->get();
+        return $this->reservation
+            ->where('client_id', $clientId)
+            ->where('datetime_start', ">=", $from)
+            ->where('reservation_status', ReservationStatuses::ACTIVE)
+            ->get();
+    }
+
+    public function getClientEveryReservations($clientId)
+    {
+        return $this->reservation
+            ->where('client_id', $clientId)
+            ->get();
+    }
+
+    public function isClientOwnerOfReservation($reservation_id, $client_id)
+    {
+        return $this->find($reservation_id)->client->id === $client_id;
     }
 }

@@ -4,6 +4,7 @@
 namespace App\BookMe\Payments\Services;
 
 
+use App\BookMe\Payments\Enums\PaymentStatuses;
 use App\BookMe\Payments\Repositories\PaymentRepository;
 
 class HandlePaymentResponseService
@@ -21,7 +22,7 @@ class HandlePaymentResponseService
         $payment = $this->paymentRepository->find($payment_intent, $payment_intent_client_secret);
         if ($request->query('redirect_status') === "succeeded")
         {
-            $payment->is_success = true;
+            $payment->payment_status = PaymentStatuses::SUCCEEDED;
             $payment->save();
             return redirect(config('client_page') . 'register/success');
         } else {
