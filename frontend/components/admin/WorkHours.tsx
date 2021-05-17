@@ -152,7 +152,6 @@ export default function AdminVisitsCalendar(params) {
       .catch(() => {
         dispatch(setMessage("Nie udalo sie dodac godziny pracy", "error"));
       });
-    console.log(values);
   };
 
   // const availablePlaces = place_ids[
