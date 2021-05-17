@@ -38,8 +38,8 @@ const ApoitmentDataTime = ({
       : null
   );
 
-  React.useEffect(async () => {
-    await getAvailableReservation(
+  React.useEffect(() => {
+    getAvailableReservation(
       props.values.selectedService,
       props.values.selectedExpert
     ).then((res) => {

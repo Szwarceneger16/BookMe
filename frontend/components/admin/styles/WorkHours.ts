@@ -57,12 +57,21 @@ export const useStyles = makeStyles((theme: Theme) =>
     busyRoomItem: {
       backgroundColor: theme.palette.common.white,
       borderRadius: "6px",
-      width: "max-content",
+      width: "60vw",
       margin: "4px",
       "&.Mui-selected": {
         backgroundColor: theme.palette.info.light,
       },
+      display: "flex",
+      justifyContent: "space-around",
+      "& div:first-child": {
+        width: "30%",
+      },
+      "& div": {
+        color: theme.palette.primary.main,
+      },
     },
+    busyRoomItemChild: {},
     label: {
       color: theme.palette.white.main,
     },

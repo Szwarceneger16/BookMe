@@ -181,7 +181,7 @@ export default function HorizontalLabelPositionBelowStepper() {
       if (activeStep === steps.length - 2 && isAuthorized) {
         setIsSubmitLoading(true);
         const result = await setNewReservation({
-          client_id: authUser.client_id,
+          client_id: authUser.id,
           place_id: 1, //TODO -replace when fixed backend
           service_id: values.selectedService,
           employee_id: values.selectedExpert,
@@ -356,15 +356,13 @@ export default function HorizontalLabelPositionBelowStepper() {
                 onClick={() => {
                   if (activeStep === steps.length - 2) {
                     return formik.handleSubmit();
-                  } else if (activeStep === steps.length - 1) {
-                    return;
                   } else {
                     return handleNext();
                   }
                 }}
                 endIcon={<NavigateNextIcon />}
                 disabled={
-                  (!isAuthorized && activeStep === 2) ||
+                  // (!isAuthorized && activeStep === 2) ||
                   (activeStep === 1 && !isDateSelected) ||
                   (activeStep === 0 &&
                     (!formik.values.selectedExpert ||
