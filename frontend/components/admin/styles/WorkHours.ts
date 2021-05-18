@@ -30,7 +30,11 @@ export const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
-      width: "max-content",
+      width: "100%",
+      justifyContent: "space-evenly",
+      // [theme.breakpoints.down("sm")]: {
+      //   width: "min-content",
+      // },
     },
     flexItemFormFields: {
       display: "flex",
@@ -57,7 +61,13 @@ export const useStyles = makeStyles((theme: Theme) =>
     busyRoomItem: {
       backgroundColor: theme.palette.common.white,
       borderRadius: "6px",
-      width: "60vw",
+      width: "90vw",
+      [theme.breakpoints.up("xs")]: {
+        width: "90vw",
+      },
+      [theme.breakpoints.up("md")]: {
+        width: "700px",
+      },
       margin: "4px",
       "&.Mui-selected": {
         backgroundColor: theme.palette.info.light,

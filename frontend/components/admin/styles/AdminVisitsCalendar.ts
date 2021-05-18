@@ -20,6 +20,34 @@ export const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
+      flexWrap: "wrap",
+      justifyContent: "space-evenly",
+    },
+    busyRoomItem: {
+      backgroundColor: theme.palette.common.white,
+      borderRadius: "6px",
+      width: "95vw",
+      // [theme.breakpoints.up("xs")]: {
+      //   width: "60vw",
+      // },
+      [theme.breakpoints.up("sm")]: {
+        width: "50vw",
+      },
+      [theme.breakpoints.up("md")]: {
+        width: "700px",
+      },
+      margin: "4px",
+      "&.Mui-selected": {
+        backgroundColor: theme.palette.info.light,
+      },
+      display: "flex",
+      justifyContent: "space-around",
+      "& div:first-child": {
+        width: "30%",
+      },
+      "& div": {
+        color: theme.palette.primary.main,
+      },
     },
     paper: {
       width: "100%",
@@ -30,6 +58,14 @@ export const useStyles = makeStyles((theme: Theme) =>
       border: "2px solid #000",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      display: "flex",
+      flexDirection: "column",
+      "& > *": {
+        margin: 4,
+        "& .MuiButtonGroup-grouped": {
+          margin: 8,
+        },
+      },
     },
     calendar: {
       /*     day: {

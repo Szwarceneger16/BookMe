@@ -23,63 +23,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../src/actions/message";
 
-/* const examplePlaces = {
-  "2021-05-11": {
-    place_id_id: 1,
-    place_id_name: "gabinet nr1",
-    busy: [
-      {
-        from: "2021-05-11T10:30:30",
-        to: "2021-05-11T11:30:30",
-      },
-      {
-        from: "2021-05-11T12:30:30",
-        to: "2021-05-11T13:30:30",
-      },
-    ],
-  },
-  "2021-05-12": {
-    place_id_id: 1,
-    place_id_name: "gabinet nr2",
-    busy: [
-      {
-        from: "2021-05-11T11:30:30",
-        to: "2021-05-11T12:30:30",
-      },
-      {
-        from: "2021-05-11T16:30:30",
-        to: "2021-05-11T17:30:30",
-      },
-    ],
-  },
-}; */
-// const exampleWorkHours = {
-//   date: "2021-05-14",
-//   workHours: [
-//     {
-//       first_name: "Jan",
-//       last_name: "Kowalski",
-//       time_start: "2021-05-14T10:30:00",
-//       time_end: "2021-05-14T10:30:00",
-//       place_id: "Gabinet nr 1",
-//     },
-//     {
-//       first_name: "Tomek",
-//       last_name: "Nowak",
-//       time_start: "2021-05-14T10:30:00",
-//       time_end: "2021-05-14T10:30:00",
-//       place_id: "Gabinet nr 2",
-//     },
-//     {
-//       first_name: "Jan",
-//       last_name: "Kowalski",
-//       time_start: "2021-05-14T13:30:00",
-//       time_end: "2021-05-14T15:30:00",
-//       place_id: "Gabinet nr 2",
-//     },
-//   ],
-// };
-
 export default function AdminVisitsCalendar(params) {
   const classes = useStyles();
   const [actualWorkHours, setActualWorkHours] = useState();
@@ -285,18 +228,9 @@ export default function AdminVisitsCalendar(params) {
                       </Box>
                       <Box /* className={classes.busyRoomItemChild} */>
                         {
-                          workItem.time_start
+                          workItem.time_start + " - " + workItem.time_end
                           // DateFns.format(
                           //   DateFns.parseISO(workItem.time_start),
-                          //   "hh:mm"
-                          // )
-                        }
-                      </Box>
-                      <Box /* className={classes.busyRoomItemChild} */>
-                        {
-                          workItem.time_end
-                          // DateFns.format(
-                          //   DateFns.parseISO(workItem.time_end),
                           //   "hh:mm"
                           // )
                         }
