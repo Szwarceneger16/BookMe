@@ -2,6 +2,7 @@
 
 namespace App\BookMe\Reservation\Services;
 
+use App\BookMe\Reservation\Enums\ReservationStatuses;
 use App\BookMe\Reservation\Repositories\ReservationRepository;
 use App\BookMe\Reservation\Resources\ListDailyReservationsResource;
 use App\BookMe\Utility\Response;
@@ -24,7 +25,9 @@ class ListAllReservationService
             $result['date']=$request['date'];
             if(isset($request['employee_id']))
             {
-                $employeeReservations=$reservations->where('employee_id',$request['employee_id']);
+                $employeeReservations=$reservations
+                    ->where('employee_id',$request['employee_id'])
+                    ->where('reservations_status', ReservationStatuses::ACTIVE);
 
                 $result['reservations']=ListDailyReservationsResource::collection($employeeReservations);
                 return Response::build($result, 200, "msg/success.list");
