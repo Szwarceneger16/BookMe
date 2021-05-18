@@ -21,6 +21,16 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../../src/actions/message";
 import LoadingButton from "../../elements/buttons/LoadingButton";
+import { Chip, Modal } from "@material-ui/core";
+import { blue, green, grey, orange, red } from "@material-ui/core/colors";
+import Row from "./TableRow";
+
+enum PaymentStatuses {
+  CANCELED = "CANCELED",
+  REFFUNDED = "REFFUNDED",
+  SUCCEEDED = "SUCCEEDED",
+  INCOMPLETE = "INCOMPLETE",
+}
 
 interface Data {
   id: number;
@@ -28,6 +38,7 @@ interface Data {
   employee: string;
   date: string;
   time: number;
+  payment_status: PaymentStatuses;
 }
 
 function createData(
@@ -116,6 +127,13 @@ const headCells: HeadCell[] = [
     numeric: true,
     disablePadding: false,
     label: "Odwołaj",
+    needSort: false,
+  },
+  {
+    id: "payment_status",
+    numeric: true,
+    disablePadding: false,
+    label: "Status płatności",
     needSort: false,
   },
 ];
@@ -238,31 +256,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-function Row({ row, index, handleButtonClick }) {
-  const [loading, setLoading] = React.useState(false);
-  const labelId = `enhanced-table-checkbox-${index}`;
-  return (
-    <TableRow hover>
-      <TableCell component="th" id={labelId} scope="row">
-        {row.service}
-      </TableCell>
-      <TableCell align="right">{row.employee}</TableCell>
-      <TableCell align="right">{row.date}</TableCell>
-      <TableCell align="right">{row.time}</TableCell>
-      <TableCell align="right">
-        <LoadingButton
-          loading={loading}
-          variant="contained"
-          color="secondary"
-          onClick={() => handleButtonClick(row.id, setLoading)}
-        >
-          Odwołaj
-        </LoadingButton>
-      </TableCell>
-    </TableRow>
-  );
-}
 
 export default function CancelReservation() {
   const classes = useStyles();

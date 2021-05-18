@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { Grid, Hidden, Typography } from "@material-ui/core";
 import Image from "next/image";
 import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 
 const stripePromise = loadStripe(process.env.STRIPE_PK);
 
@@ -36,13 +37,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function P24BankSection() {
+function P24BankSection({ color }) {
   const classes = useStyles();
+  const isWhite = color === "white";
   return (
-    <label style={{ color: "#fff", fontSize: "1.6rem" }}>
+    <label
+      className={clsx({ [classes.caption]: isWhite })}
+      style={{ fontSize: "1.6rem" }}
+    >
       Zapłać z Przelewy24
       <br />
-      <Typography variant="caption" className={classes.caption}>
+      <Typography
+        variant="caption"
+        className={clsx({ [classes.caption]: isWhite })}
+      >
         Wybierz swój sposób zapłaty i przejdź do płatności. Opłata za kaucję
         wynosi <b>10zł</b> i jest ona zapewnieniem rezerwacji dla obu stron.
       </Typography>
@@ -51,7 +59,7 @@ function P24BankSection() {
   );
 }
 
-function CheckoutForm({ setIsSubmitLoading, reservation }) {
+export function CheckoutForm({ setIsSubmitLoading, reservation, color }) {
   const stripe = useStripe();
   const elements = useElements();
   const user = useSelector((state) => state.auth.user);
@@ -123,13 +131,13 @@ function CheckoutForm({ setIsSubmitLoading, reservation }) {
   return (
     <form onSubmit={handleSubmit} id="payment">
       <div className="form-row">
-        <P24BankSection />
+        <P24BankSection color={color} />
       </div>
     </form>
   );
 }
 
-function Payment({ setIsSubmitLoading, reservation }) {
+function Payment({ setIsSubmitLoading, reservation, color = "white" }) {
   const classes = useStyles();
   return (
     <Grid container alignItems="center" justifycontent="center">
@@ -148,6 +156,7 @@ function Payment({ setIsSubmitLoading, reservation }) {
           <CheckoutForm
             setIsSubmitLoading={setIsSubmitLoading}
             reservation={reservation}
+            color={color}
           />
         </Elements>
       </Grid>
