@@ -49,7 +49,9 @@ function P24BankSection({ color }) {
       <br />
       <Typography
         variant="caption"
+        component="div"
         className={clsx({ [classes.caption]: isWhite })}
+        gutterBottom
       >
         Wybierz swój sposób zapłaty i przejdź do płatności. Opłata za kaucję
         wynosi <b>10zł</b> i jest ona zapewnieniem rezerwacji dla obu stron.

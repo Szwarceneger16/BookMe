@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import Drawer from "../components/dashboard/Drawer";
 import HomeIcon from "@material-ui/icons/Home";
 import EventNoteIcon from "@material-ui/icons/EventNote";
-import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import SettingsIcon from "@material-ui/icons/Settings";
+import PlaceIcon from "@material-ui/icons/Place";
 import { useAuth } from "../lib/authService";
 import { CircularProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
@@ -22,6 +22,11 @@ const ITEMS = [
     name: "Wizyty",
     icon: <EventNoteIcon />,
     href: SECTION_PREFIX + "/visits/all",
+  },
+  {
+    name: "Miejsca",
+    icon: <PlaceIcon />,
+    href: SECTION_PREFIX + "/places",
   },
   {
     name: "Godizny pracy",

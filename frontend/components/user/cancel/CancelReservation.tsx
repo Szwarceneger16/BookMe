@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 import {
   createStyles,
   lighten,
@@ -20,9 +19,6 @@ import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../../src/actions/message";
-import LoadingButton from "../../elements/buttons/LoadingButton";
-import { Chip, Modal } from "@material-ui/core";
-import { blue, green, grey, orange, red } from "@material-ui/core/colors";
 import Row from "./TableRow";
 
 enum PaymentStatuses {
@@ -39,16 +35,6 @@ interface Data {
   date: string;
   time: number;
   payment_status: PaymentStatuses;
-}
-
-function createData(
-  id: number,
-  service: string,
-  employee: string,
-  date: string,
-  time: number
-): Data {
-  return { id, service, employee, date, time };
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -196,8 +182,9 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(1),
+      padding: theme.spacing(2, 2, 1, 2),
+      flexDirection: "column",
+      alignItems: "flex-start",
     },
     highlight:
       theme.palette.type === "light"
@@ -210,7 +197,7 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
             backgroundColor: theme.palette.secondary.dark,
           },
     title: {
-      flex: "1 1 100%",
+      flex: "1",
     },
   })
 );
@@ -226,6 +213,10 @@ const EnhancedTableToolbar = () => {
         component="div"
       >
         Wizyty
+      </Typography>
+      <Typography variant="caption">
+        W tej sekcji możesz odwołać wizytę, bądź ponowić płatność. Aby ponowić
+        płatność naciśnij na status.
       </Typography>
     </Toolbar>
   );

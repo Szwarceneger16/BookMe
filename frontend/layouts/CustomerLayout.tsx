@@ -23,8 +23,8 @@ const ITEMS = [
     icon: <EventNoteIcon />,
     subitems: [
       {
-        name: "Odwołaj",
-        href: SECTION_PREFIX + "/cancel",
+        name: "Edytuj",
+        href: SECTION_PREFIX + "/edit",
       },
       {
         name: "Pokaż wszystkie",

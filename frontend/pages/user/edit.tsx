@@ -7,7 +7,7 @@ function Cancel(props) {
   return (
     <>
       <Typography variant="h2" component="h1">
-        Odwołaj wizyty
+        Edytuj wizyty
       </Typography>
       <CancelReservation></CancelReservation>
     </>
