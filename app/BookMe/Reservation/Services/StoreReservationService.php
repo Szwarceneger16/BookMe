@@ -27,7 +27,7 @@ class StoreReservationService
             $availability=$this->checkAvailabilityReservation($request);
             if(!is_null($availability))
             {
-                return Response::build([], 400, "msg/error.store");
+                return Response::build(["message" => "This term is not available"], 400, "msg/error.store");
             }
             $reservation = $this->prepareReservationObject($request);
             $reservation = $this->reservationRepository->create($reservation);

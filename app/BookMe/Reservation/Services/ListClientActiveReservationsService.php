@@ -6,6 +6,7 @@ namespace App\BookMe\Reservation\Services;
 
 use App\BookMe\Reservation\Repositories\ReservationRepository;
 use App\BookMe\Reservation\Resources\ListClientActiveReservationsResource;
+use App\BookMe\Reservation\Traits\ReservationTrait;
 use App\BookMe\Utility\Response;
 use App\DateFormatTrait;
 use Carbon\Carbon;
@@ -39,12 +40,16 @@ class ListClientActiveReservationsService
 
     private function prepareClientReservationsData($reservation)
     {
+        $payment = ReservationTrait::getFinalPayment($reservation);
+        $payment_status = null;
+        $payment ? $payment_status = $payment->payment_status : null;
         return [
             'id' => $reservation->id,
             'service' => $reservation->service->title,
             'employee' => $reservation->employee->user->first_name . " " . $reservation->employee->user->last_name,
             'date' => DateFormatTrait::format_Ymd_His($reservation->datetime_start),
             'time' => $reservation->service->duration_time / 60,
+            'payment_status' => $payment_status,
         ];
     }
 
