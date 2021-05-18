@@ -49,6 +49,7 @@ function P24BankSection({ color }) {
       <br />
       <Typography
         variant="caption"
+        component="div"
         className={clsx({ [classes.caption]: isWhite })}
       >
         Wybierz swój sposób zapłaty i przejdź do płatności. Opłata za kaucję
