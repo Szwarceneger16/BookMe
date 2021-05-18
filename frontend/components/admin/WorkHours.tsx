@@ -27,7 +27,7 @@ export default function AdminVisitsCalendar(params) {
   const classes = useStyles();
   const [actualWorkHours, setActualWorkHours] = useState();
   const [employee_ids, setExperts] = useState();
-  const [place_ids, setPlaces] = useState();
+  const [places, setPlaces] = useState();
   const dispatch = useDispatch();
 
   const getActualWorkHours = (date) => {
@@ -57,18 +57,12 @@ export default function AdminVisitsCalendar(params) {
     //     last_name: "Nowak",
     //   },
     // ];
-
-    const examplePlaces = [
-      {
-        place_id: 1,
-        place_name: "gabinet nr1",
-      },
-      {
-        place_id: 2,
-        place_name: "gabinet nr2",
-      },
-    ];
-    setPlaces(examplePlaces);
+    axios
+      .get(process.env.BACKEND_HOST + "/places")
+      .then((res) => {
+        setPlaces(res.data.data);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   const handleSubmit = (values, actions) => {
@@ -80,13 +74,12 @@ export default function AdminVisitsCalendar(params) {
       DateFns.formatISO(values.date, { representation: "date" }) +
       "T" +
       DateFns.formatISO(values.datetime_end, { representation: "time" });
-
     axios
       .post(process.env.BACKEND_HOST + "/workHours", {
         datetime_start,
         datetime_end,
         employee_id: values.employee.id,
-        place_id: values.place.place_id,
+        place_id: values.place.id,
       })
       .then((res) => {
         dispatch(setMessage("Dodano godzine pracy", "success"));
@@ -153,7 +146,7 @@ export default function AdminVisitsCalendar(params) {
                   )}
                 </Box>
                 <Box className={classes.formItem}>
-                  {place_ids && place_ids.length > 0 ? (
+                  {places && places.length > 0 ? (
                     // <FormControl
                     //   variant="filled"
                     //   className={classes.formItem}
@@ -164,9 +157,9 @@ export default function AdminVisitsCalendar(params) {
                       onChange={(event, newValue) => {
                         props.setFieldValue("place", newValue, false);
                       }}
-                      options={place_ids}
+                      options={places}
                       className={classes.select}
-                      getOptionLabel={(option) => option.place_name}
+                      getOptionLabel={(option) => option.name}
                       renderInput={(params) => (
                         <TextField
                           {...params}
