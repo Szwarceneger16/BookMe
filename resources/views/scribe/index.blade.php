@@ -44,7 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: May 12 2021</li>
+            <li>Last updated: May 18 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -534,7 +534,7 @@ Current reservation id.
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/payments/handle-payment-response?payment_intent=sunt&amp;payment_intent_client_secret=quia&amp;redirect_status=vitae" \
+    -G "http://localhost/api/payments/handle-payment-response?payment_intent=sunt&amp;payment_intent_client_secret=velit&amp;redirect_status=et" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -543,8 +543,8 @@ Current reservation id.
 
 let params = {
     "payment_intent": "sunt",
-    "payment_intent_client_secret": "quia",
-    "redirect_status": "vitae",
+    "payment_intent_client_secret": "velit",
+    "redirect_status": "et",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -614,54 +614,9 @@ fetch(url, {
 </p>
 </form><h1>Reservations</h1>
 <p>APIs for using Reservations</p>
-<h2>api/user/client-reservations</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/user/client-reservations" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/user/client-reservations"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (404):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "status": "Authorization Token not found"
-}</code></pre>
-<div id="execution-results-GETapi-user-client-reservations" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-user-client-reservations"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-user-client-reservations"></code></pre>
-</div>
-<div id="execution-error-GETapi-user-client-reservations" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-user-client-reservations"></code></pre>
-</div>
-<form id="form-GETapi-user-client-reservations" data-method="GET" data-path="api/user/client-reservations" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-user-client-reservations', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-user-client-reservations" onclick="tryItOut('GETapi-user-client-reservations');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-user-client-reservations" onclick="cancelTryOut('GETapi-user-client-reservations');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-user-client-reservations" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/user/client-reservations</code></b>
-</p>
-</form>
-<h2>api/user/cancel-reservation</h2>
+<h2>Cancel reservation</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>List available reservations</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -669,7 +624,7 @@ fetch(url, {
     "http://localhost/api/user/cancel-reservation" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"reservation_id":16}'
+    -d '{"reservation_id":1}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/user/cancel-reservation"
@@ -681,7 +636,7 @@ let headers = {
 };
 
 let body = {
-    "reservation_id": 16
+    "reservation_id": 1
 }
 
 fetch(url, {
@@ -689,6 +644,14 @@ fetch(url, {
     headers,
     body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": "true",
+    "message": "Records was updated",
+    "status": 200
+}</code></pre>
 <div id="execution-results-POSTapi-user-cancel-reservation" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-user-cancel-reservation"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-POSTapi-user-cancel-reservation"></code></pre>
@@ -697,7 +660,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-user-cancel-reservation"></code></pre>
 </div>
-<form id="form-POSTapi-user-cancel-reservation" data-method="POST" data-path="api/user/cancel-reservation" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-cancel-reservation', this);">
+<form id="form-POSTapi-user-cancel-reservation" data-method="POST" data-path="api/user/cancel-reservation" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-user-cancel-reservation', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-user-cancel-reservation" onclick="tryItOut('POSTapi-user-cancel-reservation');">Try it out ⚡</button>
@@ -708,12 +671,15 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/user/cancel-reservation</code></b>
 </p>
+<p>
+<label id="auth-POSTapi-user-cancel-reservation" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-user-cancel-reservation" data-component="header"></label>
+</p>
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
 <p>
 <b><code>reservation_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
 <input type="number" name="reservation_id" data-endpoint="POSTapi-user-cancel-reservation" data-component="body" required  hidden>
 <br>
-
+Reservation id.
 </p>
 
 </form>

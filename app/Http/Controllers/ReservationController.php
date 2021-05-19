@@ -171,7 +171,6 @@ class ReservationController extends Controller
      *    "status": 200
      *    }
      *
-     * @param ListAvailableReservationRequest $request
      * @return JsonResponse
      */
     public function listClientEveryReservations(): JsonResponse
