@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\JobsServicesController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkHourController;
@@ -44,6 +45,16 @@ Route::group([
     Route::get('client-active-reservations', [ReservationController::class, 'listClientActiveReservations']);
     Route::get('client-every-reservations', [ReservationController::class, 'listClientEveryReservations']);
     Route::post('cancel-reservation', [ReservationController::class, 'cancelReservation']);
+});
+
+Route::group([
+    'middleware' => 'jwt',
+    'prefix' => 'places'
+], function ($router){
+   Route::get('/', [PlaceController::class, 'list']);
+   Route::post('/', [PlaceController::class, 'store']);
+   Route::delete('/{id}', [PlaceController::class, 'destroy']);
+   Route::put('/{id}', [PlaceController::class, 'update']);
 });
 
 Route::group([], function($router){
