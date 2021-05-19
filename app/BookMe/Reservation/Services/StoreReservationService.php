@@ -27,16 +27,13 @@ class StoreReservationService
             $availability=$this->checkAvailabilityReservation($request);
             if(!is_null($availability))
             {
-                dd($availability);
                 return Response::build([], 400, "msg/error.store");
             }
-            dd('git');
             $reservation = $this->prepareReservationObject($request);
             $reservation = $this->reservationRepository->create($reservation);
             return Response::build($reservation, 201, "msg/success.store");
         }catch(Exception $exception)
         {
-
             return Response::build($exception, 400, "msg/error.store");
         }
 
