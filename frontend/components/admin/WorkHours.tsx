@@ -45,18 +45,6 @@ export default function AdminVisitsCalendar(params) {
 
     getActualWorkHours(new Date());
 
-    // const exampleExperts = [
-    //   {
-    //     id: 1,
-    //     first_name: "Jan",
-    //     last_name: "Kowalski",
-    //   },
-    //   {
-    //     id: 2,
-    //     first_name: "Kuba",
-    //     last_name: "Nowak",
-    //   },
-    // ];
     axios
       .get(process.env.BACKEND_HOST + "/places")
       .then((res) => {

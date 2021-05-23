@@ -4,6 +4,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PlaceIcon from "@material-ui/icons/Place";
+import PeopleIcon from "@material-ui/icons/People";
 import { useAuth } from "../lib/authService";
 import { CircularProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
@@ -27,6 +28,11 @@ const ITEMS = [
     name: "Miejsca",
     icon: <PlaceIcon />,
     href: SECTION_PREFIX + "/places",
+  },
+  {
+    name: "Pracownicy",
+    icon: <PeopleIcon />,
+    href: SECTION_PREFIX + "/employees",
   },
   {
     name: "Godizny pracy",
