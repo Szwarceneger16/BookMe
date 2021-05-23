@@ -125,7 +125,7 @@ export default function AdminVisitsCalendar(params) {
         lastName: "",
       }}
       validationSchema={validationSchema}
-      onSubmit={() => {}}
+      onSubmit={handleRegister}
     >
       {(props) => (
         <Form>

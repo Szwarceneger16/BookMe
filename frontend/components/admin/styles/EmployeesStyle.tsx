@@ -52,10 +52,6 @@ export default makeStyles((theme: Theme) =>
 
 export const WhiteTextField = withStyles((theme: Theme) => ({
   root: {
-    "& label.Mui-focused": {
-      color: theme.palette.info.light,
-    },
-
     "& .Mui-error": {
       color: theme.palette.error.light,
     },
@@ -66,10 +62,6 @@ export const WhiteTextField = withStyles((theme: Theme) => ({
       "&.Mui-error:hover fieldset": {
         borderColor: theme.palette.info.dark,
       },
-      "&.Mui-focused fieldset": {
-        borderColor: theme.palette.info.light,
-        borderWidth: 2,
-      },
     },
     "& input:-webkit-autofill": {
       "-webkit-box-shadow": "0 0 0px 1000px white inset",
@@ -77,7 +69,6 @@ export const WhiteTextField = withStyles((theme: Theme) => ({
       backgroundImage: "none !important",
     },
     "& .MuiInputBase-input": {
-      color: theme.palette.white.main,
       "&:-webkit-autofill, &:-internal-autofill-selected": {
         backgroundColor: "rgba(255, 255, 255, 0.1) !important",
       },
