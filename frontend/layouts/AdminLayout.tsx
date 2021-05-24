@@ -75,16 +75,6 @@ const ITEMS = [
 ];
 
 export default function CustomerLayout({ children }) {
-  //const [isAuth, setIsAuth] = React.useState(false);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push("/");
-    }
-  }, [isLoggedIn]);
-
   const isAuth = useAuth();
 
   if (!isAuth) {
