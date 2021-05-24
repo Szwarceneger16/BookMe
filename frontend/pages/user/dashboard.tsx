@@ -1,6 +1,7 @@
 import React from "react";
 import CustomerLayout from "../../layouts/CustomerLayout";
 import {
+  CircularProgress,
   Grid,
   Paper,
   Table,
@@ -28,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 function Dashboard(props) {
   const user = useSelector((state) => state.auth.user);
   const [dashboardData, setDashboardData] = React.useState(null);
-
   React.useEffect(() => {
     axios
       .get(process.env.BACKEND_HOST + "/user/dashboard-info", {
@@ -41,6 +41,9 @@ function Dashboard(props) {
   }, []);
 
   const classes = useStyles();
+  if (!user) {
+    return <CircularProgress />;
+  }
   return (
     <>
       <Typography variant="h3" component="h2" gutterBottom>

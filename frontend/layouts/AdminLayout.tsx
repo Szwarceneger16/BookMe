@@ -87,7 +87,7 @@ export default function CustomerLayout({ children }) {
 
   const isAuth = useAuth();
 
-  if (isAuth !== true) {
+  if (!isAuth) {
     return (
       <div
         style={{

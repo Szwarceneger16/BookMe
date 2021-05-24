@@ -3,7 +3,7 @@ import {
   login as loginAction,
   logout as logoutAction,
 } from "../src/actions/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useRouter } from "next/router";
 import authHeader from "./authHeader";
@@ -70,10 +70,12 @@ export function authService(): object {
 }
 
 export function useAuth() {
-  const ISSERVER = typeof window === "undefined";
-  if (ISSERVER) {
+  const isServer = typeof window === "undefined";
+  if (isServer) {
     return;
   }
+
+  const user = useSelector((state) => state.auth.user);
 
   const [response, setResponse] = React.useState(false);
   const router = useRouter();
@@ -81,10 +83,7 @@ export function useAuth() {
 
   React.useEffect(() => {
     axios
-      .get(process.env.BACKEND_HOST + "/user/me", {
-        headers: header(),
-      })
-      // Render compoment when
+      .get(process.env.BACKEND_HOST + "/user/me")
       .then((res) => {
         if (res.status === 200 && res.data.status !== "Token is Expired") {
           dispatch(login(res.data.data));
