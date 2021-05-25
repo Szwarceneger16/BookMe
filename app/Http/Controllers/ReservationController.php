@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\BookMe\Reservation\Request\CancelReservationRequest;
 use App\BookMe\Reservation\Request\ListAllReservationRequest;
 use App\BookMe\Reservation\Request\ListAvailableReservationRequest;
+use App\BookMe\Reservation\Request\ListEmployeeAllReservationsInfoRequest;
 use App\BookMe\Reservation\Request\StoreReservationRequest;
 use App\BookMe\Reservation\Services\CancelReservationService;
 use App\BookMe\Reservation\Services\ListAllReservationService;
 use App\BookMe\Reservation\Services\ListAvailableReservationService;
 use App\BookMe\Reservation\Services\ListClientEveryReservationsService;
 use App\BookMe\Reservation\Services\ListClientActiveReservationsService;
+use App\BookMe\Reservation\Services\ListEmployeeAllReservationsInfoService;
 use App\BookMe\Reservation\Services\StoreReservationService;
 use App\BookMe\User\Enums\AccountType;
 use App\Models\Employee;
@@ -31,12 +33,14 @@ class ReservationController extends Controller
     private CancelReservationService $cancelReservationService;
     private ListAllReservationService $listAllReservationService;
     private ListClientEveryReservationsService $listClientEveryReservationsService;
+    private ListEmployeeAllReservationsInfoService $listEmployeeAllReservationsInfoService;
     public function __construct(StoreReservationService $storeReservationService,
                                 ListAvailableReservationService $listAvailableReservationService,
                                 ListClientActiveReservationsService $listClientActiveReservationsService,
                                 CancelReservationService $cancelReservationService,
                                 ListAllReservationService $listAllReservationService,
-                                ListClientEveryReservationsService $listClientEveryReservationsService)
+                                ListClientEveryReservationsService $listClientEveryReservationsService,
+                                ListEmployeeAllReservationsInfoService $listEmployeeAllReservationsInfoService)
     {
         $this->storeReservationService = $storeReservationService;
         $this->listAvailableReservationService = $listAvailableReservationService;
@@ -44,6 +48,7 @@ class ReservationController extends Controller
         $this->cancelReservationService = $cancelReservationService;
         $this->listAllReservationService = $listAllReservationService;
         $this->listClientEveryReservationsService = $listClientEveryReservationsService;
+        $this->listEmployeeAllReservationsInfoService = $listEmployeeAllReservationsInfoService;
     }
 
     /**
@@ -213,5 +218,46 @@ class ReservationController extends Controller
     public function listAll(ListAllReservationRequest $request): JsonResponse
     {
         return $this->listAllReservationService->execute($request->validated());
+    }
+
+    /**
+     * List Employee's reservations info
+     *
+     * List Employee's reservations info containing days and counter of reservations
+     * @bodyParam employee_id integer Employee_id. Example: 1
+     * @authenticated
+     * @response {
+     *   "data": [
+     *   {
+     *   "date": "2021-05-12",
+     *   "counter": 3
+     *   },
+     *   {
+     *   "date": "2021-05-13",
+     *   "counter": 3
+     *   },
+     *   {
+     *   "date": "2021-05-17",
+     *   "counter": 2
+     *   },
+     *   {
+     *   "date": "2021-05-20",
+     *   "counter": 9
+     *   },
+     *   {
+     *   "date": "2021-05-22",
+     *   "counter": 1
+     *   }
+     *   ],
+     *   "message": "Data was returned",
+     *   "status": 200
+     *   }
+     *
+     * @param ListEmployeeAllReservationsInfoRequest $request
+     * @return JsonResponse
+     */
+    public function listEmployeeAllReservationsInfo(ListEmployeeAllReservationsInfoRequest $request): JsonResponse
+    {
+        return $this->listEmployeeAllReservationsInfoService->execute($request->validated());
     }
 }

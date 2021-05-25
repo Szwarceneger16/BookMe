@@ -24,6 +24,7 @@ class ListDailyReservationsResource extends JsonResource
             'time_start' => DateFormatTrait::format_His($this->datetime_start),
             'time_end' => DateFormatTrait::format_His($this->datetime_end),
             'employee_id' => $this->client->id,
+            'service' => $this->service->title,
             'employee_first_name' => $this->employee->user->first_name,
             'employee_last_name' => $this->employee->user->last_name,
         ];

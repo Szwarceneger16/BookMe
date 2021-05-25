@@ -27,7 +27,7 @@ class ListAllReservationService
             {
                 $employeeReservations=$reservations
                     ->where('employee_id',$request['employee_id'])
-                    ->where('reservations_status', ReservationStatuses::ACTIVE);
+                    ->where('reservation_status', ReservationStatuses::ACTIVE);
 
                 $result['reservations']=ListDailyReservationsResource::collection($employeeReservations);
                 return Response::build($result, 200, "msg/success.list");

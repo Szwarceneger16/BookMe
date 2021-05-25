@@ -4,6 +4,7 @@ namespace App\BookMe\Reservation\Repositories;
 
 use App\BookMe\Reservation\Enums\ReservationStatuses;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\DB;
 
 class ReservationRepository
 {
@@ -73,13 +74,25 @@ class ReservationRepository
             ->get();
     }
 
-    public function isClientOwnerOfReservation($reservation_id, $client_id)
+    public function isClientOwnerOfReservation($reservationId, $clientId)
     {
-        return $this->find($reservation_id)->client->id === $client_id;
+        return $this->find($reservationId)->client->id === $clientId;
     }
 
     public function updateReservationStatus(object $reservation, $status)
     {
         return $reservation->update(['reservation_status' => $status]);
+    }
+
+    public function getEmployeeReservationsInfo($employeeId, $from)
+    {
+        $status = ReservationStatuses::ACTIVE;
+        $sql = "SELECT date(date_format(reservations.datetime_start, '%Y-%m-%d')) as date, COUNT(reservations.id) AS counter
+                FROM reservations
+                WHERE datetime_start >= '{$from}' AND
+                    employee_id = '{$employeeId}' AND
+                    reservation_status = '{$status}'
+                GROUP BY 1";
+        return DB::select($sql);
     }
 }

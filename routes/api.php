@@ -49,6 +49,13 @@ Route::group([
 
 Route::group([
     'middleware' => 'jwt',
+    'prefix' => 'employee'
+], function($router){
+    Route::post('all-reservations-info', [ReservationController::class, 'listEmployeeAllReservationsInfo']);
+});
+
+Route::group([
+    'middleware' => 'jwt',
     'prefix' => 'places'
 ], function ($router){
    Route::get('/', [PlaceController::class, 'list']);
