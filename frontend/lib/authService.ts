@@ -81,13 +81,14 @@ export function useAuth(account_type: AccountTypes) {
   const [response, setResponse] = React.useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
-
   React.useEffect(() => {
     axios
       .get(process.env.BACKEND_HOST + "/user/me")
       .then((res) => {
         if (res.status === 200) {
-          dispatch(login(res.data.data));
+          if (!user) {
+            dispatch(login(res.data.data));
+          }
           setResponse(true);
           if (account_type !== res.data.data.account_type) {
             router.push("/");
