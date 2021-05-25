@@ -7,6 +7,7 @@ namespace App\BookMe\User\Services\Auth;
 use App\BookMe\User\Enums\AccountType;
 use App\BookMe\User\Repositories\UserRepository;
 use App\BookMe\Utility\Response;
+use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -28,6 +29,8 @@ class RegisterActionService
                 $data,
                 ['password' => Hash::make($data['password'])]
             ));
+            $client=new Client;
+            $client->user()->associate($user)->save();
             if ($user->account_type == AccountType::CLIENT){
                 $user = $this->userRepository->getUserWithClient($user);
             }

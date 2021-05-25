@@ -17,4 +17,9 @@ class EmployeeRepository
     {
         return $this->employee->all();
     }
+
+    public function addEmployee($data)
+    {
+        return $this->employee->create($data);
+    }
 }

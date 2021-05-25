@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\BookMe\Employee\Request\ListEmployeeByServiceRequest;
+use App\BookMe\Employee\Request\StoreEmployeeRequest;
+use App\BookMe\Employee\Services\AddEmployeeService;
 use App\BookMe\Employee\Services\ListEmployeesByServiceService;
 use App\BookMe\Employee\Services\ListEmployeesService;
 use Illuminate\Http\JsonResponse;
@@ -18,12 +20,15 @@ class EmployeeController extends Controller
 {
     private ListEmployeesService $listEmployeesService;
     private ListEmployeesByServiceService $listEmployeesByServiceService;
+    private AddEmployeeService $addEmployeeService;
 
     public function __construct(ListEmployeesService $listEmployeesService,
-                                ListEmployeesByServiceService $listEmployeesByServiceService)
+                                ListEmployeesByServiceService $listEmployeesByServiceService,
+                                AddEmployeeService $addEmployeeService)
     {
         $this->listEmployeesService = $listEmployeesService;
         $this->listEmployeesByServiceService = $listEmployeesByServiceService;
+        $this->addEmployeeService = $addEmployeeService;
     }
 
     /**
@@ -60,5 +65,26 @@ class EmployeeController extends Controller
     public function listEmployeesByService(ListEmployeeByServiceRequest $request): JsonResponse
     {
         return $this->listEmployeesByServiceService->execute($request->validated());
+    }
+
+    /**
+     * Create employee
+     *
+     * Create employee
+     * @bodyParam job_title string required Job title field Example: recepcjonistka
+     * @bodyParam account_type string required Account type field Example: ADMIN
+     * @bodyParam email string required Email field Example: test@test.pl
+     * @bodyParam password string required Password field. Example: 12345678
+     * @bodyParam first_name string required First name field. Example: Jan
+     * @bodyParam last_name string required Last name field. Example: Nowak
+     * @bodyParam phone string required Password field. Example: 123 456 789
+     * @authenticated
+     *
+     * @param StoreEmployeeRequest $request
+     * @return JsonResponse
+     */
+    public function store(StoreEmployeeRequest $request): JsonResponse
+    {
+        return $this->addEmployeeService->execute($request->validated());
     }
 }

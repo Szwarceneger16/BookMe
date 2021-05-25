@@ -135,7 +135,6 @@ class UserController extends Controller
      *    "status": 201
      *    }
      *
-     * @param UpdateDataRequest $request
      * @return JsonResponse
      */
     public function userDashboardInfo(): JsonResponse

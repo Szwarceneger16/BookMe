@@ -59,7 +59,22 @@ class UserRepository
             'last_name'=>$user->last_name,
             'email'=>$user->email,
             'phone'=>$user->phone,
+            'account_type'=>$user->account_type,
             'client_id'=>$user->client->id ?? null,
         ];
     }
+    public function getUserWithEmployee($user)
+    {
+        return [
+            'id'=>$user->id,
+            'first_name'=>$user->first_name,
+            'last_name'=>$user->last_name,
+            'email'=>$user->email,
+            'phone'=>$user->phone,
+            'account_type'=>$user->account_type,
+            'employee_id'=>$user->employee->id ?? null,
+            'job_title'=>$user->employee->job_title ?? null,
+        ];
+    }
+
 }

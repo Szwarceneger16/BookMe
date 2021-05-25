@@ -22,12 +22,15 @@ class AuthUserService
     public function execute(): JsonResponse
     {
         $user = $this->userRepository->getAuthUser();
-        if ($user->account_type == AccountType::CLIENT){
+        if ($user->account_type == AccountType::CLIENT) {
             $user = $this->userRepository->getUserWithClient($user);
+        } elseif ($user->account_type == (AccountType::EMPLOYEE || AccountType::ADMIN)) {
+            $user = $this->userRepository->getUserWithEmployee($user);
         }
-        if (isset($user)){
+
+        if (isset($user)) {
             return Response::build($user, 200, 'msg/success.show');
-        }else{
+        } else {
             return Response::build([], 401, 'msg/error.show');
         }
     }
