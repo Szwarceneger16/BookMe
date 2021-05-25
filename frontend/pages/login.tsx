@@ -11,13 +11,13 @@ import {
   InputAdornment,
   Paper,
 } from "@material-ui/core";
-import BookMeLogo from "../components/elements/BookMeLogo";
+import BookMeLogo from "../components/common/BookMeLogo";
 import { useFormik } from "formik";
 import axios from "axios";
 import { setMessage } from "../src/actions/message";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import LoadingButton from "../components/elements/buttons/LoadingButton";
+import LoadingButton from "../components/common/buttons/LoadingButton";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
 import { useRouter } from "next/router";

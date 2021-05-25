@@ -1,7 +1,6 @@
 import React from "react";
-import CustomerLayout from "../../layouts/CustomerLayout";
+import SpecialistLayout from "../../layouts/SpecialistLayout";
 import {
-  CircularProgress,
   Grid,
   Paper,
   Table,
@@ -14,7 +13,6 @@ import {
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import authHeader from "../../lib/authHeader";
 import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,11 +27,10 @@ const useStyles = makeStyles((theme) => ({
 function Dashboard(props) {
   const user = useSelector((state) => state.auth.user);
   const [dashboardData, setDashboardData] = React.useState(null);
+
   React.useEffect(() => {
     axios
-      .get(process.env.BACKEND_HOST + "/user/dashboard-info", {
-        headers: authHeader(),
-      })
+      .get(process.env.BACKEND_HOST + "/user/dashboard-info")
       .then((res) => {
         setDashboardData(res.data.data);
       })
@@ -41,11 +38,10 @@ function Dashboard(props) {
   }, []);
 
   const classes = useStyles();
-
   return (
     <>
       <Typography variant="h3" component="h2" gutterBottom>
-        Witaj {user.first_name},
+        Dzień dobry, {user.first_name},
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
@@ -58,7 +54,7 @@ function Dashboard(props) {
               )}
             </Typography>
             <Typography variant="h6" component="p">
-              Tyle wizyt już odbyłeś
+              Wizyt dzisiaj
             </Typography>
           </Paper>
         </Grid>
@@ -72,7 +68,7 @@ function Dashboard(props) {
               )}
             </Typography>
             <Typography variant="h6" component="p">
-              Tyle wizyt już mieliśmy
+              Wizyt całkowicie
             </Typography>
           </Paper>
         </Grid>
@@ -104,6 +100,12 @@ function Dashboard(props) {
                   </TableCell>
                   <TableCell align="center">{user.phone}</TableCell>
                 </TableRow>
+                <TableRow>
+                  <TableCell scope="row">
+                    <b>Specjalizacja</b>
+                  </TableCell>
+                  <TableCell align="center">{user.job_title}</TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
@@ -113,6 +115,6 @@ function Dashboard(props) {
   );
 }
 
-Dashboard.Layout = CustomerLayout;
+Dashboard.Layout = SpecialistLayout;
 
 export default Dashboard;

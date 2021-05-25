@@ -1,5 +1,5 @@
 import React from "react";
-import LoadingButton from "../../elements/buttons/LoadingButton";
+import LoadingButton from "../../common/buttons/LoadingButton";
 import {
   Button,
   Chip,

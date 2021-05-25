@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import authHeader from "./authHeader";
 import header from "./authHeader";
 import React from "react";
+import { AccountTypes } from "./types";
 
 export function authService(): object {
   const dispatch = useDispatch();
@@ -69,7 +70,7 @@ export function authService(): object {
   };
 }
 
-export function useAuth() {
+export function useAuth(account_type: AccountTypes) {
   const isServer = typeof window === "undefined";
   if (isServer) {
     return;
@@ -85,9 +86,12 @@ export function useAuth() {
     axios
       .get(process.env.BACKEND_HOST + "/user/me")
       .then((res) => {
-        if (res.status === 200 && res.data.status !== "Token is Expired") {
+        if (res.status === 200) {
           dispatch(login(res.data.data));
           setResponse(true);
+          if (account_type !== res.data.data.account_type) {
+            router.push("/");
+          }
           return;
         }
         setResponse(false);
@@ -111,9 +115,7 @@ export function useLogin() {
   const router = useRouter();
   const dispatch = useDispatch();
   axios
-    .get(process.env.BACKEND_HOST + "/user/me", {
-      headers: header(),
-    })
+    .get(process.env.BACKEND_HOST + "/user/me")
     // Render compoment when
     .then((res) => {
       if (res.status === 200 && res.data.status !== "Token is Expired") {

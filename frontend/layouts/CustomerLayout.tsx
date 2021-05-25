@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Drawer from "../components/dashboard/Drawer";
 import HomeIcon from "@material-ui/icons/Home";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { useAuth } from "../lib/authService";
-import { CircularProgress } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
+import FullSizeLoading from "../components/common/FullSizeLoading";
+import { AccountTypes } from "../lib/types";
 
 //Same like folder in pages
 const SECTION_PREFIX = "/user";
@@ -45,21 +44,10 @@ const ITEMS = [
 ];
 
 export default function CustomerLayout({ children }) {
-  const isAuth = useAuth();
+  const isAuth = useAuth(AccountTypes.CLIENT);
 
   if (isAuth !== true) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
+    return <FullSizeLoading />;
   } else {
     return <Drawer items={ITEMS}>{children}</Drawer>;
   }

@@ -20,7 +20,7 @@ import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../src/actions/message";
-import LoadingButton from "../elements/buttons/LoadingButton";
+import LoadingButton from "../common/buttons/LoadingButton";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 import { blue, green, grey, orange, red } from "@material-ui/core/colors";

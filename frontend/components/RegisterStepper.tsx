@@ -35,7 +35,7 @@ import { setMessage } from "../src/actions/message";
 import * as DateFns from "date-fns";
 import { useRouter } from "next/router";
 import Payment from "./register/Payment";
-import LoadingButton from "./elements/buttons/LoadingButton";
+import LoadingButton from "./common/buttons/LoadingButton";
 import { utcToZonedTime } from "date-fns-tz";
 
 const timezoned = (date) => {

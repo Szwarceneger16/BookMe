@@ -16,7 +16,7 @@ import { ExitToApp } from "@material-ui/icons";
 import { authService } from "../../lib/authService";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../src/actions/message";
-import BookMeLogo from "../elements/BookMeLogo";
+import BookMeLogo from "../common/BookMeLogo";
 import { Box } from "@material-ui/core";
 
 const LinkedSimpleItem = ({ data }) => {

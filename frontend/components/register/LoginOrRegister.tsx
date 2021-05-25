@@ -14,7 +14,7 @@ import useStyles, { WhiteTextField } from "./styles/LoginOrRegisterStyles";
 import MaskedInput from "react-text-mask";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import LoadingButton from "../elements/buttons/LoadingButton";
+import LoadingButton from "../common/buttons/LoadingButton";
 
 interface TextMaskCustomProps {
   inputRef: (ref: HTMLInputElement | null) => void;

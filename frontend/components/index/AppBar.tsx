@@ -29,17 +29,15 @@ import {
 import Link from "next/link";
 
 import useStyles from "./styles/AppBar";
-import BookMeLogo from "../elements/BookMeLogo";
+import BookMeLogo from "../common/BookMeLogo";
 import { useLogin } from "../../lib/authService";
 import { useSelector } from "react-redux";
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [
-    mobileMoreAnchorEl,
-    setMobileMoreAnchorEl,
-  ] = React.useState<null | HTMLElement>(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
+    React.useState<null | HTMLElement>(null);
   useLogin();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
@@ -107,12 +105,22 @@ export default function PrimarySearchAppBar() {
         </Link>
       </MenuItem>
       <MenuItem>
-        {isLoggedIn && 
-        <Link href="/admin/dashboard">
-          <Button variant="contained" color="primary">
-            Panel Admina
-          </Button>
-        </Link>}
+        {isLoggedIn && (
+          <Link href="/admin/dashboard">
+            <Button variant="contained" color="primary">
+              Panel Admina
+            </Button>
+          </Link>
+        )}
+      </MenuItem>
+      <MenuItem>
+        {isLoggedIn && (
+          <Link href="/specialist/dashboard">
+            <Button variant="contained" color="primary">
+              Panel Specjalisty
+            </Button>
+          </Link>
+        )}
       </MenuItem>
     </Menu>
   );
@@ -148,12 +156,20 @@ export default function PrimarySearchAppBar() {
                 {!isLoggedIn ? "Zaloguj się" : "Panel klienta"}
               </Button>
             </Link>
-            {isLoggedIn && 
+            {isLoggedIn && (
               <Link href="/admin/dashboard">
-              <Button variant="contained" color="primary">
-                Panel Admina
-              </Button>
-            </Link>}
+                <Button variant="contained" color="primary">
+                  Panel Admina
+                </Button>
+              </Link>
+            )}
+            {isLoggedIn && (
+              <Link href="/specialist/dashboard">
+                <Button variant="contained" color="primary">
+                  Panel Specjalisty
+                </Button>
+              </Link>
+            )}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

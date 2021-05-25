@@ -13,7 +13,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import LoadingButton from "../elements/buttons/LoadingButton";
+import LoadingButton from "../common/buttons/LoadingButton";
 import { Save } from "@material-ui/icons";
 import authHeader from "../../lib/authHeader";
 import axios from "axios";
@@ -34,7 +34,7 @@ const validationSchema = yup.object({
     .string("Powtórz nowe hasło")
     .min(8, "Hasło powinno zawierać co najmniej 8 znaków")
     .required("Powtórzenie hasła jest wymagane")
-    .oneOf([yup.ref('new_password'), null], 'Hasła muszą być identyczne'),
+    .oneOf([yup.ref("new_password"), null], "Hasła muszą być identyczne"),
 });
 
 function ChangePasswordSettings(props) {
@@ -47,7 +47,7 @@ function ChangePasswordSettings(props) {
     initialValues: {
       password: "",
       new_password: "",
-      new_password_2: ""
+      new_password_2: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values, actions) => {

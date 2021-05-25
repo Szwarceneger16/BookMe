@@ -17,7 +17,7 @@ import {
 import GridLocaleText from "./GridLocaleText";
 import AddIcon from "@material-ui/icons/Add";
 import axios from "axios";
-import LoadingButton from "../../elements/buttons/LoadingButton";
+import LoadingButton from "../../common/buttons/LoadingButton";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../../src/actions/message";
 
@@ -143,9 +143,9 @@ function Places() {
 
   const dispatch = useDispatch();
 
-  const handleEditCellChangeCommited = React.useCallback(
-    (props) => {
-      console.log(props);
+  const handleEditCellChangeCommited = React.useCallback((props) => {
+    const currentRow = rows.find((row) => row.id === props.id);
+    if (currentRow.name !== props.props.value) {
       axios
         .put(process.env.BACKEND_HOST + "/places/" + props.id, {
           name: props.props.value,
@@ -162,10 +162,8 @@ function Places() {
           dispatch(setMessage("Pomyślnie zmodyfikowano rekord", "success"));
         })
         .catch((err) => console.error(err));
-    },
-
-    []
-  );
+    }
+  }, []);
 
   React.useEffect(() => {
     axios

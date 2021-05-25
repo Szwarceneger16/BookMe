@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, Paper, TextField, Typography } from "@material-ui/core";
-import LoadingButton from "../elements/buttons/LoadingButton";
+import LoadingButton from "../common/buttons/LoadingButton";
 import { Save } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
