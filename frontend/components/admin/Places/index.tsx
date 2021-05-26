@@ -142,10 +142,9 @@ function Places() {
   const [rows, setRows] = React.useState([]);
 
   const dispatch = useDispatch();
-
-  const handleEditCellChangeCommited = React.useCallback((props) => {
+  const handleEditCellChangeCommited = (props) => {
     const currentRow = rows.find((row) => row.id === props.id);
-    if (currentRow.name !== props.props.value) {
+    if (currentRow && currentRow.name !== props.props.value) {
       axios
         .put(process.env.BACKEND_HOST + "/places/" + props.id, {
           name: props.props.value,
@@ -163,7 +162,7 @@ function Places() {
         })
         .catch((err) => console.error(err));
     }
-  }, []);
+  };
 
   React.useEffect(() => {
     axios

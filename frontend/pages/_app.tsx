@@ -11,7 +11,7 @@ import axiosInstance from "../lib/axiosInstance";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { pl } from "date-fns/locale";
-import Messages from "../components/Messages";
+import MessagesProvider from "../components/Messages";
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -40,12 +40,13 @@ export default function MyApp(props) {
       </Head>
       <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
         <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Messages />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <MessagesProvider>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </MessagesProvider>
         </ThemeProvider>
       </MuiPickersUtilsProvider>
     </Provider>
