@@ -66,6 +66,7 @@ Route::group([
 
 Route::group([], function($router){
     Route::get('services', [JobsServicesController::class, 'index']);
+    Route::post('services/assign', [JobsServicesController::class,'assignToEmployee']);
     Route::resource('reservations', ReservationController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('workHours', WorkHourController::class);

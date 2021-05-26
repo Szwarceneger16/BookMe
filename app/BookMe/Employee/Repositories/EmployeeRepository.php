@@ -22,4 +22,9 @@ class EmployeeRepository
     {
         return $this->employee->create($data);
     }
+
+    public function find(int $id)
+    {
+        return $this->employee->find($id);
+    }
 }

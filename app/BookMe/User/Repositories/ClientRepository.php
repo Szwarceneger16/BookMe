@@ -10,12 +10,11 @@ class ClientRepository
 
     public function __construct(Client $client)
     {
-        $this->client=$client;
+        $this->client = $client;
     }
 
     public function find(int $id)
     {
         return $this->client->find($id);
     }
-
 }

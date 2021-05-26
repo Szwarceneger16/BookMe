@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\BookMe\JobsServices\Requests\AssignServiceToEmployeeRequest;
+use App\BookMe\JobsServices\Services\AssignToEmployeeService;
 use App\BookMe\JobsServices\Services\ShowAllService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,10 +19,13 @@ use Psy\Util\Json;
 class JobsServicesController extends Controller
 {
     public ShowAllService $showAllService;
+    private AssignToEmployeeService $assignToEmployeeService;
 
-    public function __construct(ShowAllService $showAllService)
+    public function __construct(ShowAllService $showAllService,
+                                AssignToEmployeeService $assignToEmployeeService)
     {
         $this->showAllService = $showAllService;
+        $this->assignToEmployeeService = $assignToEmployeeService;
     }
 
     /**
@@ -39,4 +44,25 @@ class JobsServicesController extends Controller
         return $this->showAllService->execute();
     }
 
+    /**
+     * Assign services to employee
+     *
+     * Assign services to employee
+     * @bodyParam id integer required Employee id field Example: 15
+     * @bodyParam services[].id int Service id. Example: [1,2,4]
+     * @authenticated
+     *
+     * @response {
+     *    "data": "[]",
+     *    "message": "Data was returned",
+     *    "status": 200
+     *    }
+     *
+     * @param AssignServiceToEmployeeRequest $request
+     * @return JsonResponse
+     */
+    public function assignToEmployee(AssignServiceToEmployeeRequest $request): JsonResponse
+    {
+        return $this->assignToEmployeeService->execute($request->validated());
+    }
 }
