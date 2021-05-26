@@ -2,6 +2,8 @@ import {
   Box,
   Button,
   FormControl,
+  FormControlLabel,
+  FormLabel,
   Grid,
   IconButton,
   InputAdornment,
@@ -9,6 +11,8 @@ import {
   List,
   ListItem,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
   TextField,
   Typography,
@@ -56,7 +60,6 @@ const validationSchema = yup.object({
 export default function AdminVisitsCalendar(params) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { register, checkPassword, login } = authService();
 
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [employee_ids, setExperts] = useState();
@@ -72,7 +75,7 @@ export default function AdminVisitsCalendar(params) {
     alert("do usuniecia:" + employee_ids);
   };
 
-  const handleRegister = (values, actions) => {
+  const handleRegister = async (values, actions) => {
     if (!values.email) {
       actions.setFieldError("email", "Email jest wymagany");
       actions.setSubmiting(false);
@@ -93,24 +96,28 @@ export default function AdminVisitsCalendar(params) {
       actions.setSubmitting(false);
       return;
     }
-    const response = register({
-      email: values.email,
-      password: values.password,
-      first_name: values.firstName,
-      last_name: values.lastName,
-      phone: values.phone,
-    });
-    if (response) {
-      dispatch(
-        setMessage(
-          "Pomyślnie się zarejestrowałeś. Możesz przejść dalej",
-          "success"
-        )
-      );
-      //actions.resetForm();
-    } else {
-      actions.setFieldError("email", "Ten email jest już używany");
-    }
+
+    axios
+      .post(process.env.BACKEND_HOST + "/employees", {
+        email: values.email,
+        password: values.password,
+        first_name: values.firstName,
+        last_name: values.lastName,
+        phone: values.phone,
+        job_title: values.job_title,
+        account_type: values.account_type,
+      })
+      .then((res) => {
+        dispatch(setMessage("Pomyślnie dodano", "success"));
+      })
+      .catch((err) => {
+        Object.entries(err.response.data.errors).forEach(([key, values]) => {
+          actions.setFieldError(key, values[0]);
+        });
+
+        dispatch(setMessage("Nie udało sie dodac", "error"));
+      })
+      .finally(() => actions.setSubmitting(false));
   };
 
   return (
@@ -123,6 +130,8 @@ export default function AdminVisitsCalendar(params) {
         phone: "",
         firstName: "",
         lastName: "",
+        job_title: "",
+        account_type: "",
       }}
       validationSchema={validationSchema}
       onSubmit={handleRegister}
@@ -132,6 +141,41 @@ export default function AdminVisitsCalendar(params) {
           <Grid className={classes.root}>
             <Box className={classes.rootItem}>
               <Box className={classes.flexItemFormFields}>
+                <WhiteTextField
+                  fullWidth
+                  id="job_title"
+                  label="Tytuł"
+                  variant="outlined"
+                  className={classes.textField}
+                  name="job_title"
+                  value={props.values.job_title}
+                  onChange={props.handleChange}
+                  error={
+                    props.touched.job_title && Boolean(props.errors.job_title)
+                  }
+                  helperText={props.touched.job_title && props.errors.job_title}
+                />
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Typ konta</FormLabel>
+                  <RadioGroup
+                    aria-label="account_type"
+                    name="account_type"
+                    value={props.values.account_type}
+                    onChange={props.handleChange}
+                    row
+                  >
+                    <FormControlLabel
+                      value="ADMIN"
+                      control={<Radio />}
+                      label="Admin"
+                    />
+                    <FormControlLabel
+                      value="EMPLOYEE"
+                      control={<Radio />}
+                      label="Pracownik"
+                    />
+                  </RadioGroup>
+                </FormControl>
                 <WhiteTextField
                   fullWidth
                   id="email"
