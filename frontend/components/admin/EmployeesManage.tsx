@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -62,17 +63,65 @@ export default function AdminVisitsCalendar(params) {
   const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
-  const [employee_ids, setExperts] = useState();
+  const [employees, setExperts] = useState();
+  const [services, setServices] = useState<Service[]>();
 
-  useEffect(() => {
-    axios
+  const getEmployees = () => {
+    return axios
       .get(process.env.BACKEND_HOST + "/employees")
       .then((res) => setExperts(res.data.data))
       .catch((err) => console.error(err));
+  };
+
+  useEffect(async () => {
+    getEmployees();
+    axios
+      .get(process.env.BACKEND_HOST + "/services")
+      .then((res) => setServices(res.data.data))
+      .catch((err) => console.error(err));
   }, []);
 
-  const handleDelete = () => {
-    alert("do usuniecia:" + employee_ids);
+  const handleDelete = (employee_id, setSubmitting, resetForm) => {
+    if (!employee_id) return;
+    setSubmitting(true);
+    axios
+      .delete(process.env.BACKEND_HOST + "/employees/" + employee_id)
+      .then((res) => {
+        dispatch(setMessage("Pomyślnie usunieto", "success"));
+        getEmployees();
+        resetForm();
+      })
+      .catch((err) => {
+        dispatch(setMessage("Nie udało sie usunac", "error"));
+      })
+      .finally(() => setSubmitting(false));
+  };
+
+  const handleServiceAdd = async (values, actions) => {
+    if (!values.service) {
+      dispatch(setMessage("Usluga jest wymagana", "error"));
+      actions.setSubmiting(false);
+      return;
+    }
+    if (!values.employee) {
+      dispatch(setMessage("Pracownik jest wymagany", "error"));
+      actions.setSubmitting(false);
+      return;
+    }
+
+    axios
+      .post(process.env.BACKEND_HOST + "/services/assign", {
+        employee_id: values.employee.id,
+        services: [values.service.id],
+      })
+      .then((res) => {
+        dispatch(setMessage("Pomyślnie przypisano", "success"));
+        actions.resetForm();
+      })
+      .catch((err) => {
+        dispatch(setMessage("Nie udało sie przypisac", "error"));
+      })
+      .finally(() => actions.setSubmitting(false));
   };
 
   const handleRegister = async (values, actions) => {
@@ -109,6 +158,7 @@ export default function AdminVisitsCalendar(params) {
       })
       .then((res) => {
         dispatch(setMessage("Pomyślnie dodano", "success"));
+        getEmployees();
       })
       .catch((err) => {
         Object.entries(err.response.data.errors).forEach(([key, values]) => {
@@ -121,26 +171,26 @@ export default function AdminVisitsCalendar(params) {
   };
 
   return (
-    <Formik
-      // enableReinitialize
-      initialValues={{
-        selectedService: "",
-        email: "",
-        password: "",
-        phone: "",
-        firstName: "",
-        lastName: "",
-        job_title: "",
-        account_type: "",
-      }}
-      validationSchema={validationSchema}
-      onSubmit={handleRegister}
-    >
-      {(props) => (
-        <Form>
-          <Grid className={classes.root}>
-            <Box className={classes.rootItem}>
-              <Box className={classes.flexItemFormFields}>
+    <Grid className={classes.root}>
+      <Box className={classes.rootItem}>
+        <Box className={classes.flexItemFormFields}>
+          <Formik
+            // enableReinitialize
+            initialValues={{
+              email: "",
+              password: "",
+              phone: "",
+              firstName: "",
+              lastName: "",
+              job_title: "",
+              account_type: "",
+              service: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={handleRegister}
+          >
+            {(props) => (
+              <Form>
                 <WhiteTextField
                   fullWidth
                   id="job_title"
@@ -268,17 +318,31 @@ export default function AdminVisitsCalendar(params) {
                     Dodaj
                   </Button>
                 </Box>
-              </Box>
-              <Box className={classes.flexItemFormFields}>
+              </Form>
+            )}
+          </Formik>
+        </Box>
+        <Box className={classes.flexItemFormFields}>
+          <Formik
+            enableReinitialize
+            initialValues={{
+              employee: null /* (employees && employees[0]) ?? "" */,
+              service: null /* (services && services[0]) ?? "" */,
+            }}
+            // validationSchema={yup.object({employee: yup.string()})}
+            onSubmit={handleServiceAdd}
+          >
+            {(props) => (
+              <Form>
                 <Box className={classes.formItem}>
-                  {employee_ids && employee_ids.length > 0 ? (
+                  {employees && employees.length > 0 ? (
                     <Autocomplete
-                      id="employee_ids-select"
+                      id="employees-select"
                       value={props.values.employee}
                       onChange={(event, newValue) => {
                         props.setFieldValue("employee", newValue, false);
                       }}
-                      options={employee_ids}
+                      options={employees}
                       className={classes.select}
                       getOptionLabel={(option) => {
                         //debugger;
@@ -297,15 +361,57 @@ export default function AdminVisitsCalendar(params) {
                   )}
                 </Box>
                 <Box className={classes.formItem}>
-                  <Button variant="contained" onClick={handleDelete}>
+                  <Button
+                    variant="contained"
+                    onClick={() =>
+                      handleDelete(
+                        props.values.employee.id,
+                        props.setSubmitting,
+                        props.resetForm
+                      )
+                    }
+                    disabled={props.isSubmitting}
+                  >
                     Usun Pracownika
                   </Button>
                 </Box>
-              </Box>
-            </Box>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
+                <Divider></Divider>
+                <Box className={classes.formItem}>
+                  {services && services.length > 0 ? (
+                    <Autocomplete
+                      id="services-select"
+                      value={props.values.service}
+                      onChange={(event, newValue) => {
+                        props.setFieldValue("service", newValue, false);
+                      }}
+                      options={services}
+                      className={classes.select}
+                      getOptionLabel={(option) => {
+                        //debugger;
+                        return option.title?.toString() || option.title + "";
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Usługa"
+                          variant="outlined"
+                        />
+                      )}
+                    ></Autocomplete>
+                  ) : (
+                    <Skeleton variant="rect" height={60} />
+                  )}
+                </Box>
+                <Box className={classes.formItem}>
+                  <Button variant="contained" type="submit">
+                    Dodaj specjalność
+                  </Button>
+                </Box>
+              </Form>
+            )}
+          </Formik>
+        </Box>
+      </Box>
+    </Grid>
   );
 }
