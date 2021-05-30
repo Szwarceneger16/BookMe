@@ -4,6 +4,7 @@ namespace App\BookMe\Reservation\Repositories;
 
 use App\BookMe\Reservation\Enums\ReservationStatuses;
 use App\Models\Reservation;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ReservationRepository
@@ -28,6 +29,11 @@ class ReservationRepository
     public function getByDate($date)
     {
         return $this->reservation->whereDate('datetime_start', $date)->get();
+    }
+
+    public function getAllAfterDate($date)
+    {
+        return $this->reservation->where('reservation_status', ReservationStatuses::ACTIVE)->whereBetween('datetime_start',[Carbon::now(),$date])->get();
     }
 
     public function getAll()
