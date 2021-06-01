@@ -23,5 +23,4 @@ class ShowAllService
         $services = $this->serviceRepository->listServices();
         return Response::build($services, 200, "msg/success.list");
     }
-
 }

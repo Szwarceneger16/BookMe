@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Reservation extends Model
 {
     use HasFactory;
 
     protected $fillable=[
+        'id',
         'datetime_start',
         'datetime_end',
         'client_id',
@@ -47,5 +49,10 @@ class Reservation extends Model
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function notificationHistory(): HasOne
+    {
+        return $this->hasOne(NotificationHistory::class);
     }
 }

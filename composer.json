@@ -12,7 +12,8 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "stripe/stripe-php": "^7.77",
-        "tymon/jwt-auth": "^1.0"
+        "tymon/jwt-auth": "^1.0",
+        "vonage/client": "^2.4"
     },
     "require-dev": {
         "beyondcode/laravel-er-diagram-generator": "^1.5",

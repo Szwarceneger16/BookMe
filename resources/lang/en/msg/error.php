@@ -6,6 +6,7 @@ return [
     'update' => 'Records was not updated',
     'create' => 'Records was not created',
     'store' => 'Records was not stored',
+    'delete' => 'Records was not destroyed',
     'login' => 'Login failed',
     'register' => 'Register failed',
     'refresh' => 'Refresh token failed',

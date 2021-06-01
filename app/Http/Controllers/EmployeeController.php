@@ -7,6 +7,9 @@ use App\BookMe\Employee\Request\StoreEmployeeRequest;
 use App\BookMe\Employee\Services\AddEmployeeService;
 use App\BookMe\Employee\Services\ListEmployeesByServiceService;
 use App\BookMe\Employee\Services\ListEmployeesService;
+use App\BookMe\Utility\Response;
+use App\Models\Employee;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -86,5 +89,25 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request): JsonResponse
     {
         return $this->addEmployeeService->execute($request->validated());
+    }
+
+    /**
+     * Delete employee (with user)
+     *
+     * Delete employee (with user)
+     * @bodyParam id integer required Employee id field Example: 15
+     * @authenticated
+     *
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function destroy(int $id): JsonResponse
+    {
+        try{
+            $employee = Employee::findOrFail($id);
+            return Response::build($employee->delete(), 200, "msg/success.delete");
+        }catch(Exception $e){
+            return Response::build([], 200, "msg/error.delete");
+        }
     }
 }
