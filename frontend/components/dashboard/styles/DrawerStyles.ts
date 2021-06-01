@@ -45,7 +45,10 @@ export default makeStyles((theme: Theme) =>
       color: grey[500],
     },
     messagesContainer: {
+      paper: {
       maxWidth: 500,
+      minWidth: 400,
+    },
     },
     messagesTitle: {
       margin: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
@@ -74,6 +77,9 @@ export default makeStyles((theme: Theme) =>
       fontWeight: 300,
       color: grey[700],
       textOverflow: "hidden",
+      "&:first-letter": {
+        textTransform: "uppercase",
+      },
     },
     messagesExpandMore: {
       display: "flex",

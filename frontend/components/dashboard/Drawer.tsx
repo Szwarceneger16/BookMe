@@ -29,11 +29,17 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import useStyles from "./styles/DrawerStyles";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import axios from "axios";
+import { AccountTypes } from "../../lib/types";
 
 export default function AppDrawer({ children, items, ...props }) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const user = useSelector((state) => state?.auth?.user);
+  const [counter, setCounter] = React.useState(0);
+  const [notifications, setNotifications] = React.useState([]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -42,9 +48,8 @@ export default function AppDrawer({ children, items, ...props }) {
   //
   // Notifications
   //
-  const [anchorNotificationsEl, setAnchorNotificationsEl] = React.useState(
-    null
-  );
+  const [anchorNotificationsEl, setAnchorNotificationsEl] =
+    React.useState(null);
   const areNotificationsOpen = Boolean(anchorNotificationsEl);
 
   const handleNotificationsOpen = (event) => {
@@ -54,6 +59,18 @@ export default function AppDrawer({ children, items, ...props }) {
   const handleNotificationsClose = () => {
     setAnchorNotificationsEl(null);
   };
+
+  React.useEffect(() => {
+    if (user.account_type == AccountTypes.CLIENT) {
+      axios
+        .get(process.env.BACKEND_HOST + "/notifications/list")
+        .then((res) => {
+          setCounter(res.data.data.counter);
+          setNotifications(res.data.data.reservations);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
 
   const notificationsId = "notifications";
   const renderNotifications = (
@@ -70,34 +87,42 @@ export default function AppDrawer({ children, items, ...props }) {
         Powiadomienia
       </Typography>
       <Divider />
-      {[0, 1, 2].map((item) => (
-        <MenuItem
-          onClick={handleNotificationsClose}
-          key={item}
-          className={classes.messageItem}
-        >
-          <Avatar className={classes.notificationIcon}>
-            <AssignmentIcon />
-          </Avatar>
-          <div className={classes.messageTexts}>
-            <Typography className={classes.messageName}>
-              Nadchodzące wydarzenie
-            </Typography>
-            <Typography className={classes.messageShort}>
-              Za <b>2 dni</b> odbędzie się Twoja wizyta
-            </Typography>
-          </div>
-        </MenuItem>
-      ))}
-      <div className={classes.messagesExpandMore}>
-        <Button
-          endIcon={
-            <ExpandMoreIcon color="inherit" aria-label="show more messages" />
-          }
-        >
-          Pokaż wszystko
-        </Button>
-      </div>
+      {counter > 0 ? (
+        notifications.map((item, index) => (
+          <MenuItem
+            onClick={handleNotificationsClose}
+            key={index}
+            className={classes.messageItem}
+          >
+            <Avatar className={classes.notificationIcon}>
+              <AssignmentIcon />
+            </Avatar>
+            <div className={classes.messageTexts}>
+              <Typography className={classes.messageName}>
+                Nadchodząca wizyta
+              </Typography>
+              <Typography className={classes.messageShort}>
+                <b>{item.time_left}</b> odbędzie się {item.title}.
+              </Typography>
+            </div>
+          </MenuItem>
+        ))
+      ) : (
+        <Typography style={{ width: "100%", textAlign: "center", padding: 8 }}>
+          Aktualnie nie masz żadnych wydarzeń 🤷‍♂️
+        </Typography>
+      )}
+      <Link href="/user/edit">
+        <div className={classes.messagesExpandMore}>
+          <Button
+            endIcon={
+              <ExpandMoreIcon color="inherit" aria-label="show more messages" />
+            }
+          >
+            Pokaż wszystko
+          </Button>
+        </div>
+      </Link>
     </Menu>
   );
   //End notifictions
@@ -112,7 +137,7 @@ export default function AppDrawer({ children, items, ...props }) {
             aria-label="show 17 new notifications"
             onClick={handleNotificationsOpen}
           >
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={counter} color="primary">
               <Notifications className={classes.appBarIcon} />
             </Badge>
           </IconButton>
