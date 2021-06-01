@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\JobsServicesController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\ReservationController;
@@ -87,6 +88,13 @@ Route::group([
     'prefix' => 'payments',
 ], function ($router){
     Route::get('handle-payment-response', [PaymentController::class, 'handlePaymentResponse']);
+});
+
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'notifications',
+], function ($router){
+    Route::get('list', [NotificationController::class, 'list']);
 });
 
 
