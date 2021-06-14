@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import ChangeContactSettings from "../../components/user/ChangeContactSettings";
 
 function Settings(props) {
-  const user = useSelector((state) => state.auth.user);
   return (
     <>
       <Typography variant="h3" component="h2">

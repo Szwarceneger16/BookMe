@@ -41,10 +41,14 @@ function Dashboard(props) {
   }, []);
 
   const classes = useStyles();
+
+  if (!user) {
+    return <></>;
+  }
   return (
     <>
       <Typography variant="h3" component="h2" gutterBottom>
-        Witaj Administratorze,  {user.first_name},
+        Witaj Administratorze, {user.first_name},
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>

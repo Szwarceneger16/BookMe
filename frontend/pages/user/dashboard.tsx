@@ -42,6 +42,10 @@ function Dashboard(props) {
 
   const classes = useStyles();
 
+  if (!user) {
+    return <></>;
+  }
+
   return (
     <>
       <Typography variant="h3" component="h2" gutterBottom>
