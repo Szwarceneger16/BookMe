@@ -25,18 +25,8 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     busyRoomItem: {
       backgroundColor: theme.palette.common.white,
-      borderRadius: "6px",
-      width: "95vw",
-      // [theme.breakpoints.up("xs")]: {
-      //   width: "60vw",
-      // },
-      [theme.breakpoints.up("sm")]: {
-        width: "50vw",
-      },
-      [theme.breakpoints.up("md")]: {
-        width: "700px",
-      },
-      margin: "4px",
+      borderRadius: theme.spacing(1),
+      width: "100%",
       "&.Mui-selected": {
         backgroundColor: theme.palette.info.light,
       },
@@ -55,24 +45,26 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     modalBody: {
       backgroundColor: theme.palette.background.paper,
-      border: "2px solid #000",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      borderRadius: theme.spacing(1),
       display: "flex",
       flexDirection: "column",
       "& > *": {
         margin: 4,
-        "& .MuiButtonGroup-grouped": {
-          margin: 8,
-        },
       },
     },
     calendar: {
-      /*     day: {
-      fontSize: "22px",
-      color: "red"
-    }, */
-      width: "min-content",
+      display: "flex",
+      justifyContent: "space-around",
+    },
+    gridItem: {
+      padding: theme.spacing(3, 2),
+      display: "flex",
+      flexDirection: "column",
+    },
+    description: {
+      marginBottom: theme.spacing(2),
     },
     modal: {
       display: "flex",
@@ -83,6 +75,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       flexWrap: "wrap",
+      width: "100%",
     },
     listButton: {
       backgroundColor: theme.palette.common.white,
@@ -99,18 +92,6 @@ export const useStyles = makeStyles((theme: Theme) =>
     marginTop: {
       marginTop: theme.spacing(2),
     },
-    select: {
-      color: "white",
-
-      "& .MuiSelect-icon": {
-        color: theme.palette.white.main,
-      },
-      "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.white.main,
-        "&:hover": {
-          borderColor: theme.palette.white.dark,
-        },
-      },
-    },
+    select: {},
   })
 );

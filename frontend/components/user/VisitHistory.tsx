@@ -193,8 +193,9 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(1),
+      padding: theme.spacing(1, 1, 1, 2),
+      flexDirection: "column",
+      alignItems: "flex-start",
     },
     highlight:
       theme.palette.type === "light"
@@ -206,9 +207,6 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
             color: theme.palette.text.primary,
             backgroundColor: theme.palette.secondary.dark,
           },
-    title: {
-      flex: "1 1 100%",
-    },
   })
 );
 
@@ -216,13 +214,12 @@ const EnhancedTableToolbar = () => {
   const classes = useToolbarStyles();
   return (
     <Toolbar className={classes.root}>
-      <Typography
-        className={classes.title}
-        variant="h6"
-        id="tableTitle"
-        component="div"
-      >
+      <Typography variant="h6" id="tableTitle" component="div">
         Wizyty
+      </Typography>
+      <Typography variant="caption">
+        Tabela z wszystkimi wizytami powiązanymi z użytkownikiem. Wyświetla
+        nawet te odwołane.
       </Typography>
     </Toolbar>
   );
@@ -274,15 +271,15 @@ function Row({ row, index, handleButtonClick }) {
     default:
       chip = { color: grey[600], text: "Brak" };
   }
-
+  const time = Math.round(row.time * 100) / 100;
   return (
     <TableRow hover>
       <TableCell component="th" id={labelId} scope="row">
         {row.service}
       </TableCell>
       <TableCell align="right">{row.employee}</TableCell>
-      <TableCell align="right">{row.date}</TableCell>
-      <TableCell align="right">{row.time}</TableCell>
+      <TableCell align="right">{row.date.slice(0, -3)}</TableCell>
+      <TableCell align="right">{time}</TableCell>
       <TableCell align="right">
         {row.active === ReservationStatuses.ACTIVE ? (
           <CheckIcon />

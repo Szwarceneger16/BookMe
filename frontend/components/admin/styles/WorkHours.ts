@@ -48,10 +48,12 @@ export const useStyles = makeStyles((theme: Theme) =>
       width: "inherit",
     },
     flexItemCalendar: {
-      /*     day: {
-      fontSize: "22px",
-      color: "red"
-    }, */
+      display: "flex",
+      alignItems: "center",
+      overflow: "hidden",
+    },
+    textField: {
+      width: "100%",
     },
     busyRoomList: {
       display: "flex",
@@ -86,18 +88,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.white.main,
     },
 
-    select: {
-      color: "white",
-
-      "& .MuiSelect-icon": {
-        color: theme.palette.white.main,
-      },
-      "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.white.main,
-        "&:hover": {
-          borderColor: theme.palette.white.dark,
-        },
-      },
-    },
+    select: {},
   })
 );

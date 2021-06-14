@@ -8,10 +8,13 @@ export default makeStyles((theme: Theme) =>
       height: "100vh",
       backgroundImage: `url(/images/index.jpg)`,
       overflowY: "hidden",
+      backgroundPosition: "center center",
+      backgroundSize: "cover",
     },
     container: {
-      backgroundColor: "rgba(0, 0, 0, 0.2)",
+      //backgroundColor: "rgba(0, 0, 0, 0.35)",
       borderRadius: theme.spacing(2),
+      marginBottom: theme.spacing(2),
       height: "85vh",
       width: "90%",
       [theme.breakpoints.down("xs")]: {

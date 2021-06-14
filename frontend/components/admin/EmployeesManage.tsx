@@ -17,6 +17,7 @@ import {
   Select,
   TextField,
   Typography,
+  Paper,
 } from "@material-ui/core";
 import useStyles, { WhiteTextField } from "./styles/EmployeesStyle";
 import React, { useEffect, useState } from "react";
@@ -29,6 +30,7 @@ import { setMessage } from "../../src/actions/message";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { authService } from "../../lib/authService";
 import axios from "axios";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 function TextMaskCustom(props: TextMaskCustomProps) {
   const { inputRef, ...other } = props;
@@ -172,7 +174,7 @@ export default function AdminVisitsCalendar(params) {
 
   return (
     <Grid className={classes.root}>
-      <Box className={classes.rootItem}>
+      <Paper className={classes.rootItem}>
         <Box className={classes.flexItemFormFields}>
           <Formik
             // enableReinitialize
@@ -314,8 +316,13 @@ export default function AdminVisitsCalendar(params) {
                 />
 
                 <Box className={classes.formItem}>
-                  <Button type="submit" variant="contained">
-                    Dodaj
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    endIcon={<PersonAddIcon />}
+                  >
+                    Dodaj pracownika
                   </Button>
                 </Box>
               </Form>
@@ -411,7 +418,7 @@ export default function AdminVisitsCalendar(params) {
             )}
           </Formik>
         </Box>
-      </Box>
+      </Paper>
     </Grid>
   );
 }

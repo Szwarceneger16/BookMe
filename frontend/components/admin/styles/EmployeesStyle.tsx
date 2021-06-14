@@ -34,18 +34,22 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       justifyContent: "center",
       alignItems: "end",
+      padding: theme.spacing(2),
     },
     flexItemFormFields: {
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
       width: 300,
-      margin: 10,
+      margin: theme.spacing(0, 2),
       height: "max-content",
     },
     formItem: {
-      margin: 10,
+      margin: theme.spacing(2, 0),
       width: "inherit",
+      "&:first-child": {
+        marginTop: 0,
+      },
     },
   })
 );

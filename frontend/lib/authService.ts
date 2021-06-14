@@ -25,11 +25,11 @@ export function authService(): object {
         const data = res.data.data;
         dispatch(loginAction(data));
         localStorage.setItem("user", JSON.stringify(data));
-        return true;
+        return res;
       })
       .catch((err) => {
         console.log(err);
-        return false;
+        return null;
       });
   };
 
@@ -115,17 +115,20 @@ export function useLogin() {
   }
   const router = useRouter();
   const dispatch = useDispatch();
-  axios
-    .get(process.env.BACKEND_HOST + "/user/me")
-    // Render compoment when
-    .then((res) => {
-      if (res.status === 200 && res.data.status !== "Token is Expired") {
-        dispatch(login(res.data.data));
-        return true;
-      }
-      return false;
-    })
-    .catch((err) => {
-      return false;
-    });
+
+  React.useEffect(() => {
+    axios
+      .get(process.env.BACKEND_HOST + "/user/me")
+      // Render compoment when
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(login(res.data.data));
+          return true;
+        }
+        return false;
+      })
+      .catch((err) => {
+        return false;
+      });
+  }, []);
 }

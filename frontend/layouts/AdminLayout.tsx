@@ -34,12 +34,12 @@ const ITEMS = [
     href: SECTION_PREFIX + "/employees",
   },
   {
-    name: "Godizny pracy",
+    name: "Godziny pracy",
     icon: <EventNoteIcon />,
     href: SECTION_PREFIX + "/workHours/manage",
   },
   {
-    name: "Ustawienia placówki",
+    name: "Ustawienia konta",
     icon: <SettingsIcon />,
     href: SECTION_PREFIX + "/settings",
   },

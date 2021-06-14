@@ -23,6 +23,7 @@ import * as yup from "yup";
 import { useRouter } from "next/router";
 import { login } from "../src/actions/auth";
 import { authService } from "../lib/authService";
+import { AccountTypes } from "../lib/types";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -76,9 +77,21 @@ export default function Login() {
         password: values.password,
       });
       if (response) {
+        const account_type = response.data.data.account_type;
         actions.resetForm();
         dispatch(setMessage("Pomyślnie się zalogowałeś", "success"));
-        router.push("user/dashboard");
+        let routerPrefix = "";
+        switch (account_type) {
+          case AccountTypes.CLIENT:
+            routerPrefix = "user";
+            break;
+          case AccountTypes.ADMIN:
+            routerPrefix = "admin";
+            break;
+          case AccountTypes.EMPLOYEE:
+            routerPrefix = "specialist";
+        }
+        router.push(routerPrefix + "/dashboard");
       } else {
         actions.setFieldError("email", "Niepoprawny email lub hasło");
       }

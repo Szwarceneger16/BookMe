@@ -9,6 +9,7 @@ import {
   List,
   ListItem,
   Modal,
+  Paper,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -102,9 +103,8 @@ const MyModal = ({ visitData, handleClose, children }) => {
                       />
                     </Box>
 
-                    <ButtonGroup disableElevation>
+                    <ButtonGroup variant="contained" color="primary">
                       <Button
-                        variant="contained"
                         color="secondary"
                         startIcon={<DeleteIcon />}
                         onClick={handleDelete}
@@ -112,7 +112,6 @@ const MyModal = ({ visitData, handleClose, children }) => {
                         Usun Wizyte
                       </Button>
                       <Button
-                        variant="contained"
                         color="primary"
                         startIcon={<SaveIcon />}
                         type="submit"
@@ -161,95 +160,104 @@ export default function AdminVisitsCalendar(params) {
   const handleSubmit = (values, actions) => {};
 
   return (
-    <Formik
-      // enableReinitialize
-      initialValues={{
-        expert: null,
-        date: new Date(),
-      }}
-      onSubmit={handleSubmit}
-    >
-      {(props) => (
-        <Form>
-          <Grid className={classes.root}>
-            <MyModal
-              visitData={selectedVisit}
-              handleClose={handleClose}
-            ></MyModal>
-            <Box className={classes.calendar}>
-              <Box>
-                {experts && experts.length > 0 ? (
-                  <Autocomplete
-                    id="experts-select"
-                    value={props.values.expert}
-                    onChange={(event, newValue) => {
-                      props.setFieldValue("expert", newValue, false);
-                    }}
-                    options={experts}
-                    className={classes.select}
-                    getOptionLabel={(option) => {
-                      //debugger;
-                      return option.first_name + " " + option.last_name;
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Specjalista"
-                        variant="outlined"
-                      />
+    <Paper>
+      <Formik
+        // enableReinitialize
+        initialValues={{
+          expert: null,
+          date: new Date(),
+        }}
+        onSubmit={handleSubmit}
+      >
+        {(props) => (
+          <Form>
+            <Grid className={classes.root}>
+              <MyModal
+                visitData={selectedVisit}
+                handleClose={handleClose}
+              ></MyModal>
+              <Grid item xs={12} className={classes.calendar}>
+                <Grid container>
+                  <Grid item xs={12} md={6} className={classes.gridItem}>
+                    <Typography className={classes.description}>
+                      Aby wyświetlić wizyty w danym dniu, najpierw wybierz
+                      specjalistę następnie dzień.
+                    </Typography>
+                    {experts && experts.length > 0 ? (
+                      <Autocomplete
+                        id="experts-select"
+                        value={props.values.expert}
+                        onChange={(event, newValue) => {
+                          props.setFieldValue("expert", newValue, false);
+                        }}
+                        options={experts}
+                        className={classes.select}
+                        getOptionLabel={(option) => {
+                          //debugger;
+                          return option.first_name + " " + option.last_name;
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Specjalista"
+                            variant="outlined"
+                          />
+                        )}
+                      ></Autocomplete>
+                    ) : (
+                      <Skeleton variant="rect" height={60} />
                     )}
-                  ></Autocomplete>
-                ) : (
-                  <Skeleton variant="rect" height={60} />
-                )}
-              </Box>
+                  </Grid>
 
-              <Box>
-                <Calendar
-                  date={props.values.date}
-                  onChange={(date) => {
-                    props.setFieldValue("date", date);
-                    getActualWorkHours(date);
-                  }}
-                />
-              </Box>
-            </Box>
-
-            <List className={classes.allVisitContainer}>
-              {allReservation ? (
-                allReservation.reservations.map((reservation, index) => (
-                  <ListItem
-                    button
-                    className={classes.busyRoomItem}
-                    key={index}
-                    onClick={() =>
-                      setSelectedVisit(allReservation.reservations[index])
-                    }
-                  >
-                    <Box>
-                      {reservation.employee_first_name +
-                        " " +
-                        reservation.employee_last_name}
-                    </Box>
-                    <Box>
-                      {reservation.client_first_name +
-                        " " +
-                        reservation.client_last_name}
-                    </Box>
-                    <Box>
-                      {reservation.time_start.substring(0, 5) +
-                        "-" +
-                        reservation.time_end.substring(0, 5)}
-                    </Box>
-                  </ListItem>
-                ))
-              ) : (
-                <CircularProgress />
-              )}
-            </List>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
+                  <Grid item xs={12} md={6} className={classes.gridItem}>
+                    <Calendar
+                      date={props.values.date}
+                      onChange={(date) => {
+                        props.setFieldValue("date", date);
+                        getActualWorkHours(date);
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <List className={classes.allVisitContainer}>
+                  {allReservation ? (
+                    allReservation.reservations.map((reservation, index) => (
+                      <ListItem
+                        button
+                        className={classes.busyRoomItem}
+                        key={index}
+                        onClick={() =>
+                          setSelectedVisit(allReservation.reservations[index])
+                        }
+                      >
+                        <Box>
+                          {reservation.employee_first_name +
+                            " " +
+                            reservation.employee_last_name}
+                        </Box>
+                        <Box>
+                          {reservation.client_first_name +
+                            " " +
+                            reservation.client_last_name}
+                        </Box>
+                        <Box>
+                          {reservation.time_start.substring(0, 5) +
+                            "-" +
+                            reservation.time_end.substring(0, 5)}
+                        </Box>
+                      </ListItem>
+                    ))
+                  ) : (
+                    <CircularProgress />
+                  )}
+                </List>
+              </Grid>
+            </Grid>
+          </Form>
+        )}
+      </Formik>
+    </Paper>
   );
 }

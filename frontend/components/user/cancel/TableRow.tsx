@@ -112,7 +112,7 @@ function Row({ row, index, handleButtonClick }) {
         {row.service}
       </TableCell>
       <TableCell align="right">{row.employee}</TableCell>
-      <TableCell align="right">{row.date}</TableCell>
+      <TableCell align="right">{row.date.slice(0, -3)}</TableCell>
       <TableCell align="right">{row.time}</TableCell>
       <TableCell align="right">
         <LoadingButton

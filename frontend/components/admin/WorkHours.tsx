@@ -7,6 +7,7 @@ import {
   List,
   ListItem,
   MenuItem,
+  Paper,
   Select,
   TextField,
   Typography,
@@ -22,6 +23,7 @@ import * as DateFns from "date-fns";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../src/actions/message";
+import AddAlarmIcon from "@material-ui/icons/AddAlarm";
 
 export default function AdminVisitsCalendar(params) {
   const classes = useStyles();
@@ -77,155 +79,177 @@ export default function AdminVisitsCalendar(params) {
         dispatch(setMessage("Nie udalo sie dodac godziny pracy", "error"));
       });
   };
-
+  const renderTextField = (props) => {
+    return (
+      <TextField
+        variant="outlined"
+        onClick={props.onClick}
+        value={props.value}
+        onChange={props.onChange}
+        label={props.label}
+      />
+    );
+  };
   // const availablePlaces = place_ids[
   //   DateFns.format(props.values.date, "yyyy-mm-dd")
   // ].busy.
   return (
-    <Formik
-      // enableReinitialize
-      initialValues={{
-        employee: null,
-        date: new Date(),
-        datetime_start: new Date(),
-        datetime_end: DateFns.addMinutes(new Date(), 15),
-        place: null,
-      }}
-      onSubmit={handleSubmit}
-    >
-      {(props) => (
-        <Form>
-          <Grid className={classes.root}>
-            <Box className={classes.rootItem}>
-              <Box className={classes.flexItemCalendar}>
-                <Calendar
-                  date={props.values.date}
-                  onChange={(date) => {
-                    props.setFieldValue("date", date);
-                    getActualWorkHours(date);
-                  }}
-                />
-              </Box>
-              <Box className={classes.flexItemFormFields}>
-                <Box className={classes.formItem}>
-                  {employee_ids && employee_ids.length > 0 ? (
-                    <Autocomplete
-                      id="employee_ids-select"
-                      value={props.values.employee}
-                      onChange={(event, newValue) => {
-                        props.setFieldValue("employee", newValue, false);
+    <Paper>
+      <Formik
+        // enableReinitialize
+        initialValues={{
+          employee: null,
+          date: new Date(),
+          datetime_start: new Date(),
+          datetime_end: DateFns.addMinutes(new Date(), 15),
+          place: null,
+        }}
+        onSubmit={handleSubmit}
+      >
+        {(props) => (
+          <Form>
+            <Grid className={classes.root}>
+              <Box className={classes.rootItem}>
+                <Box className={classes.flexItemCalendar}>
+                  <Box>
+                    <Calendar
+                      date={props.values.date}
+                      onChange={(date) => {
+                        props.setFieldValue("date", date);
+                        getActualWorkHours(date);
                       }}
-                      options={employee_ids}
-                      className={classes.select}
-                      getOptionLabel={(option) => {
-                        //debugger;
-                        return option.first_name + " " + option.last_name;
-                      }}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="Specjalista"
-                          variant="outlined"
-                        />
-                      )}
-                    ></Autocomplete>
-                  ) : (
-                    <Skeleton variant="rect" height={60} />
-                  )}
+                    />
+                  </Box>
                 </Box>
-                <Box className={classes.formItem}>
-                  {places && places.length > 0 ? (
-                    // <FormControl
-                    //   variant="filled"
-                    //   className={classes.formItem}
-                    // >
-                    <Autocomplete
-                      id="place_ids-select"
-                      value={props.values.place}
-                      onChange={(event, newValue) => {
-                        props.setFieldValue("place", newValue, false);
-                      }}
-                      options={places}
-                      className={classes.select}
-                      getOptionLabel={(option) => option.name}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="Gabinet"
-                          variant="outlined"
-                        />
-                      )}
-                    ></Autocomplete>
-                  ) : (
-                    // </FormControl>
-                    <Skeleton variant="rect" height={60} />
-                  )}
-                </Box>
-                <Box className={classes.formItem}>
-                  <TimePicker
-                    variant="inline"
-                    clearable="true"
-                    ampm={false}
-                    label="Czas rozpoczecia"
-                    minutesStep={5}
-                    value={props.values.datetime_start}
-                    onChange={(time) =>
-                      props.setFieldValue("datetime_start", time)
-                    }
-                  />
-                </Box>
-                <Box className={classes.formItem}>
-                  <TimePicker
-                    clearable="true"
-                    ampm={false}
-                    label="Czas zakończenia"
-                    minutesStep={5}
-                    value={props.values.datetime_end}
-                    onChange={(time) =>
-                      props.setFieldValue("datetime_end", time)
-                    }
-                  />
-                </Box>
+                <Box className={classes.flexItemFormFields}>
+                  <Box className={classes.formItem}>
+                    {employee_ids && employee_ids.length > 0 ? (
+                      <Autocomplete
+                        id="employee_ids-select"
+                        value={props.values.employee}
+                        onChange={(event, newValue) => {
+                          props.setFieldValue("employee", newValue, false);
+                        }}
+                        options={employee_ids}
+                        className={classes.select}
+                        getOptionLabel={(option) => {
+                          //debugger;
+                          return option.first_name + " " + option.last_name;
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Specjalista"
+                            variant="outlined"
+                          />
+                        )}
+                      ></Autocomplete>
+                    ) : (
+                      <Skeleton variant="rect" height={60} />
+                    )}
+                  </Box>
+                  <Box className={classes.formItem}>
+                    {places && places.length > 0 ? (
+                      // <FormControl
+                      //   variant="filled"
+                      //   className={classes.formItem}
+                      // >
+                      <Autocomplete
+                        id="place_ids-select"
+                        value={props.values.place}
+                        onChange={(event, newValue) => {
+                          props.setFieldValue("place", newValue, false);
+                        }}
+                        options={places}
+                        className={classes.select}
+                        getOptionLabel={(option) => option.name}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Gabinet"
+                            variant="outlined"
+                          />
+                        )}
+                      ></Autocomplete>
+                    ) : (
+                      // </FormControl>
+                      <Skeleton variant="rect" height={60} />
+                    )}
+                  </Box>
+                  <Box className={classes.formItem}>
+                    <TimePicker
+                      clearable="true"
+                      ampm={false}
+                      label="Czas rozpoczecia"
+                      minutesStep={5}
+                      value={props.values.datetime_start}
+                      onChange={(time) =>
+                        props.setFieldValue("datetime_start", time)
+                      }
+                      TextFieldComponent={renderTextField}
+                      className={classes.textField}
+                    />
+                  </Box>
+                  <Box className={classes.formItem}>
+                    <TimePicker
+                      clearable="true"
+                      ampm={false}
+                      label="Czas zakończenia"
+                      minutesStep={5}
+                      value={props.values.datetime_end}
+                      onChange={(time) =>
+                        props.setFieldValue("datetime_end", time)
+                      }
+                      TextFieldComponent={renderTextField}
+                    />
+                  </Box>
 
-                <Box className={classes.formItem}>
-                  <Button type="submit" variant="contained">
-                    Dodaj
-                  </Button>
+                  <Box className={classes.formItem}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      endIcon={<AddAlarmIcon />}
+                    >
+                      Dodaj godziny
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-            <Box /* className={classes.busyRoomList} */>
-              <Typography variant="h4">Lista zajetych gabientow</Typography>
-              <List>
-                {actualWorkHours &&
-                  actualWorkHours.work_hours.map((workItem, index) => (
-                    <ListItem
-                      button
-                      className={classes.busyRoomItem}
-                      key={index}
-                    >
-                      <Box /* className={classes.busyRoomItemChild} */>
-                        {workItem.first_name + " " + workItem.last_name}
-                      </Box>
-                      <Box /* className={classes.busyRoomItemChild} */>
-                        {
-                          workItem.time_start + " - " + workItem.time_end
-                          // DateFns.format(
-                          //   DateFns.parseISO(workItem.time_start),
-                          //   "hh:mm"
-                          // )
-                        }
-                      </Box>
-                      <Box /* className={classes.busyRoomItemChild} */>
-                        {workItem.place}
-                      </Box>
-                    </ListItem>
-                  ))}
-              </List>
-            </Box>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
+              <Box
+                width="100%"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+              >
+                <Typography variant="h4">Lista zajętych gabientów</Typography>
+                <List>
+                  {actualWorkHours &&
+                    actualWorkHours.work_hours.map((workItem, index) => (
+                      <ListItem
+                        button
+                        className={classes.busyRoomItem}
+                        key={index}
+                      >
+                        <Box /* className={classes.busyRoomItemChild} */>
+                          {workItem.first_name + " " + workItem.last_name}
+                        </Box>
+                        <Box /* className={classes.busyRoomItemChild} */>
+                          {workItem.time_start.slice(0, -3) +
+                            " - " +
+                            workItem.time_end.slice(0, -3)}
+                        </Box>
+                        <Box /* className={classes.busyRoomItemChild} */>
+                          {workItem.place}
+                        </Box>
+                      </ListItem>
+                    ))}
+                </List>
+              </Box>
+            </Grid>
+          </Form>
+        )}
+      </Formik>
+    </Paper>
   );
 }
