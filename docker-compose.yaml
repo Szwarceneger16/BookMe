@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  bookme_frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    tty: true
+    depends_on:
+      - bookme_backend
+    networks:
+      - bookme-network
+
+  bookme_backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: bookme_db
+      DB_PORT: 3306
+      DB_DATABASE: bookme
+      DB_PASSWORD: root
+    depends_on:
+      - bookme_db
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/vendor
+    networks:
+      - bookme-network
+
+  bookme_db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: bookme
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - /var/lib/mysql/
+    networks:
+      - bookme-network
+
+networks:
+  bookme-network:
+    driver: bridge

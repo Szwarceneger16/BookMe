@@ -15,4 +15,13 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  //For working with docker
+  webpackDevMiddleware: (config) => {
+    config.watchOptions = {
+      poll: 1000,
+      aggregateTimeout: 300,
+    };
+
+    return config;
+  },
 };
